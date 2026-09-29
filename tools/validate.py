@@ -43,10 +43,13 @@ def check_frontmatter(fm, path, rel, errors):
         if extra:
             errors.append(f"{rel}:1: fields {sorted(extra)} not allowed in SKILL.md; put them under metadata:")
         meta = fm.get("metadata") or {}
-        if not isinstance(meta, dict) or not all(isinstance(v, str) for v in meta.values()):
-            errors.append(f"{rel}:1: metadata must map keys to quoted strings")
+        if not isinstance(meta, dict):
+            errors.append(f"{rel}:1: metadata must be a mapping")
             meta = {}
-        fm = {**fm, **{k: meta[k] for k in ("scope", "updated") if k in meta}}
+        for k, v in meta.items():
+            if not isinstance(v, str):
+                errors.append(f"{rel}:1: metadata.{k} must be a quoted string, e.g. \"{v}\"")
+        fm = {**fm, **{k: str(meta[k]) for k in ("scope", "updated") if k in meta}}
 
     for key in REQUIRED:
         if key not in fm or fm[key] in (None, ""):
