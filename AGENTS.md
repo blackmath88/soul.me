@@ -5,7 +5,7 @@ This repo is the knowledge home of **soul.me**: concept, research, architecture 
 ## Before you work
 
 1. Read `README.md`, then `DECISIONS.md`. Decisions there are settled unless the owner reopens them.
-2. For architecture work, read `docs/architecture.md`. For context on prior art, read `docs/research.md`.
+2. For architecture work, read `docs/vision.md` and `docs/architecture.md`; for vault files, `docs/spec.md`. For context on prior art, read `docs/research.md`.
 3. If an Observstory snapshot exists (Actions artifact `observstory`), read it first for in-flight work and overlaps.
    Observstory observes; it doesn't decide. If it is absent or stale, inspect the repo directly.
 
