@@ -13,6 +13,7 @@ import yaml
 
 SCOPES = {"always", "global", "project", "session"}
 REQUIRED = ("name", "description", "scope", "updated")
+SKILL_FIELDS = {"name", "description", "license", "compatibility", "metadata", "allowed-tools"}
 MINIME_WORD_BUDGET = 1500
 
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
@@ -36,6 +37,17 @@ def split_frontmatter(text):
 
 
 def check_frontmatter(fm, path, rel, errors):
+    if path.name == "SKILL.md":
+        # Agent Skills spec: only spec fields at top level; soul.me fields live in metadata (D-018)
+        extra = set(fm) - SKILL_FIELDS
+        if extra:
+            errors.append(f"{rel}:1: fields {sorted(extra)} not allowed in SKILL.md; put them under metadata:")
+        meta = fm.get("metadata") or {}
+        if not isinstance(meta, dict) or not all(isinstance(v, str) for v in meta.values()):
+            errors.append(f"{rel}:1: metadata must map keys to quoted strings")
+            meta = {}
+        fm = {**fm, **{k: meta[k] for k in ("scope", "updated") if k in meta}}
+
     for key in REQUIRED:
         if key not in fm or fm[key] in (None, ""):
             errors.append(f"{rel}:1: missing frontmatter field '{key}'")

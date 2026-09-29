@@ -1,8 +1,9 @@
 ---
 name: run-a-retro
 description: how Mara runs a 60-minute team retrospective; use when asked to plan, prepare or run a retro
-scope: global
-updated: 2026-09-20
+metadata:
+  scope: global
+  updated: "2026-09-20"
 ---
 # Run a retro (60 min)
 
