@@ -73,3 +73,7 @@
 ## D-018: SKILL.md follows the Agent Skills spec (2026-09-29), **Proposed**
 **Decision:** In `skills/*/SKILL.md`, only spec fields sit at the top level. soul.me's `scope` and `updated` go under `metadata:` as strings, and the validator enforces both.
 **Why:** The reference validator `skills-ref` rejects unknown top-level fields, so our skills weren't loadable as standard skills (research §7).
+
+## D-019: The brand kit is the visual north star (2026-09-29)
+**Decision:** `brand/brand-kit.html` (round 2) defines soul.me's visual identity: the kitsune fox, sumi greys, and the rule "grey is the world, colour is yours" (colour only on what the person has sealed; shu red only for the seal).
+**Why:** The owner chose it. The rule restates D-004 and D-006 visually, so the brand cannot drift from the product's core promise.
