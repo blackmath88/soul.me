@@ -33,12 +33,26 @@ Every file starts with a YAML frontmatter block. **(checked)**
 | Field | Required | Rule |
 |---|---|---|
 | `name` | yes | equals the file name without `.md`; for skills, the folder name. Lowercase, digits, hyphens. |
-| `description` | yes | one line: what this is and when to read it (≤ 1,024 chars, same limit as Anthropic `SKILL.md`) |
+| `description` | yes | one line: what this is and when to read it (≤ 1,024 chars, same limit as the Agent Skills spec) |
 | `scope` | yes | `always` \| `global` \| `project` \| `session` |
 | `updated` | yes | ISO date `YYYY-MM-DD` |
 | `aliases` | no | list of other names |
 
-Unknown fields are allowed, so a `SKILL.md` can carry tool-specific keys and still load in Claude Code.
+Other fields are allowed in vault files.
+
+**`SKILL.md` exception (D-018).** Skills follow the [Agent Skills spec](https://agentskills.io/specification), so they
+load as standard skills. Only `name`, `description`, `license`, `compatibility`, `metadata` and `allowed-tools` may sit at the
+top level. `scope` and `updated` go under `metadata:` as quoted strings. **(checked)**
+
+```yaml
+---
+name: run-a-retro
+description: how I run a 60-minute retro; use when asked to plan or run one
+metadata:
+  scope: global
+  updated: "2026-09-20"
+---
+```
 `minime.md` must have `scope: always`, and files in `sessions/` must have `scope: session`. **(checked)**
 
 ## Body

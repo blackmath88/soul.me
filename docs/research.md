@@ -107,6 +107,62 @@ Stars and forks come from the GitHub repo page on 2026-09-29. Last commit comes 
 - Also: [Adaptive Recall](https://www.adaptiverecall.com/enterprise-memory/employee-leaves.php), [vdf.ai](https://vdf.ai/blog/offboarding-people-enterprise-ai-platform/).
 - **Gap:** the debate is framed from the employer's side. The *employee's* portable self (patterns travel, content stays) is unclaimed territory, and a positioning opportunity for bridge-work.ai.
 
+## 6. Vendor export formats (checked 2026-09-29)
+
+| Vendor | What the export contains | Memory included? | How to get memory out |
+|---|---|---|---|
+| **ChatGPT** (Settings → Data Controls → Export) | ZIP: `conversations.json`, `user.json`, `message_feedback.json`, `model_comparisons.json`, `chat.html` ([format guide](https://ai-chat-importer.com/guides/chatgpt-export-format-explained)). `conversations.json` is an array of conversations with `title`, `create_time`, `update_time`, `current_node` and a `mapping` of message nodes (`id`, `parent`, `children`, `message.author.role`, `message.content.parts[]`). It's a **tree**, because edits and regenerations branch; follow `current_node` up through `parent` to get the active thread. | **Unclear.** Secondary sources contradict each other; OpenAI's help page blocks automated fetching ⚠️ | copy Settings → Personalization → Manage memories, or ask ChatGPT (our `memory-dump.md`) |
+| **Claude** (Settings → Privacy → Export) | ZIP: `conversations.json` (array: `uuid`, `name`, `created_at`, `updated_at`, `chat_messages[]` with `sender` human/assistant, `text`, `created_at`), `projects.json` (projects + knowledge files), `users.json` ([guide](https://ai-chat-importer.com/blog/how-to-export-claude-conversations)) | **No**, per the same guide | the official memory export flow ([help article](https://support.claude.com/en/articles/12123587-import-and-export-your-memory-from-claude)), or `memory-dump.md` |
+| **M365 Copilot** (employer tenant) | no end-user data export | saved memories, details inferred from chat history, and custom instructions are stored **in a hidden folder of the user's Exchange mailbox** ([Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-personalization-memory), updated 2026-09-03) | **user:** can view and delete saved memories; can export **only custom instructions** by hand (Settings → Personalization). **admin:** can search and export memory via Purview eDiscovery (item class `IPM.Contact`, folder `CopilotMemory`) |
+
+**What this means for soul.me**
+- The memory itself isn't in any standard export, so the **dump prompt stays the main intake route** and the chat exports are only raw material.
+  ai-memory-mcp's `mine chatgpt|claude` importers are a working reference for parsing both formats if we ever need to.
+- **M365 Copilot memory belongs to the employer tenant**: only an admin can export it, and the employee can take only their custom instructions.
+  That's the strongest argument yet for D-014: write your own description of how you work and keep it outside the tenant.
+- Also from Microsoft's page: Purview retention policies don't apply to Copilot memory, and memory actions leave no audit log.
+  A good point for a bridge-work governance conversation.
+
+## 7. Skill formats for `skills/` (checked 2026-09-29)
+
+- **[Agent Skills spec](https://agentskills.io/specification)** (from Anthropic's `SKILL.md`, now an open spec; reference validator [`skills-ref`](https://github.com/agentskills/agentskills), last commit 2026-08-09):
+  - a folder with `SKILL.md` plus optional `scripts/`, `references/`, `assets/`
+  - frontmatter: `name` (required; 1–64 chars; `a-z0-9` and hyphens; no leading, trailing or double hyphen; **must match the folder name**) and `description` (required, ≤ 1,024 chars, what + when)
+  - optional: `license`, `compatibility` (≤ 500 chars), `metadata` (string → string map), `allowed-tools` (experimental)
+  - progressive disclosure: roughly 100 tokens of metadata at startup, a body under about 5,000 tokens when activated, resources on demand
+  - **`skills-ref` rejects any other top-level field.** Our `SKILL.md` files put `scope` and `updated` at the top level, so they fail:
+    `Unexpected fields in frontmatter: scope, updated` (reproduced 2026-09-29). Fix: move both under `metadata:` (Proposed D-018).
+- **[AGENTS.md](https://agents.md/)**: plain markdown with no schema. The nearest file in the directory tree wins, and chat prompts override it.
+  It's stewarded by the Agentic AI Foundation (Linux Foundation) and used by more than 60,000 repos.
+  It describes a *repo*, not a person, so it isn't a vault format. It is a good **drop-in target**, though: v2 could export the operating manual as an `AGENTS.md` section for coding agents.
+
+## 8. Temporal facts in plain markdown (checked 2026-09-29)
+
+- **Graphiti / Zep** make every fact edge **bi-temporal** with four timestamps ([Zep blog](https://blog.getzep.com/beyond-static-knowledge-graphs/)):
+  - valid time: `valid_at` and `invalid_at` (when the fact was true in the world)
+  - transaction time: `created_at` and `expired_at` (when the system knew it)
+  - A contradiction **invalidates** the old edge; nothing is deleted.
+- **Minimal markdown equivalent** (Proposed D-017):
+  - *Valid time* goes on the line: `(valid_from: …)` / `(valid_to: …)`, which the validator already checks.
+  - *Transaction time* comes from **git**: `git log -L` or `git blame` shows when a line was added or changed. No extra fields needed.
+  - **Supersede, don't delete.** When a fact changes, the curation pass sets `valid_to` on the old line, adds the new line, and moves the old one to an `# Archive` section of the same file. Deletion is only for lines that were wrong from the start.
+
+## 9. Offboarding from the employee's side: EU and CH (checked 2026-09-29, not legal advice)
+
+| Source | What it says | What it means for "patterns travel, content stays" |
+|---|---|---|
+| **EU Trade Secrets Directive 2016/943, Art. 1(3)(b)** ([text](https://www.legislation.gov.uk/eudr/2016/943)) | nothing in the Directive offers any ground for "limiting employees' use of experience and skills honestly acquired in the normal course of their employment" | the clearest legal anchor for *patterns travel* |
+| **Swiss CO Art. 321a(4)** ([text](https://www.droit-bilingue.ch/en-de/2/22/220-321a-412.html)) | confidential information, such as trade secrets, stays confidential after the job ends "to the extent required to safeguard the employer's legitimate interests" | a limited, not total, post-employment duty; *content stays* |
+| **Swiss CO Art. 321b** ([text](https://www.droit-bilingue.ch/fr-en/2/22/220-321b-413.html)) | the employee must hand over all work produced in the course of their contractual activities | work product stays with the employer |
+| **GDPR Art. 20 + WP29 guidelines WP242** ([guidelines](https://ec.europa.eu/newsroom/article29/item-detail.cfm?item_id=611233)) | portability covers data **provided by** the data subject, including observed data; data **inferred or derived** by the controller is excluded | what you told the assistant is portable, but the vendor's conclusions about you aren't. This matches our `[stated]` / `[inferred]` split. |
+| **Swiss nFADP Art. 28** | a right to data portability, similar to Art. 20 (conditions per secondary sources; [fedlex](https://www.fedlex.admin.ch/eli/cc/2022/491/en) didn't render for automated reading, so check the primary text) | same logic in CH |
+
+- **Employee-side policy writing is still thin.** Most of what exists is written for employers ([Adaptive Recall](https://www.adaptiverecall.com/enterprise-memory/employee-leaves.php), Forbes, vdf.ai).
+  An unvetted exception is a [Substack proposal for "personal memory portability"](https://npcmemo.substack.com/p/personal-memory-portability-in-the) as a GDPR amendment.
+  The gap from §5 still stands, and bridge-work.ai could fill it.
+- **Practical reading:** the law protects taking your *skills and experience*, and our sanitised patterns are exactly that. The same sources make raw company chats and the employer's inferred memory the wrong things to take.
+  Whether a given extraction is allowed still depends on the contract and company policy (D-014).
+
 ## Synthesis: what we adopt
 
 | Concept | From |
@@ -119,3 +175,7 @@ Stars and forks come from the GitHub repo page on 2026-09-29. Last commit comes 
 | full-text search before vectors | ai-memory-mcp |
 | per-client access control | OpenMemory |
 | observed / derived / declared distinction | Observstory (own) |
+| temporal model: valid time on the line, transaction time from git; supersede, don't delete | Graphiti / Zep (simplified) |
+| skill files that pass the Agent Skills spec; soul.me fields under `metadata` | agentskills.io |
+| memory via dump prompt, not via exports (exports don't carry it) | vendor export check (§6) |
+| legal anchor: skills and experience travel, trade secrets and work product stay | TSD Art. 1(3)(b), CO 321a/321b, GDPR Art. 20 |

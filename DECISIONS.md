@@ -65,3 +65,11 @@
 ## D-016: Where extraction runs (2026-09-29), **Proposed**
 **Decision:** Extraction runs in the vendor the material came from, on a local model, or in an agent session attached only to the vault repo. It never runs in a session that has soul.me attached.
 **Why:** Whatever runs extraction sees the raw material. These options add no new party, or keep it local, and keep real data out of soul.me's PRs and CI logs.
+
+## D-017: Temporal facts: valid time on the line, transaction time from git (2026-09-29), **Proposed**
+**Decision:** Lines carry `(valid_from: …)` / `(valid_to: …)` for when a fact is true. When the vault learned it comes from git history, with no extra fields. When a fact changes, the old line gets a `valid_to` and moves to an `# Archive` section; it is never deleted unless it was wrong from the start.
+**Why:** This keeps Graphiti's bi-temporal model (research §8) in plain markdown, and git already records the second timeline.
+
+## D-018: SKILL.md follows the Agent Skills spec (2026-09-29), **Proposed**
+**Decision:** In `skills/*/SKILL.md`, only spec fields sit at the top level. soul.me's `scope` and `updated` go under `metadata:` as strings, and the validator enforces both.
+**Why:** The reference validator `skills-ref` rejects unknown top-level fields, so our skills weren't loadable as standard skills (research §7).
