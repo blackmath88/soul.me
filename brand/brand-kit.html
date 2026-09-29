@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>soul.me Brand Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* 墨に五彩: ink has five colours. Neutral only; depth comes from tone, temperature and material. */
+:root{
+  --void:#0A0A0B;   /* 漆黒 shikkoku, lacquer: the page */
+  --koge:#121110;   /* 焦墨 scorched ink */
+  --no:#1B1A17;     /* 濃墨 dense ink */
+  --ju:#2B2926;     /* 重墨 heavy ink */
+  --keshi:#45423F;  /* 消炭 spent charcoal */
+  --nibi:#5F5E5B;   /* 鈍色 */
+  --namari:#7A7B7C; /* 鉛色 lead, cool */
+  --gin:#A2A5A8;    /* 銀鼠 silver grey, cool */
+  --shiro:#C3C4BF;  /* 白鼠 */
+  --kinari:#E6E2D8; /* 生成 unbleached paper: text */
+  --gofun:#FFFDF7;  /* 胡粉 shell white: reserved for the human */
+  --line:rgba(230,226,216,.12);
+  --body:#C9C6BD; --dim:#8A8883;
+  --dot:"DotGothic16",monospace;
+  --ui:"Zen Kaku Gothic New","Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--kinari);font-family:var(--ui);font-size:16px;line-height:1.7}
+.wrap{max-width:74rem;margin:0 auto;padding:0 1.25rem}
+canvas{display:block;image-rendering:pixelated;image-rendering:crisp-edges}
+:focus-visible{outline:2px solid var(--gin);outline-offset:3px}
+code{font-family:var(--dot);font-size:.9em}
+
+header{padding:3rem 0 .5rem}
+header canvas{width:min(100%,416px);height:auto}
+.sub{font-family:var(--dot);color:var(--gin);font-size:clamp(1rem,3vw,1.3rem);margin:.8rem 0 0}
+.strap{color:var(--body);max-width:40em;margin:.8rem 0 0}
+.strap i{font-style:normal;color:var(--kinari)}
+
+section{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2{font-family:var(--dot);font-weight:400;font-size:clamp(1.7rem,4.4vw,2.4rem);line-height:1.2;margin:0 0 .4em}
+h2 em{font-style:normal;color:var(--namari)}
+.lede{color:var(--body);max-width:42em;margin:0 0 2rem}
+.sub-h{font-family:var(--dot);color:var(--gin);font-size:1rem;margin:0 0 1rem}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:1rem 3rem;align-items:center;border-top:0;padding-top:1.5rem}
+.hero canvas{width:100%;height:auto;margin-left:-1.25rem}
+.kicker{font-family:var(--dot);font-size:.95rem;color:var(--namari);letter-spacing:.05em}
+.hero h1{font-family:var(--dot);font-weight:400;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:.3rem 0 .2rem}
+.copy p{color:var(--body);margin:1rem 0 0}
+.maps{border-left:2px solid var(--keshi);padding-left:1rem;margin:1.4rem 0 0}
+.maps dt{font-family:var(--dot);font-size:.95rem;color:var(--gin);margin-top:.8rem}
+.maps dt:first-child{margin-top:0}
+.maps dd{margin:0;font-size:.93rem;color:var(--dim);line-height:1.55}
+
+.row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:1.4rem 2.4rem;margin:0 0 2.4rem}
+.row figure{margin:0;display:grid;gap:.45rem;justify-items:start;align-content:end}
+.row figcaption{font-family:var(--dot);font-size:.78rem;color:var(--dim);line-height:1.35}
+.row figcaption b{display:block;color:var(--kinari);font-weight:400;font-size:.9rem}
+.paper{background:var(--kinari);padding:14px;display:flex;gap:14px;align-items:flex-end}
+
+.titlebar{display:flex;align-items:center;gap:10px;background:#111110;border-bottom:1px solid var(--line);padding:8px 12px;min-width:280px}
+.titlebar span{font-size:12px;color:var(--body)}
+.titlebar .grow{flex:1}
+.mono{font-family:var(--dot);font-size:.78rem;color:var(--dim)}
+.tabs{display:flex;gap:2px;flex-wrap:wrap}
+.tab{display:flex;align-items:center;gap:8px;background:#1B1A17;padding:7px 12px;border-radius:6px 6px 0 0;font-size:12px;color:var(--body);min-width:200px}
+.tab.dim{background:#121110;color:var(--dim)}
+
+.many{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.2rem 2.4rem;align-items:center}
+.layers{list-style:none;margin:0;padding:0;display:grid;gap:.8rem;max-width:30rem}
+.layers li{display:grid;grid-template-columns:1.2rem 1fr;gap:.2rem .8rem;align-items:start}
+.layers i{width:14px;height:14px;display:block;margin-top:.35rem}
+.layers b{font-family:var(--dot);font-weight:400}
+.layers span{grid-column:2;font-size:.88rem;color:var(--dim);line-height:1.45}
+
+.forms{display:flex;flex-wrap:wrap;gap:1.6rem 2rem;align-items:flex-end}
+.forms figure{margin:0;display:grid;gap:.4rem;justify-items:center}
+.forms figcaption{font-family:var(--dot);font-size:.78rem;color:var(--dim);text-align:center;line-height:1.3}
+.forms figcaption b{display:block;color:var(--kinari);font-weight:400}
+
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr));gap:1.2rem 1.4rem;margin-bottom:2.2rem}
+.sw{display:grid;gap:.35rem}
+.sw .chip{height:56px;border:1px solid var(--line)}
+.sw canvas{width:100%;height:56px;border:1px solid var(--line)}
+.sw b{font-family:var(--dot);font-weight:400;font-size:.95rem}
+.sw span{font-size:.78rem;color:var(--dim);line-height:1.35}
+.sw.reserved .chip{outline:1px dashed var(--gin);outline-offset:3px}
+
+.prov{display:grid;gap:.9rem;max-width:44rem;margin-bottom:1.6rem}
+.pl{display:grid;grid-template-columns:32px 11rem 1fr;gap:.8rem;align-items:center}
+.pl code{color:var(--dim)}
+.pl.stated span{color:var(--kinari)}
+.pl.imported span{color:var(--gin);border-bottom:1px dotted var(--namari);justify-self:start}
+.pl.inferred span{color:var(--nibi);justify-self:start}
+.note{font-size:.88rem;color:var(--dim);max-width:44em}
+
+.icons{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:1.6rem 2rem}
+.ic{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;align-items:center}
+.ic .pair{display:flex;align-items:flex-end;gap:.5rem;grid-row:span 2}
+.ic b{font-family:var(--dot);font-weight:400;font-size:.95rem}
+.ic span{font-size:.8rem;color:var(--dim);line-height:1.4}
+
+.orn{display:grid;grid-template-columns:repeat(auto-fit,minmax(20rem,1fr));gap:2.4rem 3rem}
+.orn article{display:grid;gap:.8rem;align-content:start}
+.orn h3{font-family:var(--dot);font-weight:400;font-size:1.1rem;margin:0}
+.orn p{margin:0;font-size:.88rem;color:var(--dim);line-height:1.5}
+.orn .use{font-family:var(--dot);font-size:.74rem;color:var(--namari)}
+.inline{display:flex;align-items:center;gap:.7rem;font-size:.9rem;color:var(--body);flex-wrap:wrap}
+.washi{position:relative;background:#151412;padding:16px 16px 14px;font-size:.88rem;color:var(--body)}
+.washi canvas{position:absolute;left:0;right:0;top:-3px;width:100%;height:6px}
+.archived{color:var(--nibi)}
+
+.laws{display:grid;gap:.9rem;max-width:48rem;padding:0;margin:0;list-style:none;counter-reset:l}
+.laws li{counter-increment:l;display:grid;grid-template-columns:2.2rem 1fr;color:var(--body)}
+.laws li::before{content:counter(l,decimal-leading-zero);font-family:var(--dot);color:var(--namari)}
+.laws b{color:var(--kinari)}
+
+footer{padding:2.5rem 0 4rem;border-top:1px solid var(--line)}
+footer p{font-family:var(--dot);font-size:.82rem;color:var(--dim);max-width:56em;margin:0 0 .8em}
+
+@media (max-width:820px){
+  .hero,.many{grid-template-columns:1fr}
+  .hero canvas{margin-left:0}
+  .pl{grid-template-columns:32px 1fr}
+  .pl span{grid-column:1 / -1}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <canvas id="wordmark" width="104" height="20" aria-label="soul.me pixel wordmark with the obake ghost mark"></canvas>
+  <p class="sub">お化け ／ BRAND KIT · ROUND 1</p>
+  <p class="strap"><i>"I am large, I contain multitudes."</i> The obake, the thing that changes: a small ink ghost that keeps your shape, not the rooms you worked in, and never looks the same twice. Black and grey only, with the depth coming from ink, lacquer, charcoal and a hundred greys.</p>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" aria-labelledby="h-hero">
+    <canvas id="centerpiece" width="176" height="112" aria-label="Pixel art at night: a pale ghost leaves a lit paper screen whose shadows show a desk, a monitor and stacked papers. Crossing the dark corridor it shifts shape, person, fox mask, flame, lantern, and arrives as a ghost at an empty screen. The shadows stay behind."></canvas>
+    <div class="copy">
+      <div class="kicker">00 ／ CENTERPIECE</div>
+      <h1 id="h-hero">The shadows stay. The ghost leaves.</h1>
+      <p>Behind the first screen, the old room's things are still there as shadow play: the desk, the screen, the stacked files. They belong to that room. The ghost steps out, changes shape as it crosses the dark, and arrives whole at an empty screen.</p>
+      <p>Its eyes never change. Whatever form it takes, the same two eyes look out, with the one glint of pure white in them.</p>
+      <dl class="maps">
+        <dt>Product reading</dt>
+        <dd>Patterns travel, content stays. The vault keeps changing (curation, new layers, new tools) but the core that you approved stays recognisably you.</dd>
+        <dt>Where it lives</dt>
+        <dd>Landing hero, onboarding, the empty vault. Never inside a working surface.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-logo">
+    <h2 id="h-logo">The mark <em>化</em></h2>
+    <p class="lede">No letters. A round head, two eyes, a sheet that thins into wisps at the bottom. It reads at 16px, it inverts cleanly onto paper, and the only pure white in it is the glint in its eyes.</p>
+
+    <div class="sub-h">Marks</div>
+    <div class="row">
+      <figure><canvas class="mk" data-mark="ghost" width="16" height="16" style="width:16px"></canvas><figcaption><b>Ghost</b>16 · favicon</figcaption></figure>
+      <figure><canvas class="mk" data-mark="ghost" width="16" height="16" style="width:32px"></canvas><figcaption>32</figcaption></figure>
+      <figure><canvas class="mk" data-mark="ghost" width="16" height="16" style="width:64px"></canvas><figcaption>64</figcaption></figure>
+      <figure><div class="paper"><canvas class="mk" data-mark="ghost" data-ground="paper" width="16" height="16" style="width:32px"></canvas><canvas class="mk" data-mark="ghost" data-ground="paper" width="16" height="16" style="width:64px"></canvas></div><figcaption><b>On paper</b>same grid, ink tones</figcaption></figure>
+    </div>
+
+    <div class="sub-h">States: the eyes and a paper slip</div>
+    <div class="row">
+      <figure><canvas class="mk" data-mark="ghost" width="16" height="16" style="width:64px"></canvas><figcaption><b>Calm</b>vault in sync</figcaption></figure>
+      <figure><canvas class="mk" data-mark="review" width="16" height="16" style="width:64px"></canvas><figcaption><b>Review waiting</b>a white slip: inbox has lines</figcaption></figure>
+      <figure><canvas class="mk" data-mark="asleep" width="16" height="16" style="width:64px"></canvas><figcaption><b>Asleep</b>empty vault</figcaption></figure>
+      <figure>
+        <div class="tabs">
+          <div class="tab"><canvas class="mk" data-mark="review" width="16" height="16" style="width:16px"></canvas>soul.me · 4 lines to review</div>
+          <div class="tab dim"><canvas class="mk" data-mark="ghost" width="16" height="16" style="width:16px"></canvas>soul.me · in sync</div>
+        </div>
+        <figcaption>Browser tab: the slip appears only when the inbox holds unreviewed lines. Computed from state, never decorative.</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub-h">Lockups</div>
+    <div class="row">
+      <figure><canvas id="lock-a" width="104" height="20" style="width:312px"></canvas><figcaption><b>Horizontal</b>ghost + pixel wordmark; the dot is the only white</figcaption></figure>
+      <figure><div class="titlebar"><canvas class="mk" data-mark="ghost" width="16" height="16" style="width:16px"></canvas><span>soul.me</span><span class="grow"></span><span class="mono">vault · 41 lines · v0.1</span></div><figcaption>In a title bar: 16px, no wordmark tricks</figcaption></figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-many">
+    <h2 id="h-many">It contains multitudes <em>多</em></h2>
+    <p class="lede">At larger sizes the ghost is the vault. Four bands of tone are the four layers: the densest part at the top is the core you always carry, and the tail is the session layer, which thins out and disappears because sessions expire.</p>
+    <div class="many">
+      <canvas id="multitudes" width="48" height="48" style="width:192px" aria-label="The ghost at 48 pixels, shaded in four bands from pale head to dissolving tail"></canvas>
+      <ul class="layers">
+        <li><i style="background:var(--shiro)"></i><b>Core · minime.md</b><span>The head. Always loaded, all of it approved. The eyes live here.</span></li>
+        <li><i style="background:var(--gin)"></i><b>Procedures · skills/</b><span>The shoulders. Loaded when a task calls for them.</span></li>
+        <li><i style="background:var(--namari)"></i><b>Episodic · areas, people, topics</b><span>The body. Searched, dated, growing.</span></li>
+        <li><i style="background:var(--nibi)"></i><b>Session · sessions/</b><span>The tail. Handoffs that thin out and vanish after 14 days.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-forms">
+    <h2 id="h-forms">Shapeshifting <em>変化</em></h2>
+    <p class="lede">In the lore, <i>bakeru</i> means to transform, so an obake is by definition a shapeshifter. Ours moves through five forms and always settles back into the ghost. Every form keeps the same eyes in the same place: the shape changes, the self stays.</p>
+    <div class="forms">
+      <figure><canvas class="form" data-form="ghost" width="32" height="32" style="width:64px"></canvas><figcaption><b>Ghost</b>home form</figcaption></figure>
+      <figure><canvas class="form" data-form="person" width="32" height="32" style="width:64px"></canvas><figcaption><b>Person</b>who you are at work</figcaption></figure>
+      <figure><canvas class="form" data-form="fox" width="32" height="32" style="width:64px"></canvas><figcaption><b>Kitsune</b>the classic shapeshifter</figcaption></figure>
+      <figure><canvas class="form" data-form="flame" width="32" height="32" style="width:64px"></canvas><figcaption><b>Hitodama</b>the soul-flame</figcaption></figure>
+      <figure><canvas class="form" data-form="lantern" width="32" height="32" style="width:64px"></canvas><figcaption><b>Chochin</b>the lantern that carries light</figcaption></figure>
+      <figure><canvas id="morph" width="32" height="32" style="width:96px"></canvas><figcaption><b>Morphing</b>onboarding and the hero only</figcaption></figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-pal">
+    <h2 id="h-pal">Palette <em>墨</em></h2>
+    <p class="lede">Two old ideas carry the depth. Sumi-e says ink has five colours: one black, five densities. And Edo-period dyers, when commoners were restricted to plain colours, answered with "forty-eight browns and a hundred greys". So: no hue, but temperature (warm ink, cool lead), material (lacquer, ink, charcoal) and one reserved white. Traditional names, approximate values.</p>
+
+    <div class="sub-h">Three blacks, told apart by material</div>
+    <div class="swatches">
+      <div class="sw"><canvas class="mat" data-mat="lacquer" width="64" height="28"></canvas><b>漆黒 shikkoku</b><span>lacquer · #0A0A0B · the page. Glossy: gets a cool sheen #3A3E46 where light hits.</span></div>
+      <div class="sw"><canvas class="mat" data-mat="ink" width="64" height="28"></canvas><b>墨 sumi</b><span>ink · #1B1A17 · warm, matte, bleeds at the edge. Panels.</span></div>
+      <div class="sw"><canvas class="mat" data-mat="charcoal" width="64" height="28"></canvas><b>炭 sumi (charcoal)</b><span>#26282A · cool, grainy. Wells and inputs.</span></div>
+    </div>
+
+    <div class="sub-h">墨の五彩: the five inks</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#121110"></div><b>焦 koge</b><span>scorched · #121110</span></div>
+      <div class="sw"><div class="chip" style="background:#1B1A17"></div><b>濃 no</b><span>dense · #1B1A17</span></div>
+      <div class="sw"><div class="chip" style="background:#2B2926"></div><b>重 ju</b><span>heavy · #2B2926</span></div>
+      <div class="sw"><div class="chip" style="background:#6E6C68"></div><b>淡 tan</b><span>light · #6E6C68</span></div>
+      <div class="sw"><div class="chip" style="background:#B9B7B0"></div><b>清 sei</b><span>clear · #B9B7B0</span></div>
+    </div>
+
+    <div class="sub-h">百鼠: a few of the hundred greys</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#45423F"></div><b>消炭 keshizumi</b><span>spent charcoal · #45423F · rules</span></div>
+      <div class="sw"><div class="chip" style="background:#5F5E5B"></div><b>鈍色 nibi</b><span>#5F5E5B · inferred lines</span></div>
+      <div class="sw"><div class="chip" style="background:#7A7B7C"></div><b>鉛色 namari</b><span>lead · #7A7B7C · kickers</span></div>
+      <div class="sw"><div class="chip" style="background:#858A7E"></div><b>利休鼠 rikyu</b><span>green-grey · #858A7E · the one tinted grey</span></div>
+      <div class="sw"><div class="chip" style="background:#A2A5A8"></div><b>銀鼠 gin</b><span>silver · #A2A5A8 · imported lines</span></div>
+      <div class="sw"><div class="chip" style="background:#C3C4BF"></div><b>白鼠 shironezumi</b><span>#C3C4BF · the ghost</span></div>
+    </div>
+
+    <div class="sub-h">Paper, and the one white</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#E6E2D8"></div><b>生成 kinari</b><span>unbleached · #E6E2D8 · text, paper grounds</span></div>
+      <div class="sw reserved"><div class="chip" style="background:#FFFDF7"></div><b>胡粉 gofun</b><span>shell white · #FFFDF7 · <b>reserved</b>: the glint, the seal, the slip</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-prov">
+    <h2 id="h-prov">Provenance in tone <em>判</em></h2>
+    <p class="lede">Without colour, where a line came from is shown by how solid it is. A stamped seal for what you said, a dithered square for what came in from an export, a dotted outline for what a model guessed. Never swap them, and always print the tag next to the mark.</p>
+    <div class="prov">
+      <div class="pl stated"><canvas class="tag" data-tag="stated" width="16" height="16" style="width:32px"></canvas><code>[stated]</code><span>Lead with the answer, then the reasoning.</span></div>
+      <div class="pl imported"><canvas class="tag" data-tag="imported" width="16" height="16" style="width:32px"></canvas><code>[imported:chatgpt]</code><span>Prefers answers in English, even in German threads.</span></div>
+      <div class="pl inferred"><canvas class="tag" data-tag="inferred" width="16" height="16" style="width:32px"></canvas><code>[inferred]</code><span>Dislikes long planning phases.</span></div>
+    </div>
+    <p class="note">The seal is the only provenance mark that uses gofun white: a line only turns white when a human stamps it. The fictional lines are Mara Keller's, from the example vault.</p>
+  </section>
+
+  <section aria-labelledby="h-icons">
+    <h2 id="h-icons">Iconography <em>図像</em></h2>
+    <p class="lede">The vault's nouns, drawn as things from the world instead of generic UI glyphs. 16×16, hand-placed pixels, greys only. White appears on exactly two: the core's glint and the inbox slip.</p>
+    <div class="icons" id="iconGrid"></div>
+  </section>
+
+  <section aria-labelledby="h-orn">
+    <h2 id="h-orn">Ornament with a job <em>飾り</em></h2>
+    <p class="lede">Every ornament has one use case and a rule. If it can't name its job, it doesn't ship.</p>
+    <div class="orn">
+      <article>
+        <span class="use">SECTION DIVIDER</span>
+        <h3>Sumi stroke</h3>
+        <canvas id="o-rule" width="176" height="7" style="width:100%;height:14px"></canvas>
+        <p>One brush stroke, loaded on the left and dry-brushed (<i>kasure</i>) to the right. Between major sections only.</p>
+      </article>
+      <article>
+        <span class="use">REVIEW PANEL</span>
+        <h3>Washi edge</h3>
+        <div class="washi"><canvas id="o-washi" width="176" height="3"></canvas>Curation PR · 4 inbox lines · 1 contradiction · 2 expired facts</div>
+        <p>A torn paper edge marks a panel that asks for your judgement: the weekly review, an inbox batch. Ordinary panels stay plain.</p>
+      </article>
+      <article>
+        <span class="use">WORKING</span>
+        <h3>Brush in motion</h3>
+        <div class="inline"><canvas id="o-brush" width="40" height="8" style="width:160px"></canvas><span>extracting · chatgpt dump</span></div>
+        <p>The only loader. The stroke runs dry and starts again. Stops under reduced motion.</p>
+      </article>
+      <article>
+        <span class="use">APPROVED</span>
+        <h3>The seal</h3>
+        <div class="inline"><canvas class="tag" data-tag="stated" width="16" height="16" style="width:32px"></canvas><span>3 lines stamped <code>[stated]</code></span></div>
+        <p>Appears only when a human approves lines. It never appears for anything automatic.</p>
+      </article>
+      <article>
+        <span class="use">EXPIRES</span>
+        <h3>Incense</h3>
+        <div class="inline"><canvas id="o-incense" width="48" height="10" style="width:192px"></canvas><span>handoff · 9 of 14 days left</span></div>
+        <p>For things with a known lifetime: session handoffs, inbox proposals (4 weeks). Burns down in whole days, never an estimate.</p>
+      </article>
+      <article>
+        <span class="use">ARCHIVED FACT</span>
+        <h3>Dry brush</h3>
+        <div class="inline"><canvas id="o-kasure" width="32" height="8" style="width:96px"></canvas><span class="archived">(valid_to: 2026-06) Led the onboarding pilot</span></div>
+        <p>A fact past its <code>valid_to</code> fades like a stroke that ran out of ink. It's archived, never deleted.</p>
+      </article>
+      <article>
+        <span class="use">EMPTY STATE</span>
+        <h3>Asleep in the dark</h3>
+        <div class="inline"><canvas id="o-empty" width="44" height="28" style="width:176px"></canvas><span>No vault yet. Write your "how I work" note to begin.</span></div>
+        <p>The ghost asleep, fading into the dark. Only in empty states: it never replaces content.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-laws">
+    <h2 id="h-laws">Rules for the kit <em>掟</em></h2>
+    <ol class="laws">
+      <li><span><b>White is the human.</b> Gofun appears only for the glint in the eyes, the seal of approval and the review slip. Nothing automatic is ever white.</span></li>
+      <li><span><b>Tone carries provenance.</b> Solid means stated, dither means imported, outline means inferred. Never swap them; always print the tag too.</span></li>
+      <li><span><b>The ghost may change its shape, never its eyes.</b> Every form keeps the same two eyes in the same place.</span></li>
+      <li><span><b>Depth comes from tone, temperature and material, never hue.</b> The one tinted grey (rikyū) is a nuance, not an accent.</span></li>
+      <li><span><b>Scenes fade; working surfaces don't.</b> Dissolving edges and shapeshifting belong to the landing page, onboarding and empty states.</span></li>
+      <li><span><b>Everything is generated.</b> Marks, icons and ornaments come from seeded rules and pixel grids, so they can be rebuilt and reviewed like code.</span></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Design exploration, round 1. Every scene, mark, icon and ornament is drawn procedurally in greys: no images, no tracing. Colour names are traditional Japanese names with approximate values.</p>
+    <p>"Do I contradict myself? Very well then I contradict myself, (I am large, I contain multitudes.)" Walt Whitman, <i>Song of Myself</i> (1855), public domain; Bob Dylan borrowed the line for a 2020 song title.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+var P={void:'#0A0A0B',koge:'#121110',no:'#1B1A17',ju:'#2B2926',keshi:'#45423F',nibi:'#5F5E5B',tan:'#6E6C68',
+  namari:'#7A7B7C',rikyu:'#858A7E',gin:'#A2A5A8',sei:'#B9B7B0',shiro:'#C3C4BF',kinari:'#E6E2D8',gofun:'#FFFDF7',
+  sheen:'#3A3E46',char:'#26282A',charHi:'#34363A',charLo:'#1A1B1C',warm:'#76695F',cool:'#5F6A76'};
+var BAYER=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
+var bay=function(x,y){return BAYER[((y%4)+4)&3][((x%4)+4)&3]/16;};
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;
+  var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;
+  return ((t^t>>>14)>>>0)/4294967296;};}
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- pixel buffer ---------- */
+function Buf(w,h){this.w=w;this.h=h;this.c=new Array(w*h).fill(null);}
+Buf.prototype.px=function(x,y,c){x=Math.round(x);y=Math.round(y);if(x<0||y<0||x>=this.w||y>=this.h)return;this.c[y*this.w+x]=c;};
+Buf.prototype.get=function(x,y){if(x<0||y<0||x>=this.w||y>=this.h)return null;return this.c[y*this.w+x];};
+Buf.prototype.rect=function(x,y,w,h,c){for(var j=0;j<h;j++)for(var i=0;i<w;i++)this.px(x+i,y+j,c);};
+Buf.prototype.ell=function(cx,cy,rx,ry,fn){
+  for(var y=Math.floor(cy-ry);y<=Math.ceil(cy+ry);y++)for(var x=Math.floor(cx-rx);x<=Math.ceil(cx+rx);x++){
+    var dx=(x-cx)/rx,dy=(y-cy)/ry,d=dx*dx+dy*dy; if(d<=1){var c=typeof fn==='function'?fn(x,y,d):fn; if(c)this.px(x,y,c);}
+  }};
+Buf.prototype.over=function(b,ox,oy,alpha){for(var y=0;y<b.h;y++)for(var x=0;x<b.w;x++){var c=b.c[y*b.w+x];
+  if(c&&(alpha===undefined||bay(ox+x,oy+y)<alpha))this.px(ox+x,oy+y,c);}};
+var RGB={};function rgb(h){if(!RGB[h]){var n=parseInt(h.slice(1),16);RGB[h]=[n>>16&255,n>>8&255,n&255];}return RGB[h];}
+Buf.prototype.toCanvas=function(cv){var g=cv.getContext('2d'),im=g.createImageData(this.w,this.h),d=im.data;
+  for(var i=0;i<this.c.length;i++){var c=this.c[i];if(!c)continue;var q=rgb(c);d[i*4]=q[0];d[i*4+1]=q[1];d[i*4+2]=q[2];d[i*4+3]=255;}
+  g.putImageData(im,0,0);};
+function fromGrid(rows,map){var b=new Buf(rows[0].length,rows.length);
+  for(var y=0;y<rows.length;y++)for(var x=0;x<rows[y].length;x++){var c=map[rows[y][x]];if(c)b.px(x,y,c);}return b;}
+
+/* ---------- the 16px mark: bands 1-4 are the four layers ---------- */
+var GHOST=["................",".....111111.....","....11111111....","...1111111111...",
+  "...11ge11ge11...","...11ee11ee11...","...1111111111...","..222222222222..","..222222222222..",
+  "..222222222222..","..333333333333..","..333333333333..","..444.4444.444..","..44...44...44..",
+  "...4....4....4..","................"];
+var DARK={'.':null,'1':P.shiro,'2':P.gin,'3':P.namari,'4':P.nibi,e:P.void,g:P.gofun,w:P.gofun};
+var PAPER={'.':null,'1':P.no,'2':P.ju,'3':P.keshi,'4':P.tan,e:P.kinari,g:P.kinari,w:P.void};
+function ghostGrid(v){var g=GHOST.slice();
+  if(v==='review'){g[0]="..............w.";g[1]=".....111111..ww.";g[2]="....11111111.ww.";}
+  return g;}
+var MARKS={ghost:function(m){return fromGrid(ghostGrid(),m);},review:function(m){return fromGrid(ghostGrid('review'),m);},
+  asleep:function(m){var g=GHOST.slice();g[4]="...1111111111...";g[5]="...1eee11eee1...";
+    return fromGrid(g,Object.assign({},m,{e:m===PAPER?P.keshi:P.ju}));}};
+
+/* ---------- shapes as signed distances, so forms can morph ---------- */
+function circ(u,v,x,y,r){return Math.hypot(u-x,v-y)-r;}
+function rbox(x,y,hx,hy,r){var qx=Math.abs(x)-hx+r,qy=Math.abs(y)-hy+r;return Math.hypot(Math.max(qx,0),Math.max(qy,0))+Math.min(Math.max(qx,qy),0)-r;}
+function sdPoly(u,v,pts){var d=(u-pts[0][0])*(u-pts[0][0])+(v-pts[0][1])*(v-pts[0][1]),s=1;
+  for(var i=0,j=pts.length-1;i<pts.length;j=i,i++){var ex=pts[j][0]-pts[i][0],ey=pts[j][1]-pts[i][1],wx=u-pts[i][0],wy=v-pts[i][1];
+    var t=Math.max(0,Math.min(1,(wx*ex+wy*ey)/(ex*ex+ey*ey))),bx=wx-ex*t,by=wy-ey*t;d=Math.min(d,bx*bx+by*by);
+    var c1=v>=pts[i][1],c2=v<pts[j][1],c3=ex*wy>ey*wx;if((c1&&c2&&c3)||(!c1&&!c2&&!c3))s=-s;}
+  return s*Math.sqrt(d);}
+var FOX=[[-.58,-.05],[-.68,-.92],[-.22,-.44],[.22,-.44],[.68,-.92],[.58,-.05],[.14,.66],[-.14,.66]];
+var FLAME=[[-.5,.16],[0,-.94],[.5,.16]];
+var FORMS={
+  ghost:function(u,v,ph){var bot=.66+.1*Math.sin(u*9+ph);return Math.min(circ(u,v,0,-.2,.62),Math.max(Math.abs(u)-.64,v-bot,-v-.2));},
+  person:function(u,v){return Math.min(circ(u,v,0,-.3,.36),rbox(u,v-.56,.62,.38,.3));},
+  fox:function(u,v){return sdPoly(u,v,FOX);},
+  flame:function(u,v,ph){var w=.06*Math.sin(v*5+ph);return Math.min(circ(u+w,v,0,.24,.5),sdPoly(u+w*1.6,v,FLAME));},
+  lantern:function(u,v){return Math.min(rbox(u,v-.02,.58,.6,.42),rbox(u,v+.72,.3,.09,.02),rbox(u,v-.74,.3,.09,.02));}
+};
+var ORDER=['ghost','person','fox','flame','lantern'];
+/* render a (possibly morphing) form at N×N; eyes fixed; bands by height; tail dissolves */
+function spirit(N,a,b,t,ph,map,opts){opts=opts||{};var buf=new Buf(N,N),SS=4;
+  for(var y=0;y<N;y++)for(var x=0;x<N;x++){var n=0;
+    for(var sy=0;sy<SS;sy++)for(var sx=0;sx<SS;sx++){var u=((x+(sx+.5)/SS)/N)*2-1,v=((y+(sy+.5)/SS)/N)*2-1;
+      var d=FORMS[a](u,v,ph)*(1-t)+FORMS[b](u,v,ph)*t;if(d<0)n++;}
+    if(n<7)continue;
+    var vv=((y+.5)/N)*2-1+(bay(x,y)-.5)*.2;
+    var band=vv<-.02?'1':vv<.3?'2':vv<.54?'3':'4';
+    if(band==='4'&&bay(x,y)<(vv-.54)/.36)continue;
+    buf.px(x,y,map[band]);}
+  if(!opts.noEyes){var es=Math.max(2,Math.round(N/10)),ey=Math.round(.39*N-es/2),exs=[Math.round(.38*N-es/2),Math.round(.62*N-es/2)];
+    exs.forEach(function(ex){if(opts.asleep){buf.rect(ex,ey+es-1,es,1,map.e);return;}
+      buf.rect(ex,ey,es,es,map.e);var gs=N>=40?2:1;buf.rect(ex,ey,gs,gs,map.g);});}
+  return buf;}
+function ease(t){return t<0?0:t>1?1:t*t*(3-2*t);}
+
+/* ---------- pixel wordmark ---------- */
+var GL={s:[".....",".....",".####","#....",".###.","....#","####."],o:[".....",".....",".###.","#...#","#...#","#...#",".###."],
+  u:[".....",".....","#...#","#...#","#...#","#..##",".##.#"],l:[".##..","..#..","..#..","..#..","..#..","..#..",".###."],
+  '.':["..","..","..","..","..","##","##"],m:[".....",".....","##.#.","#.#.#","#.#.#","#.#.#","#.#.#"],
+  e:[".....",".....",".###.","#...#","#####","#....",".###."]};
+function lockup(){var b=new Buf(104,20);b.over(MARKS.ghost(DARK),0,2);
+  var pos=[],x0=22;"soul.me".split('').forEach(function(ch){pos.push([ch,x0]);x0+=GL[ch][0].length*2+2;});
+  // temperature split: a warm grey left, a cool grey right, paper on top
+  pos.forEach(function(p){var g=GL[p[0]];if(p[0]==='.')return;for(var y=0;y<7;y++)for(var x=0;x<g[y].length;x++)if(g[y][x]==='#'){
+    var X=p[1]+x*2,Y=3+y*2;b.rect(X-1,Y,2,2,P.warm);b.rect(X+1,Y,2,2,P.cool);}});
+  pos.forEach(function(p){var g=GL[p[0]];for(var y=0;y<7;y++)for(var x=0;x<g[y].length;x++)if(g[y][x]==='#')
+    b.rect(p[1]+x*2,3+y*2,2,2,p[0]==='.'?P.gofun:P.kinari);});
+  return b;}
+
+/* ---------- centerpiece ---------- */
+var CW=176,CH=112;
+function shoji(b,x0,y0,w,h,lit,dim,t){
+  for(var y=y0;y<y0+h;y++)for(var x=x0;x<x0+w;x++){var gy=(y-y0)/h;b.px(x,y,bay(x,y)<t+(1-gy)*.25?lit:dim);}
+  for(var x2=x0+10;x2<x0+w;x2+=10)for(var y2=y0;y2<y0+h;y2++)b.px(x2,y2,P.ju);
+  for(var y3=y0+12;y3<y0+h;y3+=12)for(var x3=x0;x3<x0+w;x3++)b.px(x3,y3,P.ju);
+  for(var x4=x0-2;x4<x0+w+2;x4++){b.px(x4,y0-1,P.keshi);b.px(x4,y0-2,P.keshi);b.px(x4,y0+h,P.keshi);b.px(x4,y0+h+1,P.keshi);}
+  for(var y4=y0-2;y4<y0+h+2;y4++){b.px(x0-1,y4,P.keshi);b.px(x0-2,y4,P.keshi);b.px(x0+w,y4,P.keshi);b.px(x0+w+1,y4,P.keshi);}
+}
+/* the old room's content, cast as shadow play on its screen */
+function shadows(b){var s=P.ju,s2=P.keshi;
+  b.rect(20,56,16,11,s);b.rect(26,67,4,3,s);b.rect(23,70,10,1,s);                // monitor
+  b.rect(16,72,44,2,s);b.rect(18,74,2,12,s);b.rect(56,74,2,12,s);                 // desk
+  for(var i=0;i<4;i++)b.rect(41+(i&1),60+i*3,13,2,i%2?s2:s);b.rect(40,72,15,0,s);   // stacked files
+  b.rect(44,47,2,9,s);b.ell(45,45,4,3,s);                                         // lamp
+  b.rect(52,62,3,4,s);b.px(55,63,s);                                              // mug
+}
+var cpBase=(function(){var b=new Buf(CW,CH),r=rng(1234);b.rect(0,0,CW,CH,P.void);
+  b.ell(88,56,84,52,function(x,y,d){return bay(x,y)<(1-d)*.65?P.koge:null;});
+  for(var x=0;x<CW;x++){b.px(x,92,P.keshi);for(var y=93;y<CH;y++)if(bay(x,y)<.55-(y-93)*.025)b.px(x,y,(x%14===0)?P.koge:P.no);}
+  shoji(b,12,28,50,62,P.kinari,P.sei,.55);shadows(b);
+  shoji(b,114,28,50,62,P.sei,P.tan,.4);
+  // light spill on the floor in front of each screen
+  for(var x2=0;x2<CW;x2++)for(var y2=93;y2<100;y2++){var inL=x2>14&&x2<60,inR=x2>116&&x2<162;
+    if((inL||inR)&&bay(x2,y2)<(inL?.35:.2)-(y2-93)*.04)b.px(x2,y2,P.ju);}
+  for(var i=0;i<14;i++)b.px((r()*CW)|0,(r()*20)|0,P.ju);
+  return b;})();
+function fadeMap(w,h,fx,fy,seed,sx,sy){var r=rng(seed),N=[],cw=10,gw=Math.ceil(w/cw)+2,gh=Math.ceil(h/cw)+2;
+  for(var i=0;i<gw*gh;i++)N.push(r());
+  function noise(x,y){var gx=x/cw,gy=y/cw,ix=gx|0,iy=gy|0,tx=gx-ix,ty=gy-iy;
+    var a=N[iy*gw+ix],c=N[iy*gw+ix+1],d=N[(iy+1)*gw+ix],e=N[(iy+1)*gw+ix+1];return (a*(1-tx)+c*tx)*(1-ty)+(d*(1-tx)+e*tx)*ty;}
+  var T=new Float32Array(w*h),rx=w*(sx||.5),ry=h*(sy||.5);
+  for(var y=0;y<h;y++)for(var x=0;x<w;x++){var dx=(x-fx)/rx,dy=(y-fy)/ry,d=Math.sqrt(dx*dx+dy*dy)+(noise(x,y)-.5)*.42;
+    T[y*w+x]=Math.min(1,Math.max(0,(d-.5)/.5));}
+  return T;}
+function applyFade(b,T){for(var y=0;y<b.h;y++)for(var x=0;x<b.w;x++){if(bay(x,y)<T[y*b.w+x]){var s=((x*73856093)^(y*19349663))>>>0;b.c[y*b.w+x]=(s%293===0)?P.ju:P.void;}}}
+var cpFade=fadeMap(CW,CH,88,58,99,.58,.62);
+(function(){applyFade(cpBase,cpFade);})();
+var CYCLE=128,X0=37,X1=139;
+function ghostAt(p){ // position, form pair, morph t, alpha
+  var travel=ease((p-14)/96),x=X0+(X1-X0)*travel;
+  var seg=Math.min(4.999,Math.max(0,(p-14)/96*5)),i=Math.floor(seg),f=seg-i;
+  var a=ORDER[i],b=ORDER[(i+1)%5],t=ease((f-.45)/.45);
+  if(p<14||p>=110){a=b='ghost';t=0;}
+  var alpha=p<10?p/10:(p>118?(CYCLE-p)/10:1);
+  return {x:x,a:a,b:b,t:t,alpha:alpha};}
+function drawCenterpiece(n){var b=new Buf(CW,CH);b.c=cpBase.c.slice();var p=n%CYCLE;
+  // the trail: pale specks the ghost leaves as it goes (its patterns, travelling with it)
+  for(var k=1;k<=6;k++){var q=p-k*4;if(q<14||q>110)continue;var g=ghostAt(q),yy=50+Math.round(2*Math.sin((n-k*4)/5));
+    if(bay(k,q)<1-k/7)b.px(Math.round(g.x)-10-k,yy+10+(k&1),k<3?P.gin:P.namari);}
+  var g2=ghostAt(p),y=50+Math.round(2*Math.sin(n/5)),blink=(n%40)===0;
+  var s=spirit(32,g2.a,g2.b,g2.t,n/3,DARK,{asleep:blink});
+  b.over(s,Math.round(g2.x)-16,y-16,g2.alpha);
+  b.toCanvas(document.getElementById('centerpiece'));}
+
+/* ---------- materials ---------- */
+function material(kind){var b=new Buf(64,28),r=rng(kind.length*97);
+  for(var y=0;y<28;y++)for(var x=0;x<64;x++){var c;
+    if(kind==='lacquer'){var s=(x-y*1.3)-18;c=P.void;if(s>0&&s<10)c=bay(x,y)<(1-Math.abs(s-5)/5)*.7?P.sheen:P.koge;if(Math.abs(s-5)<.5&&bay(x,y)<.5)c='#5A5F68';}
+    if(kind==='ink'){c=P.no;var edge=Math.min(x,63-x,y,27-y);if(edge<3&&bay(x,y)<(3-edge)/4)c=P.ju;if(edge<1&&r()<.4)c=P.keshi;}
+    if(kind==='charcoal'){var v=r();c=v<.18?P.charHi:(v<.36?P.charLo:P.char);}
+    b.px(x,y,c);}
+  return b;}
+
+/* ---------- provenance tags ---------- */
+function tag(kind){var b=new Buf(16,16);
+  if(kind==='stated'){var r=rng(7);
+    for(var k=1;k<15;k++){b.px(k,1,P.gofun);b.px(k,14,P.gofun);b.px(1,k,P.gofun);b.px(14,k,P.gofun);}
+    var mini=["...####...","..######..",".##.##.##.",".########.",".########.",".########.",".#.##.##.#","..........."];
+    for(var y=0;y<8;y++)for(var x=0;x<10;x++)if(mini[y][x]==='#')b.px(3+x,4+y,P.gofun);
+    for(var i=0;i<7;i++){var e=(r()*52)|0;b.px(e<13?1+e:(e<26?14:(e<39?1+(e-26):1)),e<13?1:(e<26?1+(e-13):(e<39?14:1+(e-39))),null);}}
+  if(kind==='imported'){for(var y2=2;y2<14;y2++)for(var x2=2;x2<14;x2++)if(((x2+y2)&1)===0)b.px(x2,y2,P.gin);}
+  if(kind==='inferred'){for(var k=2;k<14;k+=2){b.px(k,2,P.nibi);b.px(k,13,P.nibi);b.px(2,k,P.nibi);b.px(13,k,P.nibi);}}
+  return b;}
+
+/* ---------- icons ---------- */
+var IC={'.':null,a:P.shiro,b:P.gin,c:P.namari,d:P.nibi,e:P.keshi,f:P.ju,p:P.kinari,v:P.void,w:P.gofun};
+var ICONS=[
+  {name:'Core',sub:'minime.md: the head, always loaded',g:["................","................",".....aaaaaa.....","....aaaaaaaa....","...aaaaaaaaaa...","...aawvaawvaa...","...aavvaavvaa...","...aaaaaaaaaa...","...aaaaaaaaaa...","....aaaaaaaa....",".....aaaaaa.....","................","...cccccccccc...","................","................","................"]},
+  {name:'Skill',sub:'a brush: a procedure you repeat',g:["................",".............dd.","............ddd.","...........ddd..","..........ddd...",".........ddd....","........ddd.....",".......bbb......","......bbb.......",".....aab........","....aaa.........","...aaa..........","..fe............",".f..............","................","................"]},
+  {name:'Area',sub:'a shoji: a room you work in',g:["................","..cccccccccccc..","..cpppcppcpppc..","..cpppcppcpppc..","..cpppcppcpppc..","..cccccccccccc..","..cpppcppcpppc..","..cpppcppcpppc..","..cpppcppcpppc..","..cccccccccccc..","..cpppcppcpppc..","..cpppcppcpppc..","..cpppcppcpppc..","..cccccccccccc..",".eeeeeeeeeeeeee.","................"]},
+  {name:'Person',sub:'two figures: relationship, not dossier',g:["................","................","...bbb....ccc...","..bbbbb..ccccc..","..bbbbb..ccccc..","...bbb....ccc...","................","..bbbbb..ccccc..",".bbbbbbb.ccccccc",".bbbbbbb.ccccccc",".bbbbbbb.ccccccc",".bbbbbbb.ccccccc","................","................","................","................"]},
+  {name:'Topic',sub:'a scroll: facts by domain',g:["................","................","................",".d............d.",".dppppppppppppd.",".dpccccc.cccppd.",".dppppppppppppd.",".dpcccc.ccccppd.",".dppppppppppppd.",".dpccc.cccccppd.",".dppppppppppppd.",".d............d.","................","................","................","................"]},
+  {name:'Session',sub:'incense: burns down, then gone',g:[".......b........","......b.........",".......b........","......b.........",".......a........",".......d........",".......d........",".......d........",".......d........",".......d........",".......d........",".......d........","....cccdccc.....","...ccccccccc....","....ccccccc.....","................"]},
+  {name:'Inbox',sub:'a box with a slip: needs your review',g:["................","................",".......ww.......",".......ww.......",".......ww.......",".......ww.......","..cccccwwccccc..","..cddddwwddddc..","..cddddddddddc..","..cddddddddddc..","..cddddddddddc..","..cddddddddddc..","..cddddddddddc..","..cccccccccccc..","................","................"]},
+  {name:'Raw data',sub:'a kura: kept locked, never committed',g:["................",".......cc.......",".....cccccc.....","...cccccccccc...",".cccccccccccccc.","..aaaaaaaaaaaa..","..aaaaaaaaaaaa..","..aaaaeeeeaaaa..","..aaaaebbeaaaa..","..aaaaeeeeaaaa..","..aaaaeeeeaaaa..","..cccccccccccc..","..cacacacacaca..","................","................","................"]},
+  {name:'Curation',sub:'pruning shears: the weekly pass',g:["................","................","..a.........a...","...a.......a....","....a.....a.....",".....a...a......","......a.a.......",".......c........","......c.c.......",".....d...d......","....dd...dd.....","...d..d.d..d....","...d..d.d..d....","....dd...dd.....","................","................"]},
+  {name:'Offboarding',sub:'a furoshiki: patterns you carry out',g:["................","................","......b..b......",".....bb..bb.....","......bbbb......","....bbbbbbbb....","...bbcbbbbcbb...","..bbbbbbbbbbbb..","..bbbcbbbbcbbb..","..bbbbbbbbbbbb..","..bbcbbbbbbcbb..","...bbbbbbbbbb...","....bbbbbbbb....","................","................","................"]}
+];
+
+/* ---------- ornaments ---------- */
+function sumiRule(){var b=new Buf(176,7);for(var x=0;x<176;x++){var f=x/176,th=Math.max(0,Math.round(3*Math.pow(1-f,.5)));
+  for(var y=3-th;y<=3+th;y++){var k=y-3,dry=((x*7+(k+4)*13)%23)<f*16;if(dry)continue;
+    b.px(x,y,f<.08?P.shiro:(Math.abs(k)===th&&th>0?P.nibi:(f<.5?P.gin:P.namari)));}}
+  return b;}
+function washi(){var b=new Buf(176,3),r=rng(3);for(var x=0;x<176;x++){var h=1+((r()*3)|0);for(var y=3-h;y<3;y++)b.px(x,y,y===3-h?P.shiro:P.sei);}return b;}
+function brushFrame(n){var b=new Buf(40,8),pos=(n*2)%56;
+  for(var x=0;x<Math.min(40,pos);x++){var f=x/40,th=x>pos-3?1:2;
+    for(var y=4-th;y<=3+th;y++){if(((x*5+y*11)%13)<f*9)continue;b.px(x,y,f<.1?P.shiro:(f<.6?P.gin:P.namari));}}
+  if(pos<40){b.rect(pos,2,2,4,P.shiro);b.px(pos+2,3,P.gin);}return b;}
+function incense(n,left,total){var b=new Buf(48,10),L=Math.round(40*left/total);
+  b.rect(2,7,L,1,P.nibi);for(var x=2+L;x<42;x+=2)b.px(x,7,P.keshi);
+  var tip=2+L;b.px(tip,7,P.shiro);b.px(tip,6,(n%6)<3?P.gin:P.namari);
+  for(var s=0;s<5;s++){var yy=5-s,xx=tip+Math.round(Math.sin((s+n/2)/1.5));if(yy>=0)b.px(xx,yy,s<2?P.namari:P.keshi);}
+  return b;}
+function kasure(){var b=new Buf(32,8);for(var x=0;x<32;x++){var f=x/32;for(var y=2;y<6;y++){if(bay(x,y)<f*1.1)continue;b.px(x,y,f<.3?P.namari:P.nibi);}}return b;}
+var emptyFade=fadeMap(44,28,22,14,5,.5,.56);
+function emptyFrame(n){var b=new Buf(44,28),r=rng(88);b.rect(0,0,44,28,P.void);
+  b.ell(22,14,19,12,function(x,y,d){return bay(x,y)<(1-d)*.7?P.koge:null;});
+  for(var i=0;i<14;i++)b.px((r()*44)|0,(r()*22)|0,P.ju);
+  var bob=(n%24)<12?0:1;b.over(MARKS.asleep(DARK),14,6+bob);
+  if((n%24)<16){var zx=31+((n%24)>>3),zy=5-((n%24)>>3);b.px(zx,zy,P.namari);b.px(zx+1,zy,P.namari);}
+  applyFade(b,emptyFade);return b;}
+
+/* ---------- mount ---------- */
+lockup().toCanvas(document.getElementById('wordmark'));lockup().toCanvas(document.getElementById('lock-a'));
+document.querySelectorAll('canvas.mk').forEach(function(cv){var m=cv.dataset.ground==='paper'?PAPER:DARK;MARKS[cv.dataset.mark](m).toCanvas(cv);});
+spirit(48,'ghost','ghost',0,0,DARK).toCanvas(document.getElementById('multitudes'));
+document.querySelectorAll('canvas.form').forEach(function(cv){var f=cv.dataset.form;spirit(32,f,f,0,1,DARK).toCanvas(cv);});
+document.querySelectorAll('canvas.mat').forEach(function(cv){material(cv.dataset.mat).toCanvas(cv);});
+document.querySelectorAll('canvas.tag').forEach(function(cv){tag(cv.dataset.tag).toCanvas(cv);});
+var grid=document.getElementById('iconGrid');
+ICONS.forEach(function(ic){var d=document.createElement('div');d.className='ic';
+  d.innerHTML='<div class="pair"><canvas width="16" height="16" style="width:16px"></canvas><canvas width="16" height="16" style="width:32px"></canvas></div><b>'+ic.name+'</b><span>'+ic.sub+'</span>';
+  grid.appendChild(d);d.querySelectorAll('canvas').forEach(function(cv){fromGrid(ic.g,IC).toCanvas(cv);});});
+sumiRule().toCanvas(document.getElementById('o-rule'));
+washi().toCanvas(document.getElementById('o-washi'));
+kasure().toCanvas(document.getElementById('o-kasure'));
+
+function tick(n){drawCenterpiece(n);
+  var cyc=Math.floor(n/24)%5,f=(n%24)/24,a=ORDER[cyc],b=ORDER[(cyc+1)%5];
+  spirit(32,a,b,ease((f-.5)/.4),n/3,DARK).toCanvas(document.getElementById('morph'));
+  brushFrame(n).toCanvas(document.getElementById('o-brush'));
+  incense(n,9,14).toCanvas(document.getElementById('o-incense'));
+  emptyFrame(n).toCanvas(document.getElementById('o-empty'));}
+var n=reduce?70:0;tick(n);
+if(!reduce)setInterval(function(){n++;tick(n);},125);
+})();
+</script>
+</body>
+</html>
