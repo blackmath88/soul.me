@@ -1,9 +1,9 @@
 # Roadmap
 
 ## v0: Schema & template
-- [ ] `vault/` skeleton with the layout from [architecture](docs/architecture.md)
-- [ ] `minime.md` template (identity + operating manual) with a quality checklist
-- [ ] frontmatter spec + a small validator script
+- [x] `vault/` skeleton with the layout from [architecture](docs/architecture.md)
+- [x] `minime.md` template (identity + operating manual) with a quality checklist
+- [x] frontmatter spec ([docs/spec.md](docs/spec.md)) + a small validator script (`tools/validate.py`)
 
 ## v1: Intake
 - [ ] standard "dump your memory of me" prompt for ChatGPT / Claude / Copilot

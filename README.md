@@ -46,8 +46,10 @@ alone gets a new account about 70% of the way to "knowing me".
 | [docs/concept.md](docs/concept.md) | the concept in depth |
 | [docs/research.md](docs/research.md) | who else is doing this, what to borrow (with sources) |
 | [docs/architecture.md](docs/architecture.md) | the solution architecture |
+| [docs/spec.md](docs/spec.md) | vault file format, checked by `tools/validate.py` |
+| [vault/](vault/) | a **fictional** example vault (Mara Keller) |
 | [DECISIONS.md](DECISIONS.md) | decision log |
 | [ROADMAP.md](ROADMAP.md) | what gets built, in what order |
 | [AGENTS.md](AGENTS.md) | orientation for agents working in this repo |
 
-Status: **concept phase**. No code yet.
+Status: **v0**. A spec, a validator and a fictional example vault.
