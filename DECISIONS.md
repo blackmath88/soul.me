@@ -44,3 +44,15 @@
 ## D-011: Strict body format (2026-09-29), **Proposed**
 **Decision:** A vault file body contains only headings and tagged list items; `name` equals the file (or skill folder) name.
 **Why:** One fact per line becomes checkable, and the future FTS index can return a line with its tag and file without parsing prose.
+
+## D-012: Inbox is reviewed weekly and expires (2026-09-29), **Proposed**
+**Decision:** Pending `inbox/` proposals are reviewed as one batch in the weekly curation PR. Proposals unreviewed after 4 weeks expire and are deleted.
+**Why:** Without a rhythm and an expiry, the inbox grows into a second, unreviewed memory, which is exactly what D-004 and D-006 prevent.
+
+## D-013: Drop-in export before MCP (2026-09-29), **Proposed**
+**Decision:** The paste-able drop-in export is the main way to serve the vault and ships first; the MCP server is an optional later layer.
+**Why:** Employer tenants often block MCP connectors, but every assistant accepts custom instructions or project files. The offboarding story has to work without a server.
+
+## D-014: Offboarding-ready by default (2026-09-29), **Proposed**, amends D-007
+**Decision:** Sanitising runs continuously: work-context material is sanitised before it enters `inbox/`, and every weekly curation PR shows what was stripped. There is no exit-time extraction step. Self-authored descriptions of work style are the preferred source over company chat exports, and the user checks employer policy before extracting anything from a tenant.
+**Why:** Access is often cut on the last day. If the vault never holds employer content, leaving is a non-event and nothing depends on a last-minute export.

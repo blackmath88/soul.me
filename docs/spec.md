@@ -97,6 +97,7 @@ The first two checks come from aaronjmars/soul.md (see [research](research.md#2a
 
 ## Not checked yet
 
-- Sessions older than 14 days (curation pass, v4)
-- Facts past `valid_to` (curation pass, v4)
-- Duplicates and contradictions across files (v4)
+- Sessions older than 14 days (curation pass, v3)
+- Facts past `valid_to` (curation pass, v3)
+- `inbox/` files older than 4 weeks (curation pass, v3, D-012)
+- Duplicates and contradictions across files (v3)
