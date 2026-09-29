@@ -49,6 +49,8 @@ alone gets a new account about 70% of the way to "knowing me".
 | [docs/architecture.md](docs/architecture.md) | the solution architecture |
 | [docs/spec.md](docs/spec.md) | vault file format, checked by `tools/validate.py` |
 | [vault/](vault/) | a **fictional** example vault (Mara Keller) |
+| [prompts/](prompts/) | v1 intake prompts, with a fictional worked example |
+| [docs/own-vault.md](docs/own-vault.md) | set up your real vault in its own private repo |
 | [DECISIONS.md](DECISIONS.md) | decision log |
 | [ROADMAP.md](ROADMAP.md) | what gets built, in what order |
 | [AGENTS.md](AGENTS.md) | orientation for agents working in this repo |

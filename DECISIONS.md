@@ -57,3 +57,11 @@
 ## D-014: Offboarding-ready by default (2026-09-29), amends D-007
 **Decision:** Sanitising runs continuously: work-context material is sanitised before it enters `inbox/`, and every weekly curation PR shows what was stripped. There is no exit-time extraction step. Self-authored descriptions of work style are the preferred source over company chat exports, and the user checks employer policy before extracting anything from a tenant.
 **Why:** Access is often cut on the last day. Filtering weekly and flagging lines for review keeps the vault close to exit-ready, so nothing depends on a last-minute export. It reduces the risk; it doesn't guarantee it.
+
+## D-015: The real vault lives in its own private repo (2026-09-29), **Proposed**
+**Decision:** A person's vault is a separate private repo. It uses soul.me (spec, validator, prompts) at a pinned git tag, checked out next to it locally and in its CI.
+**Why:** Real personal data must never enter this repo (AGENTS.md). Pinning means a spec change can't silently break a real vault.
+
+## D-016: Where extraction runs (2026-09-29), **Proposed**
+**Decision:** Extraction runs in the vendor the material came from, on a local model, or in an agent session attached only to the vault repo. It never runs in a session that has soul.me attached.
+**Why:** Whatever runs extraction sees the raw material. These options add no new party, or keep it local, and keep real data out of soul.me's PRs and CI logs.
