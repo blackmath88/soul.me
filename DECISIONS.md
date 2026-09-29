@@ -55,4 +55,4 @@
 
 ## D-014: Offboarding-ready by default (2026-09-29), **Proposed**, amends D-007
 **Decision:** Sanitising runs continuously: work-context material is sanitised before it enters `inbox/`, and every weekly curation PR shows what was stripped. There is no exit-time extraction step. Self-authored descriptions of work style are the preferred source over company chat exports, and the user checks employer policy before extracting anything from a tenant.
-**Why:** Access is often cut on the last day. If the vault never holds employer content, leaving is a non-event and nothing depends on a last-minute export.
+**Why:** Access is often cut on the last day. Filtering weekly and flagging lines for review keeps the vault close to exit-ready, so nothing depends on a last-minute export. It reduces the risk; it doesn't guarantee it.

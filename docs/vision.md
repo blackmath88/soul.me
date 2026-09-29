@@ -16,7 +16,7 @@ Mara Keller is the fictional example in [`vault/`](../vault/). Here is the whole
 | 1 | **Day 0: intake** | memory dumps from ChatGPT and Claude, a self-written "how I work" note, a short interview | intake prompts (v1) | `inbox/` as `[imported:*]` | Mara, line by line → `[stated]` |
 | 2 | **Daily use** | Claude, ChatGPT and a local Qwen all start from `minime.md`; handoffs between them go to `sessions/` | drop-in export (v2), MCP later (v4) | `sessions/`; proposals to `inbox/` | nobody: reads only |
 | 3 | **Weekly curation** | one PR that batches inbox review, merges dupes, retires expired facts, prunes sessions, **and runs the sanitising pass** | curation Action (v3) | a PR, never `main` | Mara merges |
-| 4 | **Job change** | nothing special happens: the vault is already clean, so she takes it with her | none | none | none |
+| 4 | **Job change** | a short final check of the latest curation PR; no bulk extraction | curation PR (v3) | none | Mara |
 | 5 | **New tenant** | drops the export into the new assistant; productive on day 1 | drop-in export (v2) | none | none |
 
 ### 1 · Intake
@@ -33,20 +33,22 @@ the episodic layer plus a `propose` tool. When an assistant notices something ne
 
 ### 3 · Weekly curation: offboarding-ready by default
 
-Employer access is often cut on the last day, sometimes without notice. **So there is no exit step.**
+Employer access is often cut on the last day, sometimes without notice. **So nothing depends on an exit-time extraction.**
 Sanitising runs every week inside the curation PR:
 
-- New material from work contexts goes through the sanitising prompt **before** it reaches `inbox/`. Only patterns
-  survive: working style, generic procedures, role-level facts. Client names, internal numbers and documents don't.
-- The curation PR shows what was stripped, so Mara can see the filter working.
-- As a result the vault never holds employer content, and leaving is a non-event.
+- New material from work contexts goes through the sanitising prompt **before** it reaches `inbox/`. The aim is that
+  only patterns survive: working style, generic procedures, role-level facts, and not client names, internal numbers or documents.
+- The curation PR shows what was stripped and flags anything that still looks like employer content, so Mara reviews it.
+- Employer content is filtered weekly and flagged for review, so the vault stays close to exit-ready.
+  **This reduces the risk; it doesn't guarantee it.** A prompt filter can miss things, and Mara's review is the real control.
 
 The inbox gets a batch review in the same PR. Proposals nobody reviews expire after four weeks (D-012),
 so the inbox can't grow into a second, unreviewed memory.
 
 ### 4 · Job change
 
-Because of stage 3, there's nothing to extract, clean or negotiate on the way out. The vault is hers and already clean.
+Because of stage 3, there's no bulk extraction to rush on the way out. Mara does one last check of the vault for flagged
+or borderline lines, removes anything doubtful, and takes the rest with her.
 
 ### 5 · New tenant
 
