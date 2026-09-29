@@ -32,3 +32,15 @@
 ## D-008: Observstory watches this repo (2026-09-29)
 **Decision:** The Observstory GitHub Action runs with zero config.
 **Why:** Dogfooding. It becomes meaningful once the MCP server is being built in parallel.
+
+## D-009: Unreviewed tags live only in inbox/ (2026-09-29), **Proposed**
+**Decision:** `[inferred]` and `[imported:*]` lines are allowed only in `inbox/`. Live files hold `[stated]` only, and the validator fails otherwise.
+**Why:** It makes D-004 and D-006 mechanical: nothing unconfirmed can sit where it would be served as fact.
+
+## D-010: Skill steps carry tags too (2026-09-29), **Proposed**
+**Decision:** Every step in a `SKILL.md` gets a provenance tag, like any other line. There's no file-level provenance.
+**Why:** It keeps D-004 without exceptions. It costs a little noise, but an imported procedure gets reviewed step by step.
+
+## D-011: Strict body format (2026-09-29), **Proposed**
+**Decision:** A vault file body contains only headings and tagged list items; `name` equals the file (or skill folder) name.
+**Why:** One fact per line becomes checkable, and the future FTS index can return a line with its tag and file without parsing prose.
