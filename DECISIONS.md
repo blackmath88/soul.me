@@ -77,3 +77,15 @@
 ## D-019: The brand kit is the visual north star (2026-09-29)
 **Decision:** `brand/brand-kit.html` (round 2) defines soul.me's visual identity: the kitsune fox, sumi greys, and the rule "grey is the world, colour is yours" (colour only on what the person has sealed; shu red only for the seal).
 **Why:** The owner chose it. The rule restates D-004 and D-006 visually, so the brand cannot drift from the product's core promise.
+
+## D-020: Source slugs name provider and place (2026-09-29), **Proposed**
+**Decision:** `[imported:<source>]` uses `<provider>-<place>`, e.g. `chatgpt-home`, `copilot-work`, or `self`. The validator already accepts it; the spec and prompts now ask for it.
+**Why:** The place decides the rules (sanitising, offboarding); the provider only decides the format. Both have to be visible on every imported line.
+
+## D-021: Origin after sealing lives in git (2026-09-29), **Proposed**
+**Decision:** No extra syntax on `[stated]` lines. The commit that promotes lines names the inbox file they came from (`seal: inbox/<file>`), so "stated lines that came from work" is a `git log` query.
+**Why:** Same principle as D-017: git already keeps the second timeline, so the files stay simple.
+
+## D-022: Serving uses profiles (2026-09-29), **Proposed**
+**Decision:** The drop-in export (v2) and the MCP server (v4) take a profile that decides which folders leave the vault: `work` (minime, skills, work areas; never people/, private topics or sessions) and `personal` (everything live).
+**Why:** Places are destinations as well as sources. The main serving path (D-013) needs the same protection the MCP server's allowlists were planned to have.

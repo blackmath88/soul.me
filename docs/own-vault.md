@@ -55,8 +55,10 @@ To move to a newer spec, bump `ref`, run the validator locally, fix what it repo
 2. **Memory dumps**: [`prompts/memory-dump.md`](../prompts/memory-dump.md) in your personal ChatGPT and Claude → `vault/data/`.
 3. **Extract**, one source at a time, with [`prompts/extract.md`](../prompts/extract.md) → `vault/inbox/<date>-<source>.md`.
    Run the validator after each file.
+   Name each source `<provider>-<place>`, e.g. `chatgpt-home` (D-020).
 4. **Review, minime.md first.** Move the lines you agree with into live files as `[stated]`, reworded as you like;
    delete the rest. Empty the inbox in the same session.
+   Commit with the inbox file in the message, e.g. `seal: inbox/2026-09-29-chatgpt-home.md`, so origin stays findable (D-021).
 5. **Fill the gaps** by answering the questions again where `minime.md` is thin, then run the quality checklist in
    [spec.md](spec.md#quality-checklist), including the weak-model test.
 6. **Commit and tag** the vault `v0.1`.

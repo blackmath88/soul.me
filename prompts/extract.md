@@ -4,7 +4,7 @@ Turns one raw source (a memory dump, a self-written note, an interview transcrip
 `inbox/` file that passes `tools/validate.py`. Run it once per source. Replace the three
 `{placeholders}` before pasting.
 
-- `{source}`: lowercase short name used in the tag, e.g. `self`, `chatgpt`, `claude`, `copilot-work`
+- `{source}`: `<provider>-<place>` in lowercase, e.g. `chatgpt-home`, `claude-home`, `copilot-work`, or `self` for your own note (D-020)
 - `{date}`: today, `YYYY-MM-DD`
 - `{raw}`: the source text
 
