@@ -111,9 +111,9 @@ Stars and forks come from the GitHub repo page on 2026-09-29. Last commit comes 
 
 | Concept | From |
 |---|---|
-| human-self files, intake by interview + exports | kevinpinscoe/soul.md |
-| three runtime layers + scopes + expiring handoffs | openport |
-| git + markdown vault, append-only, migration = clone | vault-mcp |
+| human-self files, intake by interview + exports, predict-my-take bar | aaronjmars/soul.md (via kevinpinscoe fork) |
+| three runtime layers + scopes + expiring handoffs | openport (source gone; Glama only) |
+| git + markdown vault, every write a commit, migration = clone | vault-mcp |
 | always-loaded core + archive; background consolidation | Letta |
 | facts with validity windows | Zep / Graphiti |
 | full-text search before vectors | ai-memory-mcp |
