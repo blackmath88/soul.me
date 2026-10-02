@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Validate a soul.me vault against docs/spec.md.
 
-Usage: python tools/validate.py [vault_dir]   (default: vault)
+Usage: python tools/validate.py [vault_dir] [--summary]   (default: vault)
 Prints path:line: message per problem; exits 1 if any.
+--summary also prints the status counts (stated, inbox, expired) that status displays use.
 """
 import datetime
 import re
@@ -23,6 +24,7 @@ TAGLIKE_RE = re.compile(r"\[(stated|inferred|imported)[^\]]*\]")
 ITEM_RE = re.compile(r"^\s*(?:[-*]|\d+\.)\s+(.*)$")
 VALIDITY_RE = re.compile(r"\((valid_from|valid_to):\s*([^)]*)\)")
 VALIDITY_DATE_RE = re.compile(r"^\d{4}-\d{2}(-\d{2})?$")
+QUOTE_RE = re.compile(r'\(quote: "[^"]*"\)')
 
 
 def split_frontmatter(text):
@@ -113,11 +115,14 @@ def check_body(lines, start, rel, errors):
         if tags[0] != "stated" and not in_inbox:
             errors.append(f"{rel}:{lineno}: [{tags[0]}] only allowed in inbox/ until confirmed")
 
+        if QUOTE_RE.search(item) and not in_inbox:
+            errors.append(f"{rel}:{lineno}: (quote: ...) is only allowed in inbox/; drop it when sealing")
+
         for field, value in VALIDITY_RE.findall(item):
             if not VALIDITY_DATE_RE.match(value.strip()):
                 errors.append(f"{rel}:{lineno}: {field} '{value}' must be YYYY-MM or YYYY-MM-DD")
 
-        words += len(TAG_RE.sub("", item).split())
+        words += len(QUOTE_RE.sub("", TAG_RE.sub("", item)).split())
     return words, headings
 
 
@@ -156,12 +161,40 @@ def validate(vault):
     return files, errors
 
 
+def summary(vault, files, today=None):
+    """Counts for status displays: stated lines, inbox lines, expired inbox files and sessions."""
+    today = today or datetime.date.today()
+    stated = inbox = old_inbox = old_sessions = 0
+    for path in files:
+        rel = path.relative_to(vault).as_posix()
+        text = path.read_text(encoding="utf-8")
+        tags = [TAG_RE.search(m.group(1)) for m in map(ITEM_RE.match, text.split("\n")) if m]
+        if rel.startswith("inbox/"):
+            inbox += sum(1 for t in tags if t)
+            parts = split_frontmatter(text)
+            fm = (yaml.safe_load(parts[0]) if parts else None) or {}
+            upd = fm.get("updated") if isinstance(fm, dict) else None
+            if isinstance(upd, str) and DATE_RE.match(upd):
+                upd = datetime.date.fromisoformat(upd)
+            if isinstance(upd, datetime.date) and (today - upd).days > 28:
+                old_inbox += 1
+        else:
+            stated += sum(1 for t in tags if t and t.group(1) == "stated")
+        if rel.startswith("sessions/") and DATE_RE.match(path.stem[:10]):
+            if (today - datetime.date.fromisoformat(path.stem[:10])).days > 14:
+                old_sessions += 1
+    return f"stated {stated} · inbox {inbox} · inbox files past 4 weeks {old_inbox} · sessions past 14 days {old_sessions}"
+
+
 if __name__ == "__main__":
-    vault = Path(sys.argv[1] if len(sys.argv) > 1 else "vault")
+    args = [a for a in sys.argv[1:] if a != "--summary"]
+    vault = Path(args[0] if args else "vault")
     if not vault.is_dir():
         sys.exit(f"no vault directory at {vault}")
     files, errors = validate(vault)
     for e in errors:
         print(e)
     print(f"{len(files)} files checked, {len(errors)} problems")
+    if "--summary" in sys.argv:
+        print(summary(vault, files))
     sys.exit(1 if errors else 0)

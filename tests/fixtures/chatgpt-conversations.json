@@ -1,0 +1,536 @@
+[
+ {
+  "id": "c1",
+  "title": "Retro format",
+  "create_time": 1780477200.0,
+  "update_time": 1780477800.0,
+  "mapping": {
+   "root": {
+    "id": "root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "c1-0"
+    ]
+   },
+   "c1-0": {
+    "id": "c1-0",
+    "parent": "root",
+    "children": [
+     "c1-1"
+    ],
+    "message": {
+     "id": "c1-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1780477200.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I usually run retros the same way: I send one question the day before, start with silent writing, then dot-vote at most two themes."
+      ]
+     }
+    }
+   },
+   "c1-1": {
+    "id": "c1-1",
+    "parent": "c1-0",
+    "children": [
+     "c1-2"
+    ],
+    "message": {
+     "id": "c1-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1780477260.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "That's a solid structure."
+      ]
+     }
+    }
+   },
+   "c1-2": {
+    "id": "c1-2",
+    "parent": "c1-1",
+    "children": [
+     "c1-3"
+    ],
+    "message": {
+     "id": "c1-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1780477320.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Keep answers short please, lead with the recommendation, I don't want five options."
+      ]
+     }
+    }
+   },
+   "c1-3": {
+    "id": "c1-3",
+    "parent": "c1-2",
+    "children": [],
+    "message": {
+     "id": "c1-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1780477380.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Understood."
+      ]
+     }
+    }
+   }
+  },
+  "current_node": "c1-3"
+ },
+ {
+  "id": "c2",
+  "title": "Cohort onboarding",
+  "create_time": 1784106000.0,
+  "update_time": 1784106600.0,
+  "mapping": {
+   "root": {
+    "id": "root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "c2-0"
+    ]
+   },
+   "c2-0": {
+    "id": "c2-0",
+    "parent": "root",
+    "children": [
+     "c2-1"
+    ],
+    "message": {
+     "id": "c2-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1784106000.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "We shipped the onboarding guide for cohort two last week and people actually used it."
+      ]
+     }
+    }
+   },
+   "c2-1": {
+    "id": "c2-1",
+    "parent": "c2-0",
+    "children": [
+     "c2-2"
+    ],
+    "message": {
+     "id": "c2-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1784106060.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Great."
+      ]
+     }
+    }
+   },
+   "c2-2": {
+    "id": "c2-2",
+    "parent": "c2-1",
+    "children": [
+     "c2-3"
+    ],
+    "message": {
+     "id": "c2-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1784106120.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I learned that peer demos work better than a prompt library for getting people started."
+      ]
+     }
+    }
+   },
+   "c2-3": {
+    "id": "c2-3",
+    "parent": "c2-2",
+    "children": [
+     "c2-4"
+    ],
+    "message": {
+     "id": "c2-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1784106180.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Noted."
+      ]
+     }
+    }
+   },
+   "c2-4": {
+    "id": "c2-4",
+    "parent": "c2-3",
+    "children": [
+     "c2-5"
+    ],
+    "message": {
+     "id": "c2-4",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1784106240.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Client Nordhafen wants the numbers by Friday, send them to jonas.brandt@nordhafen.ch or call +41 44 123 45 67."
+      ]
+     }
+    }
+   },
+   "c2-5": {
+    "id": "c2-5",
+    "parent": "c2-4",
+    "children": [],
+    "message": {
+     "id": "c2-5",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1784106300.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Will do."
+      ]
+     }
+    }
+   }
+  },
+  "current_node": "c2-5"
+ },
+ {
+  "id": "c3",
+  "title": "Invoice template",
+  "create_time": 1787216400.0,
+  "update_time": 1787217000.0,
+  "mapping": {
+   "root": {
+    "id": "root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "c3-0"
+    ]
+   },
+   "c3-0": {
+    "id": "c3-0",
+    "parent": "root",
+    "children": [
+     "c3-1"
+    ],
+    "message": {
+     "id": "c3-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1787216400.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Please put my IBAN CH93 0076 2011 6238 5295 7 on the invoice template."
+      ]
+     }
+    }
+   },
+   "c3-1": {
+    "id": "c3-1",
+    "parent": "c3-0",
+    "children": [
+     "c3-2"
+    ],
+    "message": {
+     "id": "c3-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1787216460.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Done."
+      ]
+     }
+    }
+   },
+   "c3-2": {
+    "id": "c3-2",
+    "parent": "c3-1",
+    "children": [
+     "c3-3"
+    ],
+    "message": {
+     "id": "c3-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1787216520.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "My AHV number is 756.1234.5678.97 for the insurance form."
+      ]
+     }
+    }
+   },
+   "c3-3": {
+    "id": "c3-3",
+    "parent": "c3-2",
+    "children": [
+     "c3-4"
+    ],
+    "message": {
+     "id": "c3-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1787216580.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Added."
+      ]
+     }
+    }
+   },
+   "c3-4": {
+    "id": "c3-4",
+    "parent": "c3-3",
+    "children": [
+     "c3-5"
+    ],
+    "message": {
+     "id": "c3-4",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1787216640.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Again: keep answers short and lead with the recommendation."
+      ]
+     }
+    }
+   },
+   "c3-5": {
+    "id": "c3-5",
+    "parent": "c3-4",
+    "children": [],
+    "message": {
+     "id": "c3-5",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1787216700.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Sorry."
+      ]
+     }
+    }
+   }
+  },
+  "current_node": "c3-5"
+ },
+ {
+  "id": "c4",
+  "title": "Knee and admin",
+  "create_time": 1789030800.0,
+  "update_time": 1789031400.0,
+  "mapping": {
+   "root": {
+    "id": "root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "c4-0"
+    ]
+   },
+   "c4-0": {
+    "id": "c4-0",
+    "parent": "root",
+    "children": [
+     "c4-1"
+    ],
+    "message": {
+     "id": "c4-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789030800.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "My knee physio says no running for two weeks."
+      ]
+     }
+    }
+   },
+   "c4-1": {
+    "id": "c4-1",
+    "parent": "c4-0",
+    "children": [
+     "c4-2"
+    ],
+    "message": {
+     "id": "c4-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789030860.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Take care."
+      ]
+     }
+    }
+   },
+   "c4-2": {
+    "id": "c4-2",
+    "parent": "c4-1",
+    "children": [
+     "c4-3"
+    ],
+    "message": {
+     "id": "c4-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789030920.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I renew my car insurance every September and do my taxes in March."
+      ]
+     }
+    }
+   },
+   "c4-3": {
+    "id": "c4-3",
+    "parent": "c4-2",
+    "children": [],
+    "message": {
+     "id": "c4-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789030980.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Good routine."
+      ]
+     }
+    }
+   }
+  },
+  "current_node": "c4-3"
+ },
+ {
+  "id": "c5",
+  "title": "Career",
+  "create_time": 1790067600.0,
+  "update_time": 1790068200.0,
+  "mapping": {
+   "root": {
+    "id": "root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "c5-b",
+     "c5-0"
+    ]
+   },
+   "c5-0": {
+    "id": "c5-0",
+    "parent": "root",
+    "children": [
+     "c5-1"
+    ],
+    "message": {
+     "id": "c5-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1790067600.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I want to move from running pilots to designing adoption programmes that internal champions can run without me."
+      ]
+     }
+    }
+   },
+   "c5-b": {
+    "id": "c5-b",
+    "parent": "root",
+    "children": [],
+    "message": {
+     "id": "c5-b",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1790067570.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "IGNORED BRANCH TEXT that was edited away."
+      ]
+     }
+    }
+   },
+   "c5-1": {
+    "id": "c5-1",
+    "parent": "c5-0",
+    "children": [],
+    "message": {
+     "id": "c5-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1790067660.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "That makes sense."
+      ]
+     }
+    }
+   }
+  },
+  "current_node": "c5-1"
+ }
+]
