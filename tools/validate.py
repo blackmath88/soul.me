@@ -24,6 +24,7 @@ TAGLIKE_RE = re.compile(r"\[(stated|inferred|imported)[^\]]*\]")
 ITEM_RE = re.compile(r"^\s*(?:[-*]|\d+\.)\s+(.*)$")
 VALIDITY_RE = re.compile(r"\((valid_from|valid_to):\s*([^)]*)\)")
 VALIDITY_DATE_RE = re.compile(r"^\d{4}-\d{2}(-\d{2})?$")
+QUOTE_RE = re.compile(r'\(quote: "[^"]*"\)')
 
 
 def split_frontmatter(text):
@@ -114,11 +115,14 @@ def check_body(lines, start, rel, errors):
         if tags[0] != "stated" and not in_inbox:
             errors.append(f"{rel}:{lineno}: [{tags[0]}] only allowed in inbox/ until confirmed")
 
+        if QUOTE_RE.search(item) and not in_inbox:
+            errors.append(f"{rel}:{lineno}: (quote: ...) is only allowed in inbox/; drop it when sealing")
+
         for field, value in VALIDITY_RE.findall(item):
             if not VALIDITY_DATE_RE.match(value.strip()):
                 errors.append(f"{rel}:{lineno}: {field} '{value}' must be YYYY-MM or YYYY-MM-DD")
 
-        words += len(TAG_RE.sub("", item).split())
+        words += len(QUOTE_RE.sub("", TAG_RE.sub("", item)).split())
     return words, headings
 
 

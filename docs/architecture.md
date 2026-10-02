@@ -10,8 +10,8 @@ reads from the vault or proposes changes to it. If every tool disappears, the va
 
 ## As built today (v0 + v1)
 
-There is no running service. The system is **two git repos and a person carrying text between chat windows and files.**
-The only automated part is the validator.
+There is no running service. The system is **two git repos, a monthly export, and scripts you run on your own machine
+against your own model.** The person's manual work is requesting exports (monthly) and sealing a short list (weekly).
 
 ```text
  SOURCES: places × providers                  TOOL: soul.me (public)          VAULT: soul-vault (private, D-015)
@@ -33,7 +33,9 @@ The only automated part is the validator.
 | validator | soul.me `tools/validate.py` | built (v0) | `python tools/validate.py <vault> [--summary]`; PyYAML only |
 | CI, tool repo | soul.me `.github/workflows/validate.yml` | built | on push, against the fictional `vault/` |
 | fictional vault | soul.me `vault/` | built | example and CI fixture; never real data |
-| intake prompts | soul.me `prompts/` | built (v1) | copied by hand into assistants; nothing calls an API |
+| intake prompts | soul.me `prompts/` | built (v1) | copied by hand into assistants (manual path) |
+| automated intake | soul.me `tools/extract.py` + `prompts/lenses.md`, `intake-*.md` | built (v1) | on your machine, against your own model via any OpenAI-compatible endpoint; see below |
+| intake evaluation | soul.me `tools/eval_extract.py` + `tests/fixtures/` | built | scores a model on fictional exports; CI runs it against a stub model |
 | vault repo + its CI | `soul-vault` (per person) | documented in [own-vault.md](own-vault.md) | Action checks out soul.me at a pinned tag and validates. **Tag `v0.1` is not published yet**, so that Action can't run until it is. |
 | brand kit | soul.me `brand/` | built | static HTML (D-019) |
 | drop-in export, curation, MCP server | – | planned (v2–v4) | see below |
@@ -48,6 +50,24 @@ The place decides the rules; the provider only decides the format.
 - **Work** material is sanitised inside the tenant before it crosses (D-014). Everything else goes straight to `inbox/`.
 - **Origin after sealing** stays in git: the commit that promotes lines names the inbox file it came from,
   so "every stated line that came from work" is a `git log` query, not extra syntax in the file (D-021).
+
+## Automated intake (as built)
+
+```text
+ export ZIPs / notes ─► 1 parse   only your own messages, only since the last run (timestamps in data/.intake-state.json)
+ (vault/data/)          2 redact  IDs, IBAN, cards, emails, phones, data/denylist.txt  — code, before any model (D-024)
+                        3 map     each chunk × each lens (prompts/lenses.md) → JSON findings with quotes (D-025)
+                        4 verify  quote must appear word for word in your message, else dropped
+                        5 merge   same fact across chunks/lenses → one finding, with recurrence across conversations
+                        6 known   already in the vault or waiting in inbox/ → dropped
+                        7 judge   second pass: keep? confidence · stability · sensitive · target · contradicts
+                        8 gaps    up to 3 open questions → next run's prompts and the inbox frontmatter (D-026)
+                        9 write   inbox/<date>-<source>.md (top 12, ranked, with quotes) + data/reports/*.json
+```
+
+The prompts are markdown in `prompts/`, so lenses and wording change without code. Nothing writes to live files:
+the person seals a short ranked list (review option A, D-006 unchanged). Conversation titles are never stored: vendors
+write them from the content, and the evaluation caught one leaking a health detail.
 
 ## Vault and file format
 

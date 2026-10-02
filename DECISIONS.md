@@ -89,3 +89,19 @@
 ## D-022: Serving uses profiles (2026-09-29), **Proposed**
 **Decision:** The drop-in export (v2) and the MCP server (v4) take a profile that decides which folders leave the vault: `work` (minime, skills, work areas; never people/, private topics or sessions) and `personal` (everything live).
 **Why:** Places are destinations as well as sources. The main serving path (D-013) needs the same protection the MCP server's allowlists were planned to have.
+
+## D-023: Inbox lines carry their evidence (2026-10-02), **Proposed**
+**Decision:** Lines written by `tools/extract.py` end with `(quote: "…")`, copied word for word from the person's own message. The validator allows it in `inbox/` only; it is dropped when a line is sealed.
+**Why:** The reviewer sees why a line was proposed in one glance, and an invented fact has no quote to show.
+
+## D-024: Redaction happens in code, before any model (2026-10-02), **Proposed**
+**Decision:** IDs (AHV), IBANs, card numbers, emails, phone numbers and the terms in `data/denylist.txt` are replaced before text reaches a model. Prompts and the judge are a second layer, not the first. Conversation titles are never stored.
+**Why:** A prompt rule asks a model to behave; code guarantees it. The evaluation found a health detail leaking through a vendor-written title.
+
+## D-025: Models return schema-constrained JSON; markdown is written by code (2026-10-02), **Proposed**
+**Decision:** Every intake model call asks for JSON matching a schema (falling back to plain JSON); quotes are verified and the inbox file is rendered by the script.
+**Why:** Small local models fail at strict markdown first. With the format in code, the validator becomes a check, not a repair loop.
+
+## D-026: Intake asks lenses, iteratively; the person seals a short ranked list (2026-10-02)
+**Decision:** Intake asks a list of questions ("lenses": how I work, what I learned, what I built, career, procedures, admin patterns) over the person's own messages. Each run includes what the vault already says and the open questions from the last run, so it reports what's new. A judge pass ranks findings and only the top 12 reach the inbox; the person seals them (review option A). Nothing is auto-accepted.
+**Why:** The owner chose option A: minimal manual effort without giving up D-004/D-006. Judgement comes from the lenses and the judge; truth still comes from the person.

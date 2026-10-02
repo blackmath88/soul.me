@@ -73,6 +73,9 @@ line without a tag is a line whose origin nobody knows.
 | `[inferred]` | a model concluded it | `inbox/` only **(checked)** |
 | `[imported:<source>]` | pulled from an export, not yet reviewed; `<source>` is `<provider>-<place>` in lowercase, e.g. `chatgpt-home`, `copilot-work`, or `self` for your own note (D-020) | `inbox/` only **(checked)** |
 
+Inbox lines written by `tools/extract.py` end with the evidence they came from, e.g. `(quote: "keep answers short")`.
+The quote is allowed in `inbox/` only **(checked)**: drop it when you seal the line (D-023).
+
 Promotion is manual: a human rewrites an inbox line as `[stated]` and moves it to a live file.
 A tool never turns `[inferred]` into `[stated]`.
 

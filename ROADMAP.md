@@ -11,7 +11,9 @@
 - [x] extraction prompt: raw material → four layers, tagged `[imported:*]` ([prompts/extract.md](prompts/extract.md))
 - [x] sanitising prompt for company sources (runs inside the source tenant, D-014)
 - [x] self-authored "how I work" prompt (preferred over company exports)
-- [ ] interview agent to fill gaps in minime.md
+- [x] automated intake: `tools/extract.py` (parse exports, redact, lenses, verify quotes, judge, ranked inbox)
+- [x] `tools/eval_extract.py`: score your model on fictional exports before real data
+- [ ] interview agent to fill gaps in minime.md (partly: gap questions per run)
 - [ ] publish soul.me tag `v0.1` (the vault repo's Action pins to it)
 - [ ] first real vault: my own, in a separate private repo ([docs/own-vault.md](docs/own-vault.md), D-015)
 
