@@ -73,3 +73,35 @@
 ## D-018: SKILL.md follows the Agent Skills spec (2026-09-29), **Proposed**
 **Decision:** In `skills/*/SKILL.md`, only spec fields sit at the top level. soul.me's `scope` and `updated` go under `metadata:` as strings, and the validator enforces both.
 **Why:** The reference validator `skills-ref` rejects unknown top-level fields, so our skills weren't loadable as standard skills (research §7).
+
+## D-019: The brand kit is the visual north star (2026-09-29)
+**Decision:** `brand/brand-kit.html` (round 2) defines soul.me's visual identity: the kitsune fox, sumi greys, and the rule "grey is the world, colour is yours" (colour only on what the person has sealed; shu red only for the seal).
+**Why:** The owner chose it. The rule restates D-004 and D-006 visually, so the brand cannot drift from the product's core promise.
+
+## D-020: Source slugs name provider and place (2026-09-29), **Proposed**
+**Decision:** `[imported:<source>]` uses `<provider>-<place>`, e.g. `chatgpt-home`, `copilot-work`, or `self`. The validator already accepts it; the spec and prompts now ask for it.
+**Why:** The place decides the rules (sanitising, offboarding); the provider only decides the format. Both have to be visible on every imported line.
+
+## D-021: Origin after sealing lives in git (2026-09-29), **Proposed**
+**Decision:** No extra syntax on `[stated]` lines. The commit that promotes lines names the inbox file they came from (`seal: inbox/<file>`), so "stated lines that came from work" is a `git log` query.
+**Why:** Same principle as D-017: git already keeps the second timeline, so the files stay simple.
+
+## D-022: Serving uses profiles (2026-09-29), **Proposed**
+**Decision:** The drop-in export (v2) and the MCP server (v4) take a profile that decides which folders leave the vault: `work` (minime, skills, work areas; never people/, private topics or sessions) and `personal` (everything live).
+**Why:** Places are destinations as well as sources. The main serving path (D-013) needs the same protection the MCP server's allowlists were planned to have.
+
+## D-023: Inbox lines carry their evidence (2026-10-02), **Proposed**
+**Decision:** Lines written by `tools/extract.py` end with `(quote: "…")`, copied word for word from the person's own message. The validator allows it in `inbox/` only; it is dropped when a line is sealed.
+**Why:** The reviewer sees why a line was proposed in one glance, and an invented fact has no quote to show.
+
+## D-024: Redaction happens in code, before any model (2026-10-02), **Proposed**
+**Decision:** IDs (AHV), IBANs, card numbers, emails, phone numbers and the terms in `data/denylist.txt` are replaced before text reaches a model. Prompts and the judge are a second layer, not the first. Conversation titles are never stored.
+**Why:** A prompt rule asks a model to behave; code guarantees it. The evaluation found a health detail leaking through a vendor-written title.
+
+## D-025: Models return schema-constrained JSON; markdown is written by code (2026-10-02), **Proposed**
+**Decision:** Every intake model call asks for JSON matching a schema (falling back to plain JSON); quotes are verified and the inbox file is rendered by the script.
+**Why:** Small local models fail at strict markdown first. With the format in code, the validator becomes a check, not a repair loop.
+
+## D-026: Intake asks lenses, iteratively; the person seals a short ranked list (2026-10-02)
+**Decision:** Intake asks a list of questions ("lenses": how I work, what I learned, what I built, career, procedures, admin patterns) over the person's own messages. Each run includes what the vault already says and the open questions from the last run, so it reports what's new. A judge pass ranks findings and only the top 12 reach the inbox; the person seals them (review option A). Nothing is auto-accepted.
+**Why:** The owner chose option A: minimal manual effort without giving up D-004/D-006. Judgement comes from the lenses and the judge; truth still comes from the person.

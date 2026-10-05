@@ -55,14 +55,39 @@ To move to a newer spec, bump `ref`, run the validator locally, fix what it repo
 2. **Memory dumps**: [`prompts/memory-dump.md`](../prompts/memory-dump.md) in your personal ChatGPT and Claude → `vault/data/`.
 3. **Extract**, one source at a time, with [`prompts/extract.md`](../prompts/extract.md) → `vault/inbox/<date>-<source>.md`.
    Run the validator after each file.
+   Name each source `<provider>-<place>`, e.g. `chatgpt-home` (D-020).
 4. **Review, minime.md first.** Move the lines you agree with into live files as `[stated]`, reworded as you like;
    delete the rest. Empty the inbox in the same session.
+   Commit with the inbox file in the message, e.g. `seal: inbox/2026-09-29-chatgpt-home.md`, so origin stays findable (D-021).
 5. **Fill the gaps** by answering the questions again where `minime.md` is thin, then run the quality checklist in
    [spec.md](spec.md#quality-checklist), including the weak-model test.
 6. **Commit and tag** the vault `v0.1`.
 
 **Not in session 1:** anything from an employer tenant. Later, after checking your employer's policy, use
 [`prompts/sanitise.md`](../prompts/sanitise.md) inside the tenant (D-014).
+
+## Automated intake (after session 1)
+
+Once a month, about two minutes of clicking; everything else runs on your machine against your own model.
+
+1. **Request the exports** (manual): ChatGPT → Settings → Data controls → Export; Claude → Settings → Privacy → Export data.
+   Drop the ZIPs into `vault/data/` when the emails arrive. This can't be automated: neither vendor offers an export API.
+2. **Run the intake** (automatic) against any OpenAI-compatible endpoint (Ollama, LM Studio, llama.cpp, vLLM):
+
+   ```bash
+   export SOULME_LLM_BASE=http://localhost:11434/v1 SOULME_LLM_MODEL=<your model>
+   python ../soul.me/tools/eval_extract.py                        # once per model: is it good enough?
+   python ../soul.me/tools/extract.py vault/data/chatgpt-export.zip --source chatgpt-home
+   python ../soul.me/tools/extract.py vault/data/claude-export.zip  --source claude-home
+   ```
+
+   It keeps only your own messages, only those since the last run, redacts IDs, IBANs, emails, phone numbers and the
+   names in `vault/data/denylist.txt` in code, asks each lens in `prompts/lenses.md`, checks every quote, drops what's
+   already in your vault or inbox, lets a judge pass rank the rest, and writes the top 12 to `vault/inbox/`.
+   The full report and the run state stay in `vault/data/` (never committed).
+3. **Seal** (manual, about 5 minutes a week): read the inbox file, keep what's true as `[stated]` (drop the `(quote: …)`),
+   delete the rest, commit `seal: inbox/<file>`. The `questions:` in the inbox frontmatter are optional prompts for your
+   next "how I work" note; the next run asks the lenses about them too.
 
 ## Where the extraction runs (D-016)
 

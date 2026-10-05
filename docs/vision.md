@@ -7,6 +7,9 @@ Today every assistant builds its own picture of you, and none of those pictures 
 soul.me makes the picture a private git repo of markdown, and every assistant reads from that repo.
 Assistants can *propose* changes. Only you merge them.
 
+The visual north star is [`brand/brand-kit.html`](../brand/brand-kit.html): many sources, one self, and
+*grey is the world, colour is yours*.
+
 ## End to end: one year of Mara's working life
 
 Mara Keller is the fictional example in [`vault/`](../vault/). Here is the whole loop, stage by stage.
