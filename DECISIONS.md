@@ -105,3 +105,15 @@
 ## D-026: Intake asks lenses, iteratively; the person seals a short ranked list (2026-10-02)
 **Decision:** Intake asks a list of questions ("lenses": how I work, what I learned, what I built, career, procedures, admin patterns) over the person's own messages. Each run includes what the vault already says and the open questions from the last run, so it reports what's new. A judge pass ranks findings and only the top 12 reach the inbox; the person seals them (review option A). Nothing is auto-accepted.
 **Why:** The owner chose option A: minimal manual effort without giving up D-004/D-006. Judgement comes from the lenses and the judge; truth still comes from the person.
+
+## D-027: Bulk imports get staged review (2026-10-05), **Proposed**
+**Decision:** Large imports (e.g. a full ChatGPT export) reach `inbox/` in batches, one per cluster, with Operating-manual candidates first. D-012's 4-week expiry starts per batch when it is released for review, not at import.
+**Why:** A whole export at once would flood the inbox and expire unread. Small batches keep the weekly review possible, and the Operating manual changes the most for the least reading.
+
+## D-028: Pasted text is never `[imported]` (2026-10-05), **Proposed**
+**Decision:** Long pasted user turns are source material, not statements about the person. Converters replace user turns over 2,000 characters with a stub (`[pasted: n chars, starts "…"]`) and count only authored characters.
+**Why:** In a real export 84% of user characters were pasted material. Treating it as the person's own words would fill the vault with other people's text.
+
+## D-029: Export input allowlist (2026-10-05), **Proposed**
+**Decision:** Converters read only conversation shards (`conversations*.json`) and the asset-name maps (`conversation_asset_file_names.json`, `library_files.json`). Account files (`user.json`, `user_settings.json`) and everything else in the export are never opened; the test fails if they are.
+**Why:** `user.json` holds email, phone and birth year. The safest way to keep identifiers out is never to read them.

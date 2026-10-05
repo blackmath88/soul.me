@@ -76,6 +76,13 @@ line without a tag is a line whose origin nobody knows.
 Inbox lines written by `tools/extract.py` end with the evidence they came from, e.g. `(quote: "keep answers short")`.
 The quote is allowed in `inbox/` only **(checked)**: drop it when you seal the line (D-023).
 
+### Seen count (inbox only)
+
+Imported lines that were merged from several conversations may carry how many distinct conversations they
+were seen in, right after the tag: `- [imported:chatgpt] (seen: 4) Lead with the recommendation`.
+It helps the review and is only allowed in `inbox/` **(checked)**, just as D-009 limits unreviewed tags:
+drop it when you seal the line. `n` is a whole number, at least 1 **(checked)**.
+
 Promotion is manual: a human rewrites an inbox line as `[stated]` and moves it to a live file.
 A tool never turns `[inferred]` into `[stated]`.
 

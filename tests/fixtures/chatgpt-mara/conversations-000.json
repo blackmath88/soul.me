@@ -1,0 +1,375 @@
+[
+ {
+  "id": "a1b2c3d4-0001",
+  "conversation_id": "a1b2c3d4-0001",
+  "title": "Retro format",
+  "create_time": 1780477200.0,
+  "update_time": 1780480800.0,
+  "mapping": {
+   "a1b2c3d4-0001-root": {
+    "id": "a1b2c3d4-0001-root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "a1b2c3d4-0001-sys"
+    ]
+   },
+   "a1b2c3d4-0001-sys": {
+    "id": "a1b2c3d4-0001-sys",
+    "message": {
+     "id": "a1b2c3d4-0001-sys",
+     "author": {
+      "role": "system"
+     },
+     "create_time": 1780477200.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       ""
+      ]
+     },
+     "metadata": {
+      "is_visually_hidden_from_conversation": true
+     }
+    },
+    "parent": "a1b2c3d4-0001-root",
+    "children": [
+     "a1b2c3d4-0001-0"
+    ]
+   },
+   "a1b2c3d4-0001-0": {
+    "id": "a1b2c3d4-0001-0",
+    "message": {
+     "id": "a1b2c3d4-0001-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1780477200.0,
+     "content": {
+      "content_type": "user_editable_context",
+      "parts": [
+       "Hidden profile text that must never appear."
+      ]
+     },
+     "metadata": {
+      "is_visually_hidden_from_conversation": true
+     }
+    },
+    "parent": "a1b2c3d4-0001-sys",
+    "children": [
+     "a1b2c3d4-0001-1"
+    ]
+   },
+   "a1b2c3d4-0001-1": {
+    "id": "a1b2c3d4-0001-1",
+    "message": {
+     "id": "a1b2c3d4-0001-1",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1780477260.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I usually run retros the same way: one question the day before, silent writing first, then a dot vote on at most two themes. Can you turn that into a facilitator checklist for a new colleague who has never run one?"
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "a1b2c3d4-0001-0",
+    "children": [
+     "a1b2c3d4-0001-2",
+     "a1b2c3d4-0001-old"
+    ]
+   },
+   "a1b2c3d4-0001-2": {
+    "id": "a1b2c3d4-0001-2",
+    "message": {
+     "id": "a1b2c3d4-0001-2",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1780477320.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Here is a first draft. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. It covers the agenda, the roles, the timing and the materials in detail. "
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "a1b2c3d4-0001-1",
+    "children": [
+     "a1b2c3d4-0001-3"
+    ]
+   },
+   "a1b2c3d4-0001-3": {
+    "id": "a1b2c3d4-0001-3",
+    "message": {
+     "id": "a1b2c3d4-0001-3",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1780477380.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Kürzer bitte, und ohne Einleitung."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "a1b2c3d4-0001-2",
+    "children": [
+     "a1b2c3d4-0001-4"
+    ]
+   },
+   "a1b2c3d4-0001-4": {
+    "id": "a1b2c3d4-0001-4",
+    "message": {
+     "id": "a1b2c3d4-0001-4",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1780477440.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Checklist: question the day before; silent writing; cluster; dot vote; two experiments."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "a1b2c3d4-0001-3",
+    "children": [
+     "a1b2c3d4-0001-5"
+    ]
+   },
+   "a1b2c3d4-0001-5": {
+    "id": "a1b2c3d4-0001-5",
+    "message": {
+     "id": "a1b2c3d4-0001-5",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1780477500.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Again: lead with the recommendation, then the steps. Keep the checklist under ten lines and use my wording where you can."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "a1b2c3d4-0001-4",
+    "children": [
+     "a1b2c3d4-0001-6"
+    ]
+   },
+   "a1b2c3d4-0001-6": {
+    "id": "a1b2c3d4-0001-6",
+    "message": {
+     "id": "a1b2c3d4-0001-6",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1780477560.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Recommendation: run it exactly as above. Steps: …"
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "a1b2c3d4-0001-5",
+    "children": []
+   },
+   "a1b2c3d4-0001-old": {
+    "id": "a1b2c3d4-0001-old",
+    "message": {
+     "id": "a1b2c3d4-0001-old",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1780477230.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "ABANDONED BRANCH: this version was edited away."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "a1b2c3d4-0001-1",
+    "children": []
+   }
+  },
+  "current_node": "a1b2c3d4-0001-6"
+ },
+ {
+  "id": "e5f6a7b8-0002",
+  "conversation_id": "e5f6a7b8-0002",
+  "title": "Kickoff agenda",
+  "create_time": 1784106000.0,
+  "update_time": 1784109600.0,
+  "mapping": {
+   "e5f6a7b8-0002-root": {
+    "id": "e5f6a7b8-0002-root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "e5f6a7b8-0002-sys"
+    ]
+   },
+   "e5f6a7b8-0002-sys": {
+    "id": "e5f6a7b8-0002-sys",
+    "message": {
+     "id": "e5f6a7b8-0002-sys",
+     "author": {
+      "role": "system"
+     },
+     "create_time": 1784106000.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       ""
+      ]
+     },
+     "metadata": {
+      "is_visually_hidden_from_conversation": true
+     }
+    },
+    "parent": "e5f6a7b8-0002-root",
+    "children": [
+     "e5f6a7b8-0002-0"
+    ]
+   },
+   "e5f6a7b8-0002-0": {
+    "id": "e5f6a7b8-0002-0",
+    "message": {
+     "id": "e5f6a7b8-0002-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1784106000.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Draft agenda for the cohort 3 kickoff, copied from the shared document:\n09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. "
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "e5f6a7b8-0002-sys",
+    "children": [
+     "e5f6a7b8-0002-1"
+    ]
+   },
+   "e5f6a7b8-0002-1": {
+    "id": "e5f6a7b8-0002-1",
+    "message": {
+     "id": "e5f6a7b8-0002-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1784106060.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Thanks, here is a tighter version of the agenda with times."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "e5f6a7b8-0002-0",
+    "children": [
+     "e5f6a7b8-0002-2"
+    ]
+   },
+   "e5f6a7b8-0002-2": {
+    "id": "e5f6a7b8-0002-2",
+    "message": {
+     "id": "e5f6a7b8-0002-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1784106120.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Good. I want the expectations round to be silent writing, not talking, because the loud people always dominate. Move it before the welcome and cut the welcome to five minutes. The welcome is always the part people forget, so keep it short and put the logistics on the printed card instead of saying them out loud."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "e5f6a7b8-0002-1",
+    "children": [
+     "e5f6a7b8-0002-3"
+    ]
+   },
+   "e5f6a7b8-0002-3": {
+    "id": "e5f6a7b8-0002-3",
+    "message": {
+     "id": "e5f6a7b8-0002-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1784106180.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Done: silent expectations first, welcome five minutes."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "e5f6a7b8-0002-2",
+    "children": [
+     "e5f6a7b8-0002-4"
+    ]
+   },
+   "e5f6a7b8-0002-4": {
+    "id": "e5f6a7b8-0002-4",
+    "message": {
+     "id": "e5f6a7b8-0002-4",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1784106240.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Don't add icebreakers, I never use them with this group. Instead give each table one printed question card."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "e5f6a7b8-0002-3",
+    "children": [
+     "e5f6a7b8-0002-5"
+    ]
+   },
+   "e5f6a7b8-0002-5": {
+    "id": "e5f6a7b8-0002-5",
+    "message": {
+     "id": "e5f6a7b8-0002-5",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1784106300.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Removed icebreakers; added question cards."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "e5f6a7b8-0002-4",
+    "children": []
+   }
+  },
+  "current_node": "e5f6a7b8-0002-5"
+ }
+]

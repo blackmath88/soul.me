@@ -45,6 +45,7 @@ alone gets a new account about 70% of the way to "knowing me".
 |---|---|
 | [docs/vision.md](docs/vision.md) | the vision, end to end |
 | [brand/](brand/) | the visual north star: brand kit and its one rule (grey is the world, colour is yours) |
+| [docs/chatgpt-import.md](docs/chatgpt-import.md) | turning a ChatGPT export into inbox lines, locally |
 | [docs/concept.md](docs/concept.md) | the concept in depth |
 | [docs/research.md](docs/research.md) | who else is doing this, what to borrow (with sources) |
 | [docs/architecture.md](docs/architecture.md) | the solution architecture |
