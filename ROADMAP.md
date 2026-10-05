@@ -10,6 +10,9 @@
 - [x] extraction prompt: raw material → four layers, tagged `[imported:*]` ([prompts/extract.md](prompts/extract.md))
 - [x] sanitising prompt for company sources (runs inside the source tenant, D-014)
 - [x] self-authored "how I work" prompt (preferred over company exports)
+- [x] ChatGPT export converter + corrections pass ([docs/chatgpt-import.md](docs/chatgpt-import.md))
+- [ ] classify corrections on real export
+- [ ] per-cluster extraction
 - [ ] interview agent to fill gaps in minime.md
 - [ ] first real vault: my own, in a separate private repo ([docs/own-vault.md](docs/own-vault.md), D-015)
 

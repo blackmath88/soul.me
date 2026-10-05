@@ -44,6 +44,7 @@ alone gets a new account about 70% of the way to "knowing me".
 | File | What |
 |---|---|
 | [docs/vision.md](docs/vision.md) | the vision, end to end |
+| [docs/chatgpt-import.md](docs/chatgpt-import.md) | turning a ChatGPT export into inbox lines, locally |
 | [docs/concept.md](docs/concept.md) | the concept in depth |
 | [docs/research.md](docs/research.md) | who else is doing this, what to borrow (with sources) |
 | [docs/architecture.md](docs/architecture.md) | the solution architecture |

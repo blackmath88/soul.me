@@ -9,6 +9,7 @@ Never paste real material into this repo.
 | [memory-dump.md](memory-dump.md) | a personal-account assistant's memory | `data/<date>-<source>-dump.md` |
 | [sanitise.md](sanitise.md) | an employer-tenant assistant, **after checking policy** | `data/<date>-<source>-sanitised.md` |
 | [extract.md](extract.md) | any one of the above | `inbox/<date>-<source>.md`, validator-clean |
+| [classify-corrections.md](classify-corrections.md) | JSONL from `tools/chatgpt_corrections.py`, for a local model | `inbox/<date>-chatgpt-corrections.md` with `(seen: n)` ([docs/chatgpt-import.md](../docs/chatgpt-import.md)) |
 
 ## Example (fictional)
 

@@ -73,3 +73,15 @@
 ## D-018: SKILL.md follows the Agent Skills spec (2026-09-29), **Proposed**
 **Decision:** In `skills/*/SKILL.md`, only spec fields sit at the top level. soul.me's `scope` and `updated` go under `metadata:` as strings, and the validator enforces both.
 **Why:** The reference validator `skills-ref` rejects unknown top-level fields, so our skills weren't loadable as standard skills (research §7).
+
+## D-019: Bulk imports get staged review (2026-10-05), **Proposed**
+**Decision:** Large imports (e.g. a full ChatGPT export) reach `inbox/` in batches, one per cluster, with Operating-manual candidates first. D-012's 4-week expiry starts per batch when it is released for review, not at import.
+**Why:** A whole export at once would flood the inbox and expire unread. Small batches keep the weekly review possible, and the Operating manual changes the most for the least reading.
+
+## D-020: Pasted text is never `[imported]` (2026-10-05), **Proposed**
+**Decision:** Long pasted user turns are source material, not statements about the person. Converters replace user turns over 2,000 characters with a stub (`[pasted: n chars, starts "…"]`) and count only authored characters.
+**Why:** In a real export 84% of user characters were pasted material. Treating it as the person's own words would fill the vault with other people's text.
+
+## D-021: Export input allowlist (2026-10-05), **Proposed**
+**Decision:** Converters read only conversation shards (`conversations*.json`) and the asset-name maps (`conversation_asset_file_names.json`, `library_files.json`). Account files (`user.json`, `user_settings.json`) and everything else in the export are never opened; the test fails if they are.
+**Why:** `user.json` holds email, phone and birth year. The safest way to keep identifiers out is never to read them.
