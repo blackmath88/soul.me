@@ -23,6 +23,8 @@ TAGLIKE_RE = re.compile(r"\[(stated|inferred|imported)[^\]]*\]")
 ITEM_RE = re.compile(r"^\s*(?:[-*]|\d+\.)\s+(.*)$")
 VALIDITY_RE = re.compile(r"\((valid_from|valid_to):\s*([^)]*)\)")
 VALIDITY_DATE_RE = re.compile(r"^\d{4}-\d{2}(-\d{2})?$")
+SEEN_RE = re.compile(r"\(seen:\s*([^)]*)\)")
+MARKERS_RE = re.compile(r"^\[[^\]]+\](?:\s*\((?:valid_from|valid_to|seen):[^)]*\))*")
 
 
 def split_frontmatter(text):
@@ -113,11 +115,20 @@ def check_body(lines, start, rel, errors):
         if tags[0] != "stated" and not in_inbox:
             errors.append(f"{rel}:{lineno}: [{tags[0]}] only allowed in inbox/ until confirmed")
 
+        seen = SEEN_RE.findall(item)
+        if seen and not in_inbox:
+            errors.append(f"{rel}:{lineno}: (seen: n) is only allowed in inbox/; drop it when sealing")
+        elif seen:
+            if len(seen) > 1 or not re.fullmatch(r"[1-9][0-9]*", seen[0].strip()):
+                errors.append(f"{rel}:{lineno}: use one (seen: n) with a whole number of conversations, n >= 1")
+            elif "(seen:" not in MARKERS_RE.match(item).group(0):
+                errors.append(f"{rel}:{lineno}: (seen: n) must come right after the tag")
+
         for field, value in VALIDITY_RE.findall(item):
             if not VALIDITY_DATE_RE.match(value.strip()):
                 errors.append(f"{rel}:{lineno}: {field} '{value}' must be YYYY-MM or YYYY-MM-DD")
 
-        words += len(TAG_RE.sub("", item).split())
+        words += len(SEEN_RE.sub("", TAG_RE.sub("", item)).split())
     return words, headings
 
 

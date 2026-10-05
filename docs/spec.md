@@ -73,6 +73,13 @@ line without a tag is a line whose origin nobody knows.
 | `[inferred]` | a model concluded it | `inbox/` only **(checked)** |
 | `[imported:<source>]` | pulled from an export, not yet reviewed; `<source>` is lowercase, e.g. `chatgpt`, `claude`, `copilot` | `inbox/` only **(checked)** |
 
+### Seen count (inbox only)
+
+Imported lines that were merged from several conversations may carry how many distinct conversations they
+were seen in, right after the tag: `- [imported:chatgpt] (seen: 4) Lead with the recommendation`.
+It helps the review and is only allowed in `inbox/` **(checked)**, just as D-009 limits unreviewed tags:
+drop it when you seal the line. `n` is a whole number, at least 1 **(checked)**.
+
 Promotion is manual: a human rewrites an inbox line as `[stated]` and moves it to a live file.
 A tool never turns `[inferred]` into `[stated]`.
 
