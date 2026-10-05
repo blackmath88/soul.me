@@ -12,3 +12,4 @@ jobs:
           python-version: "3.12"
       - run: pip install pyyaml
       - run: python tools/validate.py vault
+      - run: python tests/test_chatgpt_import.py

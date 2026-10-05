@@ -1,0 +1,588 @@
+[
+ {
+  "id": "c9d0e1f2-0003",
+  "conversation_id": "c9d0e1f2-0003",
+  "title": "Weekly notes",
+  "create_time": 1787216400.0,
+  "update_time": 1787220000.0,
+  "mapping": {
+   "c9d0e1f2-0003-root": {
+    "id": "c9d0e1f2-0003-root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "c9d0e1f2-0003-sys"
+    ]
+   },
+   "c9d0e1f2-0003-sys": {
+    "id": "c9d0e1f2-0003-sys",
+    "message": {
+     "id": "c9d0e1f2-0003-sys",
+     "author": {
+      "role": "system"
+     },
+     "create_time": 1787216400.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       ""
+      ]
+     },
+     "metadata": {
+      "is_visually_hidden_from_conversation": true
+     }
+    },
+    "parent": "c9d0e1f2-0003-root",
+    "children": [
+     "c9d0e1f2-0003-0"
+    ]
+   },
+   "c9d0e1f2-0003-0": {
+    "id": "c9d0e1f2-0003-0",
+    "message": {
+     "id": "c9d0e1f2-0003-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1787216400.0,
+     "content": {
+      "content_type": "multimodal_text",
+      "parts": [
+       {
+        "content_type": "image_asset_pointer",
+        "asset_pointer": "file-service://file-Mara01Notes",
+        "size_bytes": 1234
+       },
+       "Here is my notes template. Use the same headings every week and keep the tone dry, no motivational phrases please. The headings are: what moved, what is stuck, what I decided, what I need from the sponsor. Never add a fifth heading."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "c9d0e1f2-0003-sys",
+    "children": [
+     "c9d0e1f2-0003-1"
+    ]
+   },
+   "c9d0e1f2-0003-1": {
+    "id": "c9d0e1f2-0003-1",
+    "message": {
+     "id": "c9d0e1f2-0003-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1787216460.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Sure, here is this week's note in your template."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "c9d0e1f2-0003-0",
+    "children": [
+     "c9d0e1f2-0003-2"
+    ]
+   },
+   "c9d0e1f2-0003-2": {
+    "id": "c9d0e1f2-0003-2",
+    "message": {
+     "id": "c9d0e1f2-0003-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1787216520.0,
+     "content": {
+      "content_type": "multimodal_text",
+      "parts": [
+       {
+        "content_type": "image_asset_pointer",
+        "asset_pointer": "sediment://file_00000000aa11bb22"
+       },
+       {
+        "content_type": "image_asset_pointer",
+        "asset_pointer": "sediment://file_99999999unknown"
+       },
+       "And this is the cohort plan plus a photo of the wall. Summarise both in my weekly format, shorter than last time, and mark open decisions clearly. Open decisions go at the top in their own short list."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "c9d0e1f2-0003-1",
+    "children": [
+     "c9d0e1f2-0003-3"
+    ]
+   },
+   "c9d0e1f2-0003-3": {
+    "id": "c9d0e1f2-0003-3",
+    "message": {
+     "id": "c9d0e1f2-0003-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1787216580.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Summary in your format: …"
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "c9d0e1f2-0003-2",
+    "children": []
+   }
+  },
+  "current_node": "c9d0e1f2-0003-3"
+ },
+ {
+  "id": "aa11aa11-0004",
+  "conversation_id": "aa11aa11-0004",
+  "title": "New chat",
+  "create_time": 1789030800.0,
+  "update_time": 1789034400.0,
+  "mapping": {
+   "aa11aa11-0004-root": {
+    "id": "aa11aa11-0004-root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "aa11aa11-0004-sys"
+    ]
+   },
+   "aa11aa11-0004-sys": {
+    "id": "aa11aa11-0004-sys",
+    "message": {
+     "id": "aa11aa11-0004-sys",
+     "author": {
+      "role": "system"
+     },
+     "create_time": 1789030800.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       ""
+      ]
+     },
+     "metadata": {
+      "is_visually_hidden_from_conversation": true
+     }
+    },
+    "parent": "aa11aa11-0004-root",
+    "children": [
+     "aa11aa11-0004-0"
+    ]
+   },
+   "aa11aa11-0004-0": {
+    "id": "aa11aa11-0004-0",
+    "message": {
+     "id": "aa11aa11-0004-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789030800.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Can you rewrite this paragraph for the sponsor update? Lead with the number of active users, then what changed since last week, and leave out the method section entirely because he never reads it. Keep my numbers exactly as they are, do not round them."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "aa11aa11-0004-sys",
+    "children": [
+     "aa11aa11-0004-1"
+    ]
+   },
+   "aa11aa11-0004-1": {
+    "id": "aa11aa11-0004-1",
+    "message": {
+     "id": "aa11aa11-0004-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789030860.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Here is the rewrite. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. More words. "
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "aa11aa11-0004-0",
+    "children": [
+     "aa11aa11-0004-2"
+    ]
+   },
+   "aa11aa11-0004-2": {
+    "id": "aa11aa11-0004-2",
+    "message": {
+     "id": "aa11aa11-0004-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789030920.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Shorter, and don't use bullet points in sponsor updates."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "aa11aa11-0004-1",
+    "children": [
+     "aa11aa11-0004-3"
+    ]
+   },
+   "aa11aa11-0004-3": {
+    "id": "aa11aa11-0004-3",
+    "message": {
+     "id": "aa11aa11-0004-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789030980.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Rewritten as two sentences."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "aa11aa11-0004-2",
+    "children": []
+   }
+  },
+  "current_node": "aa11aa11-0004-3"
+ },
+ {
+  "id": "bb22bb22-0005",
+  "conversation_id": "bb22bb22-0005",
+  "title": "New chat",
+  "create_time": 1789030800.0,
+  "update_time": 1789034400.0,
+  "mapping": {
+   "bb22bb22-0005-root": {
+    "id": "bb22bb22-0005-root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "bb22bb22-0005-sys"
+    ]
+   },
+   "bb22bb22-0005-sys": {
+    "id": "bb22bb22-0005-sys",
+    "message": {
+     "id": "bb22bb22-0005-sys",
+     "author": {
+      "role": "system"
+     },
+     "create_time": 1789030800.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       ""
+      ]
+     },
+     "metadata": {
+      "is_visually_hidden_from_conversation": true
+     }
+    },
+    "parent": "bb22bb22-0005-root",
+    "children": [
+     "bb22bb22-0005-0"
+    ]
+   },
+   "bb22bb22-0005-0": {
+    "id": "bb22bb22-0005-0",
+    "message": {
+     "id": "bb22bb22-0005-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789030800.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Plan my Friday: I have the cohort 3 debrief, two calls and I want an hour to write the weekly note. Give me one recommendation for the order, not three options, and keep it short. I do my best writing before lunch, so the note should go there if possible."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "bb22bb22-0005-sys",
+    "children": [
+     "bb22bb22-0005-1"
+    ]
+   },
+   "bb22bb22-0005-1": {
+    "id": "bb22bb22-0005-1",
+    "message": {
+     "id": "bb22bb22-0005-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789030860.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Option A, option B, option C …"
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "bb22bb22-0005-0",
+    "children": [
+     "bb22bb22-0005-2"
+    ]
+   },
+   "bb22bb22-0005-2": {
+    "id": "bb22bb22-0005-2",
+    "message": {
+     "id": "bb22bb22-0005-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789030920.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Nicht drei Optionen, nur eine Empfehlung bitte."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "bb22bb22-0005-1",
+    "children": [
+     "bb22bb22-0005-3"
+    ]
+   },
+   "bb22bb22-0005-3": {
+    "id": "bb22bb22-0005-3",
+    "message": {
+     "id": "bb22bb22-0005-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789030980.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Recommendation: debrief first, then the note, then calls."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "bb22bb22-0005-2",
+    "children": []
+   }
+  },
+  "current_node": "bb22bb22-0005-3"
+ },
+ {
+  "id": "cc33cc33-0006",
+  "conversation_id": "cc33cc33-0006",
+  "title": "Quick question",
+  "create_time": 1789203600.0,
+  "update_time": 1789207200.0,
+  "mapping": {
+   "cc33cc33-0006-root": {
+    "id": "cc33cc33-0006-root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "cc33cc33-0006-sys"
+    ]
+   },
+   "cc33cc33-0006-sys": {
+    "id": "cc33cc33-0006-sys",
+    "message": {
+     "id": "cc33cc33-0006-sys",
+     "author": {
+      "role": "system"
+     },
+     "create_time": 1789203600.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       ""
+      ]
+     },
+     "metadata": {
+      "is_visually_hidden_from_conversation": true
+     }
+    },
+    "parent": "cc33cc33-0006-root",
+    "children": [
+     "cc33cc33-0006-0"
+    ]
+   },
+   "cc33cc33-0006-0": {
+    "id": "cc33cc33-0006-0",
+    "message": {
+     "id": "cc33cc33-0006-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789203600.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "What is the German word for retrospective, and is it masculine or feminine in common usage?"
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "cc33cc33-0006-sys",
+    "children": [
+     "cc33cc33-0006-1"
+    ]
+   },
+   "cc33cc33-0006-1": {
+    "id": "cc33cc33-0006-1",
+    "message": {
+     "id": "cc33cc33-0006-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789203660.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Die Retrospektive."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "cc33cc33-0006-0",
+    "children": []
+   }
+  },
+  "current_node": "cc33cc33-0006-1"
+ },
+ {
+  "id": "dd44dd44-0007",
+  "conversation_id": "dd44dd44-0007",
+  "title": "Paste and fix",
+  "create_time": 1789462800.0,
+  "update_time": 1789466400.0,
+  "mapping": {
+   "dd44dd44-0007-root": {
+    "id": "dd44dd44-0007-root",
+    "message": null,
+    "parent": null,
+    "children": [
+     "dd44dd44-0007-sys"
+    ]
+   },
+   "dd44dd44-0007-sys": {
+    "id": "dd44dd44-0007-sys",
+    "message": {
+     "id": "dd44dd44-0007-sys",
+     "author": {
+      "role": "system"
+     },
+     "create_time": 1789462800.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       ""
+      ]
+     },
+     "metadata": {
+      "is_visually_hidden_from_conversation": true
+     }
+    },
+    "parent": "dd44dd44-0007-root",
+    "children": [
+     "dd44dd44-0007-0"
+    ]
+   },
+   "dd44dd44-0007-0": {
+    "id": "dd44dd44-0007-0",
+    "message": {
+     "id": "dd44dd44-0007-0",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789462800.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Draft agenda for the cohort 3 kickoff, copied from the shared document:\n09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. 09:00 Welcome and why we are doing this pilot. 09:20 Round of expectations. "
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "dd44dd44-0007-sys",
+    "children": [
+     "dd44dd44-0007-1"
+    ]
+   },
+   "dd44dd44-0007-1": {
+    "id": "dd44dd44-0007-1",
+    "message": {
+     "id": "dd44dd44-0007-1",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789462860.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Fixed typos."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "dd44dd44-0007-0",
+    "children": [
+     "dd44dd44-0007-2"
+    ]
+   },
+   "dd44dd44-0007-2": {
+    "id": "dd44dd44-0007-2",
+    "message": {
+     "id": "dd44dd44-0007-2",
+     "author": {
+      "role": "user"
+     },
+     "create_time": 1789462920.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Thanks, perfect."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "dd44dd44-0007-1",
+    "children": [
+     "dd44dd44-0007-3"
+    ]
+   },
+   "dd44dd44-0007-3": {
+    "id": "dd44dd44-0007-3",
+    "message": {
+     "id": "dd44dd44-0007-3",
+     "author": {
+      "role": "assistant"
+     },
+     "create_time": 1789462980.0,
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "You're welcome."
+      ]
+     },
+     "metadata": {}
+    },
+    "parent": "dd44dd44-0007-2",
+    "children": []
+   }
+  },
+  "current_node": "dd44dd44-0007-3"
+ }
+]
