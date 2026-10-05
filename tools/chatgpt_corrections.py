@@ -3,7 +3,7 @@
 
 Usage: python tools/chatgpt_corrections.py <export_dir> <out_file.jsonl>
 
-Same allowlist (D-021), active branch and in-repo refusal as tools/chatgpt_export.py. One JSON line per user
+Same allowlist (D-029), active branch and in-repo refusal as tools/chatgpt_export.py. One JSON line per user
 turn that directly follows an assistant turn and is at most 300 chars:
   {conv_id, date, title, user, prev_assistant (≤300 chars), hint}
 `hint` is true when the turn contains a correction-ish keyword. It is a hint only: nothing is filtered on it,

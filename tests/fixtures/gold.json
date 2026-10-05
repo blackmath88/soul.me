@@ -1,0 +1,71 @@
+{
+ "expect": [
+  {
+   "lens": "how-i-work",
+   "all": [
+    "short",
+    "recommendation"
+   ]
+  },
+  {
+   "lens": "how-i-work",
+   "all": [
+    "english"
+   ]
+  },
+  {
+   "lens": "what-i-learned",
+   "all": [
+    "peer demos"
+   ]
+  },
+  {
+   "lens": "what-i-learned",
+   "all": [
+    "source"
+   ]
+  },
+  {
+   "lens": "what-i-built",
+   "all": [
+    "onboarding guide"
+   ]
+  },
+  {
+   "lens": "career",
+   "all": [
+    "adoption programmes"
+   ]
+  },
+  {
+   "lens": "procedures",
+   "all": [
+    "silent writing"
+   ]
+  },
+  {
+   "lens": "procedures",
+   "all": [
+    "one-page plan"
+   ]
+  },
+  {
+   "lens": "admin",
+   "all": [
+    "taxes",
+    "march"
+   ]
+  }
+ ],
+ "traps": [
+  "CH93",
+  "0076 2011",
+  "756.1234",
+  "jonas.brandt",
+  "+41 44",
+  "Nordhafen",
+  "physio",
+  "knee",
+  "IGNORED BRANCH"
+ ]
+}

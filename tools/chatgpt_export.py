@@ -4,11 +4,11 @@
 Usage: python tools/chatgpt_export.py <export_dir> <out_dir>
 
 Runs on your own machine, inside your private vault repo (D-015/D-016). It reads ONLY the conversation
-shards (conversations*.json) and the two asset-name maps (D-021); account files such as user.json are never
+shards (conversations*.json) and the two asset-name maps (D-029); account files such as user.json are never
 opened. out_dir must not be inside this repo: real data never lands here.
 
 Per conversation it follows the active branch (current_node -> parents), keeps user and assistant text
-(assistant cut to 600 chars), stubs user turns over 2,000 chars as pasted material (D-020), resolves
+(assistant cut to 600 chars), stubs user turns over 2,000 chars as pasted material (D-028), resolves
 attachments to their original names, and keeps the conversation only if the person wrote at least 2 turns
 and 300 characters of their own (pasted stubs don't count). Writes <date>_<slug>_<id8>.md and _stats.json.
 """
@@ -36,7 +36,7 @@ def refuse_repo_output(path):
                  f"e.g. ../soul-vault/vault/data/chatgpt")
 
 
-# ---------- reading: the allowlist (D-021) ----------
+# ---------- reading: the allowlist (D-029) ----------
 
 def shard_paths(export_dir):
     paths = sorted(Path(export_dir).glob("conversations*.json"))

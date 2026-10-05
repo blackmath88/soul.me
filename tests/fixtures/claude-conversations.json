@@ -1,0 +1,65 @@
+[
+ {
+  "uuid": "k1",
+  "name": "Workshop plan",
+  "created_at": "2026-08-02T08:00:00Z",
+  "updated_at": "2026-08-02T09:00:00Z",
+  "chat_messages": [
+   {
+    "uuid": "k1a",
+    "sender": "human",
+    "text": "I always prepare workshops with a one-page plan and a fallback activity.",
+    "created_at": "2026-08-02T08:00:00Z",
+    "content": []
+   },
+   {
+    "uuid": "k1b",
+    "sender": "assistant",
+    "text": "Sensible.",
+    "created_at": "2026-08-02T08:01:00Z",
+    "content": []
+   },
+   {
+    "uuid": "k1c",
+    "sender": "human",
+    "text": "I realised I trust answers more when they cite a source.",
+    "created_at": "2026-08-02T08:05:00Z",
+    "content": []
+   }
+  ]
+ },
+ {
+  "uuid": "k2",
+  "name": "Language",
+  "created_at": "2026-09-18T08:00:00Z",
+  "updated_at": "2026-09-18T08:10:00Z",
+  "chat_messages": [
+   {
+    "uuid": "k2a",
+    "sender": "human",
+    "text": "",
+    "content": [
+     {
+      "type": "text",
+      "text": "Please answer in English even when I write in German."
+     }
+    ],
+    "created_at": "2026-09-18T08:00:00Z"
+   },
+   {
+    "uuid": "k2b",
+    "sender": "assistant",
+    "text": "Of course.",
+    "created_at": "2026-09-18T08:01:00Z",
+    "content": []
+   },
+   {
+    "uuid": "k2c",
+    "sender": "human",
+    "text": "Lead with the recommendation and keep it short.",
+    "created_at": "2026-09-18T08:03:00Z",
+    "content": []
+   }
+  ]
+ }
+]

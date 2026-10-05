@@ -5,7 +5,7 @@ tests/fixtures/chatgpt-mara/ and checks the promises in docs/chatgpt-import.md.
   python tests/test_chatgpt_import.py
 
 Every file the tools open is recorded with a Python audit hook, so reading user.json (or anything else
-outside the allowlist, D-021) fails the test.
+outside the allowlist, D-029) fails the test.
 """
 import json
 import os
