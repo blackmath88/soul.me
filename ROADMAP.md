@@ -38,3 +38,14 @@
 
 ## Later
 - vectors if FTS recall is poor · temporal graph · offboarding kit as a bridge-work.ai offer
+
+## Optional ecosystem evaluations (2026-10-06; proposed)
+
+Details and acceptance checks: [ecosystem fit](docs/ecosystem-fit-2026-10.md). These do not replace the v1–v4 order or change settled decisions.
+
+- [ ] v2: measure export size and preserve provenance/validity/hard rules under destination profiles; optional context compression must not erase required facts.
+- [ ] v1 evaluation only: compare Strands Decider with current classification on fictional, redacted, quote-verified findings; shadow output suggests a layer, never seals or filters live facts.
+- [ ] v4 evaluation only: compare native FTS5 with a read-only agent-memory recall view; profile filtering precedes ranking and whole-file reads; disable lifecycle writes and retain direct-file fallback.
+- [ ] Later, only if review usability warrants it: borrow OpenDots' exact-draft review card pattern using the existing brand and Git vault; assess conversation-service dependency before any stack adoption.
+
+Defer vectors/graphs, autonomous memory management, automatic learning and new agent workspaces until measured need justifies a separate proposal.

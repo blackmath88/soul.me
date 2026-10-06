@@ -179,3 +179,11 @@ Stars and forks come from the GitHub repo page on 2026-09-29. Last commit comes 
 | skill files that pass the Agent Skills spec; soul.me fields under `metadata` | agentskills.io |
 | memory via dump prompt, not via exports (exports don't carry it) | vendor export check (§6) |
 | legal anchor: skills and experience travel, trade secrets and work product stay | TSD Art. 1(3)(b), CO 321a/321b, GDPR Art. 20 |
+
+## 10. Ecosystem fit update (2026-10-06)
+
+See [the fit assessment and proposed experiments](ecosystem-fit-2026-10.md) for agent-memory, Strands Decider, OpenDots and the earlier tool references.
+
+The strongest candidates are progressive lexical recall over approved vault content and bounded classification of already extracted intake findings. OpenDots contributes a later review-card pattern rather than a new canonical store. Automatic memory writes, confidence-based sealing, graph infrastructure and a new chat stack do not fit the settled human-review/files-first boundary.
+
+These are research proposals, not new decisions. Keep v2 drop-in exports first, measure optional Decider triage on fictional fixtures, and compare recall implementations only in the optional v4 lane.
