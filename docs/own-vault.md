@@ -89,6 +89,18 @@ Once a month, about two minutes of clicking; everything else runs on your machin
    delete the rest, commit `seal: inbox/<file>`. The `questions:` in the inbox frontmatter are optional prompts for your
    next "how I work" note; the next run asks the lenses about them too.
 
+## Use it (drop-in export, D-013)
+
+```bash
+python ../soul.me/tools/export.py vault --profile personal --target system  > /tmp/minime.txt   # local model system prompt
+python ../soul.me/tools/export.py vault --profile personal --target chatgpt                     # the two custom-instruction fields
+python ../soul.me/tools/export.py vault --profile work --target claude --out ~/soulme-claude    # project files for a work account
+```
+
+Only `[stated]` lines inside their validity window leave the vault; `inbox/`, `data/` and `sessions/` never do. `work` leaves out
+`people/` and anything not marked `profiles: [work, …]`. If a target has a size limit, whole lines are dropped lowest priority
+first (context, procedures, tensions, identity, operating manual last) and listed on stderr: nothing is shortened silently.
+
 ## Where the extraction runs (D-016)
 
 Extraction sends your raw material to whichever model runs it. In order of preference:

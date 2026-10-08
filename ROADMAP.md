@@ -21,9 +21,10 @@
 - [ ] first real vault: my own, in a separate private repo ([docs/own-vault.md](docs/own-vault.md), D-015)
 
 ## v2: Drop-in exports (main way to serve the vault, D-013)
-- [ ] export profiles `work` / `personal` (D-022)
-- [ ] script: minime.md → ChatGPT custom-instructions length
-- [ ] script: bundle for Claude project files
+- [x] export profiles `work` / `personal` (D-022), `tools/export.py`
+- [x] minime.md → ChatGPT custom-instruction fields, with a per-field budget and a report of what didn't fit
+- [x] bundle for Claude project files (`core.md`, `procedures.md`, `context.md`)
+- [ ] check the real ChatGPT field limit and set the default budget to it
 
 ## v3: Curation (offboarding-ready by default)
 - [ ] weekly curation Action → one PR (dupes, expiry, contradictions, pruning)

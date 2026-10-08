@@ -37,6 +37,7 @@ Every file starts with a YAML frontmatter block. **(checked)**
 | `scope` | yes | `always` \| `global` \| `project` \| `session` |
 | `updated` | yes | ISO date `YYYY-MM-DD` |
 | `aliases` | no | list of other names |
+| `profiles` | no | which exports may include the file: `[work, personal]`. Defaults: `minime.md` and `skills/` both, `areas/` and `topics/` personal only; `people/` is never in `work` (D-022). Skills put it under `metadata:` as a string, e.g. `profiles: "work personal"`. |
 
 Other fields are allowed in vault files.
 
