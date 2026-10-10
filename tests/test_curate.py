@@ -54,6 +54,26 @@ class Curate(unittest.TestCase):
         out = self.run_curate("2026-10-01")
         self.assertEqual(out.count("- none"), 4)
 
+    def test_apply(self):
+        out = subprocess.run([sys.executable, str(ROOT / "tools" / "curate.py"), str(self.vault), "--today", "2027-01-20",
+                              "--apply"], capture_output=True, text=True)
+        self.assertEqual(out.returncode, 0, out.stderr)
+        self.assertIn("applied in this PR", out.stdout)
+        self.assertFalse((self.vault / "inbox" / "2026-09-28-chatgpt-dump.md").exists())
+        self.assertFalse((self.vault / "sessions" / "2026-09-25-cohort-3-agenda.md").exists())
+        area = (self.vault / "areas" / "nordhafen-pilot.md").read_text()
+        live, archived = area.split("# Archive")
+        self.assertNotIn("Contract runs until", live)
+        self.assertIn("- [stated] (valid_to: 2026-12) Contract runs until the end of December 2026", archived)  # word for word
+        self.assertIn("updated: 2027-01-20", area)
+        v = subprocess.run([sys.executable, str(ROOT / "tools" / "validate.py"), str(self.vault)], capture_output=True, text=True)
+        self.assertEqual(v.returncode, 0, v.stdout)
+        again = self.run_curate("2027-01-20")                                   # nothing left to do
+        self.assertEqual(again.count("- none"), 4)                              # nothing left to do
+        e = subprocess.run([sys.executable, str(ROOT / "tools" / "export.py"), str(self.vault), "--profile", "personal",
+                            "--target", "system", "--today", "2026-10-01"], capture_output=True, text=True)
+        self.assertNotIn("Contract runs until", e.stdout)                       # archived lines never leave the vault
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

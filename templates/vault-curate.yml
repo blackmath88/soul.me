@@ -1,0 +1,44 @@
+# Weekly curation for your private vault repo (v3). Copy to soul-vault/.github/workflows/curate.yml.
+# One PR per week, on the branch curate/weekly: merge it to accept, close it to reject. Nothing lands on main without you.
+# Needs: Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests".
+name: curate
+on:
+  schedule:
+    - cron: "47 6 * * 1"                         # Mondays, 06:47 UTC
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  curate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: blackmath88/soul.me
+          ref: v0.1                                # pinned, like validate.yml
+          path: soul.me
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: curate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python soul.me/tools/curate.py vault --apply > "$RUNNER_TEMP/report.md"
+          cat "$RUNNER_TEMP/report.md" >> "$GITHUB_STEP_SUMMARY"   # report-only items (duplicates, budget) show here too
+          rm -rf soul.me
+          git add -A vault
+          if git diff --cached --quiet; then echo "no file changes this week"; exit 0; fi
+          git config user.name "soul.me curate"
+          git config user.email "curate@users.noreply.github.com"
+          git checkout -B curate/weekly
+          git commit -q -m "curate: $(date -u +%F)"
+          git push -f origin curate/weekly
+          if [ "$(gh pr view curate/weekly --json state -q .state 2>/dev/null)" = OPEN ]; then
+            gh pr edit curate/weekly --body-file "$RUNNER_TEMP/report.md"
+          else
+            gh pr create --head curate/weekly --title "curate: week of $(date -u +%F)" --body-file "$RUNNER_TEMP/report.md"
+          fi

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Weekly curation report (v3, first cut): what needs the person's attention. Read-only: it never edits the vault.
 
-Usage: python tools/curate.py <vault> [--today YYYY-MM-DD]
+Usage: python tools/curate.py <vault> [--today YYYY-MM-DD] [--apply]
 
 Prints a markdown report (meant as the body of the weekly curation PR) with:
   - inbox files past 4 weeks (D-012), counted from `released:` in their frontmatter if present (D-027), else `updated:`
@@ -10,6 +10,10 @@ Prints a markdown report (meant as the body of the weekly curation PR) with:
   - near-duplicate [stated] lines across live files
   - minime.md against its word budget
 Contradictions need judgement and are not detected here.
+
+--apply makes the mechanical changes, for the weekly Action to put in one PR the person merges or closes:
+deletes the old inbox files (D-012) and sessions, and moves expired lines to `# Archive` in the same file (D-017),
+word for word. Duplicates and the minime budget need judgement and stay report-only. Never runs a model.
 """
 import argparse
 import datetime
@@ -52,15 +56,39 @@ def jaccard(a, b):
     return len(a & b) / len(a | b) if a and b else 0.0
 
 
+def archive(path, idx, today):
+    """Move body lines idx (0-based, after the frontmatter) under `# Archive`, unchanged; bump `updated`."""
+    lines = path.read_text(encoding="utf-8").split("\n")
+    start = split_frontmatter("\n".join(lines))[2] - 1          # first body line
+    moved = [lines[start + i] for i in idx]
+    for i in reversed(idx):
+        del lines[start + i]
+    head = next((k for k in range(start, len(lines)) if re.fullmatch(r"#+\s*archive\s*", lines[k].strip(), re.I)), None)
+    if head is None:
+        while lines and not lines[-1].strip():
+            lines.pop()
+        lines += ["", "# Archive", *moved, ""]
+    else:
+        lines[head + 1:head + 1] = moved
+    for k in range(1, start - 1):                                 # frontmatter: updated / metadata.updated
+        m = re.match(r'^(\s*updated:\s*)("?)\d{4}-\d{2}-\d{2}("?)\s*$', lines[k])
+        if m:
+            lines[k] = f"{m.group(1)}{m.group(2)}{today.isoformat()}{m.group(3)}"
+            break
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("vault")
     ap.add_argument("--today")
+    ap.add_argument("--apply", action="store_true", help="delete old inbox files and sessions, archive expired lines")
     a = ap.parse_args()
     vault = Path(a.vault)
     today = datetime.date.fromisoformat(a.today) if a.today else datetime.date.today()
 
     old_inbox, old_sessions, expired, live = [], [], [], []
+    to_archive = {}                                  # path -> body line indexes
     inbox_lines = 0
     for p in sorted(vault.rglob("*.md")):
         rel = p.relative_to(vault).as_posix()
@@ -98,6 +126,7 @@ def main():
                     end = end_of(value)
                     if field == "valid_to" and end and today > end:
                         expired.append((rel, clean, value.strip()))
+                        to_archive.setdefault(p, []).append(i)
                 live.append((rel, clean))
 
     dupes = []
@@ -113,6 +142,13 @@ def main():
         if parts:
             words, _ = check_body(parts[1], parts[2], "minime.md", [])
 
+    if a.apply:
+        for rel, *_ in old_inbox + old_sessions:
+            (vault / rel).unlink()
+        for p, idx in to_archive.items():
+            archive(p, sorted(set(idx)), today)
+
+    done = " (applied in this PR)" if a.apply else ""
     out = [f"# Curation report · {today.isoformat()}", ""]
     out += [f"**Inbox:** {inbox_lines} lines waiting. **minime.md:** {words} of {MINIME_WORD_BUDGET} words.", ""]
 
@@ -120,11 +156,11 @@ def main():
         out.append(f"## {title}")
         out.extend(rows or [f"- {empty}"])
         out.append("")
-    section("Inbox files past 4 weeks (D-012): review or let them go",
+    section(f"Inbox files past 4 weeks (D-012): review or let them go{' · deleted' + done if done else ''}",
             [f"- `{r}`: {d} days since {k}, {n} lines" for r, d, n, k in old_inbox], "none")
-    section("Sessions past 14 days: prune",
+    section(f"Sessions past 14 days: prune{' · deleted' + done if done else ''}",
             [f"- `{r}`: {d} days old" for r, d in old_sessions], "none")
-    section("Facts past valid_to: move to `# Archive` in the same file (D-017), don't delete",
+    section(f"Facts past valid_to: move to `# Archive` in the same file (D-017), don't delete{' · moved' + done if done else ''}",
             [f"- `{r}`: {t} (valid_to {v})" for r, t, v in expired], "none")
     section("Possible duplicates: merge or keep both",
             [f"- `{a[0]}`: {a[1]}\n  `{b[0]}`: {b[1]}" for a, b in dupes], "none")

@@ -20,3 +20,5 @@ jobs:
       - run: python tests/test_chatgpt_import.py
       - run: python tests/test_export.py
       - run: python tests/test_curate.py
+      - run: python tests/test_mcp_server.py
+      - run: python tests/test_conflicts.py

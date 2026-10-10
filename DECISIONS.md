@@ -117,3 +117,7 @@
 ## D-029: Export input allowlist (2026-10-05), **Proposed**
 **Decision:** Converters read only conversation shards (`conversations*.json`) and the asset-name maps (`conversation_asset_file_names.json`, `library_files.json`). Account files (`user.json`, `user_settings.json`) and everything else in the export are never opened; the test fails if they are.
 **Why:** `user.json` holds email, phone and birth year. The safest way to keep identifiers out is never to read them.
+
+## D-030: MCP clients propose, tagged by who said it; handoffs stay manual for now (2026-10-10), **Proposed**
+**Decision:** The MCP server's `propose` writes to `inbox/<date>-mcp-<client>.md` only. Lines are `[inferred]` unless the client marks them as something the person said in the conversation (`told`), then `[imported:<client>]`, with the client named `<provider>-<place>` (D-020). The server never writes `[stated]`, so `handoff(note)` is not built yet: a session file only allows `[stated]`, and a model writing that tag would be a tool sealing on the person's behalf.
+**Why:** Same rule as intake (D-004, D-006): anything a model writes waits for the person. Whether handoffs get their own unreviewed tag or go through the inbox is the owner's call.

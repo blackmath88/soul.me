@@ -184,7 +184,8 @@ def summary(vault, files, today=None):
             inbox += sum(1 for t in tags if t)
             parts = split_frontmatter(text)
             fm = (yaml.safe_load(parts[0]) if parts else None) or {}
-            upd = fm.get("updated") if isinstance(fm, dict) else None
+            fm = fm if isinstance(fm, dict) else {}
+            upd = fm.get("released") or fm.get("updated")         # D-027: the clock starts at release
             if isinstance(upd, str) and DATE_RE.match(upd):
                 upd = datetime.date.fromisoformat(upd)
             if isinstance(upd, datetime.date) and (today - upd).days > 28:

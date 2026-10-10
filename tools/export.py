@@ -104,7 +104,7 @@ def collect(vault, profile, today):
                     top = heading
                 continue
             m = ITEM_RE.match(line)
-            if not m:
+            if not m or "archive" in top:          # D-017: archived lines are history, not context
                 continue
             item = m.group(1)
             tag = TAG_RE.match(item)
