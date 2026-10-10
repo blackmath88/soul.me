@@ -29,7 +29,8 @@
 ## v3: Curation (offboarding-ready by default)
 - [x] `tools/curate.py`: read-only weekly report (old inbox files, old sessions, facts past valid_to, near-duplicates, minime budget)
 - [x] weekly curation Action → one PR: `curate.py --apply` + [`templates/vault-curate.yml`](templates/vault-curate.yml) (expiry, archive, pruning)
-- [ ] contradictions and duplicate merging in the curation PR (needs a model; report-only today)
+- [x] contradictions and duplicates: `tools/conflicts.py`, your own model, run locally, report-only
+- [ ] merge duplicates in the PR itself (after a few weeks of reports show what's safe to automate)
 - [ ] batch inbox review; proposals expire after 4 weeks (D-012)
 - [ ] continuous sanitising of work-context lines, with a "what was stripped" section (D-014)
 

@@ -42,6 +42,14 @@ def answer(prompt):
         return {"items": [{"id": c["id"], "keep": True, "confidence": 0.8, "stability": "months",
                            "sensitive": any(w in c["claim"].lower() for w in SENSITIVE), "target": c["target"],
                            "contradicts": None, "line": c["claim"]} for c in cands]}
+    if task == "conflicts":                 # near-identical lines are duplicates; plus two ids that must be dropped
+        rows = re.findall(r"^(L\d+) \| \S+ \| (.*)$", prompt, re.M)
+        words = {i: set(re.findall(r"\w+", t.lower())) for i, t in rows}
+        pairs = [{"a": a, "b": b, "kind": "duplicate", "why": "same fact twice"}
+                 for k, (a, _) in enumerate(rows) for b, _ in rows[k + 1:]
+                 if len(words[a] & words[b]) / len(words[a] | words[b]) >= 0.7]
+        return {"pairs": pairs + [{"a": "L999", "b": "L1", "kind": "contradiction", "why": "invented"},
+                                  {"a": "L1", "b": "L1", "kind": "duplicate", "why": "self"}]}
     return {"gaps": ["What would Mara like assistants to stop doing?", "Which work does Mara want less of?"]}
 
 

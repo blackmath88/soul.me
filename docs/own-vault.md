@@ -122,6 +122,8 @@ on `curate/weekly`: inbox files past 4 weeks and sessions past 14 days deleted, 
 The report is the PR body. Merge to accept, close to reject; your validate Action checks the branch first.
 Duplicates and the minime budget need your judgement, so they are listed (in the PR, or in the run summary) but never changed.
 Locally: `python ../soul.me/tools/curate.py vault` shows the same report without changing anything.
+Contradictions need a model, so they run on your machine, never in the Action: `python ../soul.me/tools/conflicts.py vault`
+(same `SOULME_LLM_*` settings as the intake) prints the pairs to look at; paste them into the PR if you like. `## Tensions` is skipped.
 
 ## Where the extraction runs (D-016)
 
