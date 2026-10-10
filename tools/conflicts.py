@@ -15,8 +15,6 @@ import re
 import sys
 from pathlib import Path
 
-import yaml
-
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from export import valid_now  # noqa: E402
 from extract import LLM, fill, prompt_text  # noqa: E402
@@ -84,7 +82,7 @@ def main():
         (fa, ta), (fb, tb) = by_id[a_], by_id[b_]
         why = re.sub(r"\s+", " ", str(pair.get("why", ""))).strip()
         rows.append(f"- **{pair.get('kind', 'contradiction')}**: {why}\n  `{fa}`: {ta}\n  `{fb}`: {tb}")
-    print("## Contradictions and duplicates (your model's judgement; you decide)")
+    print(f"### Contradictions and duplicates · {len(rows)}\n_your model's judgement; you decide_\n")
     print("\n".join(rows) if rows else "- none")
     print(f"checked {len(lines)} lines, {len(rows)} pairs reported, {dropped} dropped (unknown ids or repeats)", file=sys.stderr)
 
