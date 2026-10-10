@@ -160,28 +160,48 @@ def main():
         for p, idx in to_archive.items():
             archive(p, sorted(set(idx)), today)
 
-    done = " (applied in this PR)" if a.apply else ""
-    out = [f"# Curation report · {today.isoformat()}", ""]
-    out += [f"**Inbox:** {inbox_lines} lines waiting. **minime.md:** {words} of {MINIME_WORD_BUDGET} words.", ""]
+    # what needs the person's hand first, then what the PR changes, then one line for everything that's fine
+    decide = [
+        ("Possible IDs, private or employer content (D-014)", "reword or remove before it travels; the match is masked here",
+         [f"- `{r}` ({k}): {t}" for r, k, t in flagged]),
+        ("Possible duplicates", "merge them or keep both",
+         [f"- `{a[0]}`: {a[1]}<br>`{b[0]}`: {b[1]}" for a, b in dupes]),
+        ("minime.md budget", "over budget: move detail to areas/ or topics/",
+         [f"- {words} words; budget {MINIME_WORD_BUDGET}"] if words > MINIME_WORD_BUDGET else []),
+    ]
+    change = [
+        ("Inbox files past 4 weeks (D-012)", "the PR deletes them: seal anything you still want first",
+         [f"- `{r}`: {d} days since {k}, {n} lines" for r, d, n, k in old_inbox]),
+        ("Sessions past 14 days", "the PR deletes them", [f"- `{r}`: {d} days old" for r, d in old_sessions]),
+        ("Facts past valid_to (D-017)", "the PR moves them word for word to `# Archive` in the same file",
+         [f"- `{r}`: {t} (valid_to {v})" for r, t, v in expired]),
+    ]
+    n_decide, n_change = sum(len(r) for *_, r in decide), sum(len(r) for *_, r in change)
+    head = [f"{n_decide} to decide", f"{n_change} {'changed in this PR' if a.apply else 'to change with --apply'}",
+            f"inbox: {inbox_lines} line{'s' * (inbox_lines != 1)} waiting", f"minime.md: {words} of {MINIME_WORD_BUDGET} words"]
+    out = [f"# Curation · {today.isoformat()}", "", "> " + " · ".join(head), ""]
 
-    def section(title, rows, empty):
-        out.append(f"## {title}")
-        out.extend(rows or [f"- {empty}"])
-        out.append("")
-    section(f"Inbox files past 4 weeks (D-012): review or let them go{' · deleted' + done if done else ''}",
-            [f"- `{r}`: {d} days since {k}, {n} lines" for r, d, n, k in old_inbox], "none")
-    section(f"Sessions past 14 days: prune{' · deleted' + done if done else ''}",
-            [f"- `{r}`: {d} days old" for r, d in old_sessions], "none")
-    section(f"Facts past valid_to: move to `# Archive` in the same file (D-017), don't delete{' · moved' + done if done else ''}",
-            [f"- `{r}`: {t} (valid_to {v})" for r, t, v in expired], "none")
-    section("Possible duplicates: merge or keep both",
-            [f"- `{a[0]}`: {a[1]}\n  `{b[0]}`: {b[1]}" for a, b in dupes], "none")
-    section("Possible IDs, private or employer content (D-014): reword or remove before it travels",
-            [f"- `{r}` ({k}): {t}" for r, k, t in flagged], "none")
-    if words > MINIME_WORD_BUDGET:
-        section("minime.md over budget", [f"- {words} words; budget {MINIME_WORD_BUDGET}: move detail to areas/ or topics/"], "")
+    def block(title, why, rows):
+        if len(rows) > 5:                                     # long lists fold, so the page stays scannable
+            out.extend([f"<details><summary><b>{title}</b> · {len(rows)} · {why}</summary>", "", *rows, "", "</details>", ""])
+        else:
+            out.extend([f"### {title} · {len(rows)}", f"_{why}_", "", *rows, ""])
+
+    if n_decide:
+        out += ["## Needs your decision", ""]
+        for t, why, rows in decide:
+            if rows:
+                block(t, why, rows)
+    if n_change:
+        out += ["## Changed in this PR: merge to accept, close to reject" if a.apply else
+                "## Will change in the weekly PR (`--apply`)", ""]
+        for t, why, rows in change:
+            if rows:
+                block(t, why, rows)
+    fine = [t for t, _, rows in decide + change if not rows]
+    if fine:
+        out += ["## Nothing to do", "", "- " + " · ".join(fine), ""]
     sys.stdout.write("\n".join(out))
-
 
 if __name__ == "__main__":
     main()

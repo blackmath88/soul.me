@@ -23,5 +23,9 @@ is stamped `[stated]`. Shu red is the seal and nothing else.
 | the reflection | the vault in git, the true form |
 | shadow play left behind the screen | content stays; patterns travel |
 
+In the terminal the same rule holds (`tools/ui.py`): hints and paths in grey, sealed counts in kitsunebi, and shu only for
+lines waiting for your seal. Colour is off when the output isn't a terminal or `NO_COLOR` is set. The weekly curation PR
+leads with one summary line, then what needs your decision, then what the PR changes; long lists fold.
+
 The kit's rules section is binding for anything visual (README banner, landing page, favicons, future UI).
 Round history is in git: round 1 (obake, greys only) is commit `9ce7a40`.

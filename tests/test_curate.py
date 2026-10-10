@@ -48,17 +48,19 @@ class Curate(unittest.TestCase):
         i = self.vault / "inbox" / "2026-09-28-chatgpt-dump.md"
         i.write_text(i.read_text().replace("updated:", "released: 2026-12-20\nupdated:", 1))
         out = self.run_curate("2027-01-10")
-        self.assertNotIn("2026-09-28-chatgpt-dump.md", out.split("## Sessions")[0])   # 21 days since release
+        self.assertNotIn("2026-09-28-chatgpt-dump.md", out)                       # 21 days since release
 
     def test_quiet_when_fresh(self):
         out = self.run_curate("2026-10-01")
-        self.assertEqual(out.count("- none"), 5)
+        self.assertIn("> 0 to decide · 0 to change with --apply", out)
+        self.assertIn("## Nothing to do", out)
 
     def test_apply(self):
         out = subprocess.run([sys.executable, str(ROOT / "tools" / "curate.py"), str(self.vault), "--today", "2027-01-20",
                               "--apply"], capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, out.stderr)
-        self.assertIn("applied in this PR", out.stdout)
+        self.assertIn("## Changed in this PR: merge to accept, close to reject", out.stdout)
+        self.assertIn("0 to decide · 3 changed in this PR", out.stdout)
         self.assertFalse((self.vault / "inbox" / "2026-09-28-chatgpt-dump.md").exists())
         self.assertFalse((self.vault / "sessions" / "2026-09-25-cohort-3-agenda.md").exists())
         area = (self.vault / "areas" / "nordhafen-pilot.md").read_text()
@@ -69,7 +71,7 @@ class Curate(unittest.TestCase):
         v = subprocess.run([sys.executable, str(ROOT / "tools" / "validate.py"), str(self.vault)], capture_output=True, text=True)
         self.assertEqual(v.returncode, 0, v.stdout)
         again = self.run_curate("2027-01-20")                                   # nothing left to do
-        self.assertEqual(again.count("- none"), 5)                              # nothing left to do
+        self.assertIn("0 to decide · 0 to change", again)                       # nothing left to do
         e = subprocess.run([sys.executable, str(ROOT / "tools" / "export.py"), str(self.vault), "--profile", "personal",
                             "--target", "system", "--today", "2026-10-01"], capture_output=True, text=True)
         self.assertNotIn("Contract runs until", e.stdout)                       # archived lines never leave the vault
@@ -82,11 +84,17 @@ class Curate(unittest.TestCase):
         before = digest(self.vault)
         out = self.run_curate("2026-10-01")
         self.assertEqual(before, digest(self.vault))
-        section = out.split("## Possible IDs")[1]
+        section = out.split("Possible IDs")[1].split("## Nothing")[0]
         self.assertIn("(iban): Pays the coach from <iban>", section)
         self.assertNotIn("6238", out)                                           # masked, not repeated
         self.assertIn("(denylist): Keeps the <denylist> Q3 numbers", section)
         self.assertIn("`people/jonas-brandt.md` (denylist): Sponsor of the <denylist> pilot", section)
+
+    def test_long_lists_fold(self):
+        t = self.vault / "topics" / "tools.md"
+        t.write_text(t.read_text() + "".join(f"- [stated] (valid_to: 2025-0{i}) Old fact number {i}\n" for i in range(1, 8)))
+        out = self.run_curate("2026-10-01")
+        self.assertIn("<details><summary><b>Facts past valid_to (D-017)</b> · 7 ·", out)
 
 
 if __name__ == "__main__":

@@ -28,6 +28,8 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
+from ui import cmd, next_step, seal_hint
+
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "prompts"
 CHUNK_CHARS = 6000
@@ -473,6 +475,7 @@ def main():
         ip.parent.mkdir(parents=True, exist_ok=True)
         ip.write_text(inbox_markdown(report, a.source, a.top, ip.stem), encoding="utf-8")
         print(f"{'staged' if a.stage else 'inbox'}: {ip} ({c['in_inbox']} lines)  report: {rp}")
+        next_step(cmd("release.py", vault) if a.stage else seal_hint(ip))
     else:
         print(f"nothing new for the inbox  report: {rp}")
     print(f"verified {c['verified']} of {c['findings_raw']} findings, merged to {c['merged']}, "
