@@ -14,8 +14,10 @@
 - [x] automated intake: `tools/extract.py` (parse exports, redact, lenses, verify quotes, judge, ranked inbox)
 - [x] `tools/eval_extract.py`: score your model on fictional exports before real data
 - [x] ChatGPT export converter + corrections pass ([docs/chatgpt-import.md](docs/chatgpt-import.md))
-- [ ] classify corrections on real export
-- [ ] per-cluster extraction
+- [x] classify corrections automatically: `tools/classify_corrections.py` (redact → model by line id → code counts `seen`)
+- [ ] classify corrections on a real export (in the vault session, D-016)
+- [x] per-cluster extraction: `extract.py <folder>` reads only the user turns of converted conversations
+- [x] staged review: `--stage` + `tools/release.py`, one batch at a time, corrections first (D-027)
 - [x] interview agent: `tools/interview.py` asks your own model's picks from the open gaps; your answers → `data/`, then `extract.py --source self`
 - [ ] publish soul.me tag `v0.1` (the vault repo's Action pins to it)
 - [ ] first real vault: my own, in a separate private repo ([docs/own-vault.md](docs/own-vault.md), D-015)
@@ -31,7 +33,7 @@
 - [x] weekly curation Action → one PR: `curate.py --apply` + [`templates/vault-curate.yml`](templates/vault-curate.yml) (expiry, archive, pruning)
 - [x] contradictions and duplicates: `tools/conflicts.py`, your own model, run locally, report-only
 - [ ] merge duplicates in the PR itself (after a few weeks of reports show what's safe to automate)
-- [ ] batch inbox review; proposals expire after 4 weeks (D-012)
+- [x] proposals expire after 4 weeks, counted from release (D-012, D-027): `release.py` + the weekly PR
 - [ ] continuous sanitising of work-context lines, with a "what was stripped" section (D-014)
 
 ## v4: MCP server (optional layer, D-013)

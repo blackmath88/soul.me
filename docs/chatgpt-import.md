@@ -31,14 +31,31 @@ python ../soul.me/tools/chatgpt_export.py "$E" vault/data/chatgpt/conversations
 python ../soul.me/tools/chatgpt_corrections.py "$E" vault/data/chatgpt/corrections.jsonl
 ```
 
-3. **Classify** the corrections with your local model, batch by batch, using
-   [`prompts/classify-corrections.md`](../prompts/classify-corrections.md) → `vault/inbox/<date>-chatgpt-corrections.md`
-   (Operating-manual candidates with `(seen: n)`). Review this batch **first** (D-027).
+3. **Classify** the corrections with your local model. Automated:
+
+   ```bash
+   python ../soul.me/tools/classify_corrections.py vault/data/chatgpt/corrections.jsonl --vault vault --stage
+   ```
+
+   It redacts in code first, then asks [`prompts/intake-corrections.md`](../prompts/intake-corrections.md) batch by batch;
+   code counts `(seen: n)` as distinct conversations and merges the batches. By hand instead: paste batches into
+   [`prompts/classify-corrections.md`](../prompts/classify-corrections.md). This batch is released **first** (D-027).
 4. **Extract per cluster**: group the converted conversations by theme (a folder per cluster is enough: one project,
-   one client, one hobby), then run [`prompts/extract.md`](../prompts/extract.md) over one cluster at a time.
+   one client, one hobby), then run the intake on one folder at a time. It reads only the `## user` turns:
+
+   ```bash
+   python ../soul.me/tools/extract.py vault/data/chatgpt/clusters/retros --source chatgpt-home --vault vault --stage
+   ```
 5. **Sanitise** clusters from work contexts with [`prompts/sanitise.md`](../prompts/sanitise.md) before their lines go
    anywhere near the inbox (D-014).
-6. **Inbox**: release one batch at a time (D-027). Its 4-week expiry (D-012) starts when you release it, not at import.
-   Run `tools/validate.py` after every file; seal what's true as `[stated]` and drop the `(seen: n)` markers.
+6. **Inbox**: `--stage` keeps every batch in `vault/data/staged/` (never committed). Release one at a time (D-027):
+
+   ```bash
+   python ../soul.me/tools/release.py vault --list    # the queue: corrections first, then oldest
+   python ../soul.me/tools/release.py vault           # moves the next batch to inbox/ if the inbox is empty
+   ```
+
+   Releasing adds `released: <date>`; the 4-week expiry (D-012) counts from there, not from the import. A batch that
+   fails the validator stays staged. Seal what's true as `[stated]` and drop the `(seen: n)` markers.
 
 `vault/data/` is gitignored: the converted conversations, the JSONL and `_stats.json` stay on your machine.
