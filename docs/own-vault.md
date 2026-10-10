@@ -85,6 +85,9 @@ Once a month, about two minutes of clicking; everything else runs on your machin
    names in `vault/data/denylist.txt` in code, asks each lens in `prompts/lenses.md`, checks every quote, drops what's
    already in your vault or inbox, lets a judge pass rank the rest, and writes the top 12 to `vault/inbox/`.
    The full report and the run state stay in `vault/data/` (never committed).
+   Between exports, `python ../soul.me/tools/interview.py vault` asks you five questions where the vault is thin
+   (the open `questions:` first). Only your answers are saved, to `vault/data/<date>-interview.md`; run the intake on it
+   with `--source self`.
 3. **Seal** (manual, about 5 minutes a week): read the inbox file, keep what's true as `[stated]` (drop the `(quote: …)`),
    delete the rest, commit `seal: inbox/<file>`. The `questions:` in the inbox frontmatter are optional prompts for your
    next "how I work" note; the next run asks the lenses about them too.

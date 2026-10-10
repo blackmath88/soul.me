@@ -22,3 +22,5 @@ jobs:
       - run: python tests/test_curate.py
       - run: python tests/test_mcp_server.py
       - run: python tests/test_conflicts.py
+      - run: python tests/test_interview.py
+      - run: python tests/test_staged_intake.py

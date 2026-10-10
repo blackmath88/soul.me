@@ -10,7 +10,9 @@ Never paste real material into this repo.
 | [sanitise.md](sanitise.md) | an employer-tenant assistant, **after checking policy** | `data/<date>-<source>-sanitised.md` |
 | [extract.md](extract.md) | any one of the above | `inbox/<date>-<source>.md`, validator-clean (manual path) |
 | [lenses.md](lenses.md), [intake-map.md](intake-map.md), [intake-judge.md](intake-judge.md), [intake-gaps.md](intake-gaps.md) | read by `tools/extract.py` | the automated path: edit lenses and wording here, no code change needed |
+| [interview.md](interview.md) | read by `tools/interview.py` | the next few questions, from the open gaps and thin sections |
 | [curate-conflicts.md](curate-conflicts.md) | read by `tools/conflicts.py` | contradiction and duplicate pairs, by line id, for the weekly review |
+| [intake-corrections.md](intake-corrections.md) | read by `tools/classify_corrections.py` | the automated version: JSON by line id; code counts `seen` |
 | [classify-corrections.md](classify-corrections.md) | JSONL from `tools/chatgpt_corrections.py`, for a local model | `inbox/<date>-chatgpt-corrections.md` with `(seen: n)` ([docs/chatgpt-import.md](../docs/chatgpt-import.md)) |
 
 ## Example (fictional)

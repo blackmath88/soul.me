@@ -2,7 +2,11 @@
 """Automated intake: chat exports and notes -> a short, ranked inbox file for the person to seal.
 
 Usage:
-  python tools/extract.py <export.zip | conversations.json | note.md> --source chatgpt-home [options]
+  python tools/extract.py <export.zip | conversations.json | note.md | folder> --source chatgpt-home [options]
+
+A folder is one cluster of files from tools/chatgpt_export.py: only the `## user` turns are read, pasted stubs and
+attachments are dropped (D-028). --stage writes the digest to data/staged/ instead of inbox/, for tools/release.py
+to hand out one batch at a time (D-027).
 
 Runs on your machine against any OpenAI-compatible endpoint (Ollama, LM Studio, llama.cpp, vLLM):
   --base  (or SOULME_LLM_BASE, default http://localhost:11434/v1)
@@ -68,9 +72,37 @@ def _stamp(ts):
     return datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
 
+TURN_RE = re.compile(r"^## (user|assistant)(?: · (\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}))?\s*$")
+
+
+def _converted(folder):
+    """A folder from tools/chatgpt_export.py (one cluster): user turns only; pasted stubs and attachments dropped."""
+    msgs = []
+    for p in sorted(Path(folder).glob("*.md")):
+        conv, role, buf, ts = p.stem.rsplit("_", 1)[-1], None, [], None
+
+        def flush():
+            text = "\n".join(l for l in buf if not l.startswith(("[pasted:", "[attachment"))).strip()
+            if role == "user" and text:
+                msgs.append({"id": f"m{len(msgs)+1}", "conv": conv, "title": "", "ts": ts, "date": ts[:10], "text": text})
+
+        for line in p.read_text(encoding="utf-8").split("\n"):
+            m = TURN_RE.match(line)
+            if m:
+                flush()
+                role, buf = m.group(1), []
+                ts = f"{m.group(2)}T{m.group(3)}:00" if m.group(2) else (ts or p.stem[:10] + "T00:00:00")
+            elif role:
+                buf.append(line)
+        flush()
+    return msgs
+
+
 def load_messages(path):
     """Return [{id, conv, title, date, text}] for everything the person wrote."""
     path = Path(path)
+    if path.is_dir():
+        return _converted(path)
     if path.suffix in (".md", ".txt"):
         text = path.read_text(encoding="utf-8")
         ts = _stamp(path.stat().st_mtime)
@@ -150,9 +182,9 @@ def vault_lines(vault):
 
 
 def pending_lines(vault):
-    """Lines already waiting in inbox/, so a new run doesn't propose them again."""
+    """Lines already waiting in inbox/ or data/staged/, so a new run doesn't propose them again."""
     out = []
-    for p in sorted((Path(vault) / "inbox").glob("*.md")):
+    for p in sorted((Path(vault) / "inbox").glob("*.md")) + sorted((Path(vault) / "data" / "staged").glob("*.md")):
         for line in p.read_text(encoding="utf-8").split("\n"):
             m = TAG_RE.match(line)
             if m:
@@ -414,6 +446,7 @@ def main():
     ap.add_argument("--lenses", default=str(PROMPTS / "lenses.md"))
     ap.add_argument("--denylist", help="one term per line, e.g. client and employer names (default: <vault>/data/denylist.txt)")
     ap.add_argument("--since", help="only messages after YYYY-MM-DD (default: since the last run for this source)")
+    ap.add_argument("--stage", action="store_true", help="write to data/staged/, release later with tools/release.py")
     a = ap.parse_args()
     if not a.model:
         sys.exit("set --model or SOULME_LLM_MODEL")
@@ -432,13 +465,14 @@ def main():
     (data / ".intake-state.json").write_text(json.dumps(state, indent=1), encoding="utf-8")
     c = report["counts"]
     if c["in_inbox"]:
-        ip, k = vault / "inbox" / f"{report['date']}-{a.source}.md", 1
-        while ip.exists():                      # never overwrite lines still waiting for review
+        dest = data / "staged" if a.stage else vault / "inbox"
+        ip, k = dest / f"{report['date']}-{a.source}.md", 1
+        while ip.exists() or (vault / "inbox" / ip.name).exists():   # never overwrite lines still waiting for review
             k += 1
-            ip = vault / "inbox" / f"{report['date']}-{a.source}-{k}.md"
-        ip.parent.mkdir(exist_ok=True)
+            ip = dest / f"{report['date']}-{a.source}-{k}.md"
+        ip.parent.mkdir(parents=True, exist_ok=True)
         ip.write_text(inbox_markdown(report, a.source, a.top, ip.stem), encoding="utf-8")
-        print(f"inbox: {ip} ({c['in_inbox']} lines)  report: {rp}")
+        print(f"{'staged' if a.stage else 'inbox'}: {ip} ({c['in_inbox']} lines)  report: {rp}")
     else:
         print(f"nothing new for the inbox  report: {rp}")
     print(f"verified {c['verified']} of {c['findings_raw']} findings, merged to {c['merged']}, "

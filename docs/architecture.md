@@ -41,7 +41,9 @@ against your own model.** The person's manual work is requesting exports (monthl
 | drop-in export | soul.me `tools/export.py` | built (v2) | `--profile work` or `personal`, `--target system`, `chatgpt` or `claude`; tested in CI |
 | curation | soul.me `tools/curate.py` + `templates/vault-curate.yml` | built (v3, partly) | weekly Action in the vault repo opens one PR: expiry, archive, pruning; duplicates and budget report-only. `tools/conflicts.py` flags contradictions locally with your own model |
 | MCP server | soul.me `tools/mcp_server.py` | built (v4, first cut) | stdio, one process per client and profile; see below |
-| interview agent, Observstory workflow | – | not built | the interview is an optional prompt in `how-i-work.md` |
+| bulk imports | soul.me `tools/chatgpt_export.py`, `chatgpt_corrections.py`, `classify_corrections.py`, `release.py` | built (v1) | converter → corrections and per-cluster intake, staged in `data/staged/`, released one batch at a time (D-027) |
+| interview | soul.me `tools/interview.py` + `prompts/interview.md` | built (v1) | your model picks questions from open gaps; only your answers are saved, to `data/`, then intake as `self` |
+| Observstory workflow | – | not built | |
 
 ## Sources have two axes
 
