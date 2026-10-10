@@ -54,6 +54,7 @@ alone gets a new account about 70% of the way to "knowing me".
 | [prompts/](prompts/) | v1 intake prompts, with a fictional worked example |
 | [tools/](tools/) | validate, extract (intake), export (drop-in), curate (weekly), mcp_server (live, optional) |
 | [templates/](templates/) | GitHub Actions to copy into your vault repo |
+| [docs/try-it.md](docs/try-it.md) | every tool, in order, with your own model, on fictional data |
 | [docs/own-vault.md](docs/own-vault.md) | set up your real vault in its own private repo |
 | [DECISIONS.md](DECISIONS.md) | decision log |
 | [ROADMAP.md](ROADMAP.md) | what gets built, in what order |

@@ -123,7 +123,9 @@ Copy [`templates/vault-curate.yml`](../templates/vault-curate.yml) to `.github/w
 pull requests (Settings → Actions → General). Every Monday it runs `tools/curate.py --apply` and, if anything changed, opens one PR
 on `curate/weekly`: inbox files past 4 weeks and sessions past 14 days deleted, expired lines moved word for word to `# Archive`.
 The report is the PR body. Merge to accept, close to reject; your validate Action checks the branch first.
-Duplicates and the minime budget need your judgement, so they are listed (in the PR, or in the run summary) but never changed.
+Duplicates, the minime budget and lines that look like IDs or contain a term from `data/denylist.txt` (D-014; the denylist
+only exists on your machine, so the Action checks the ID patterns only) need your judgement, so they are listed but never changed.
+`python ../soul.me/tools/status.py vault > status.svg` draws the brand's mask from your numbers for the vault's README.
 Locally: `python ../soul.me/tools/curate.py vault` shows the same report without changing anything.
 Contradictions need a model, so they run on your machine, never in the Action: `python ../soul.me/tools/conflicts.py vault`
 (same `SOULME_LLM_*` settings as the intake) prints the pairs to look at; paste them into the PR if you like. `## Tensions` is skipped.
