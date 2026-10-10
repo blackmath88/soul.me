@@ -42,6 +42,11 @@ def answer(prompt):
         return {"items": [{"id": c["id"], "keep": True, "confidence": 0.8, "stability": "months",
                            "sensitive": any(w in c["claim"].lower() for w in SENSITIVE), "target": c["target"],
                            "contradicts": None, "line": c["claim"]} for c in cands]}
+    if task == "interview":                 # first open gap (if any), then standard questions
+        gaps = prompt.split("Open questions from earlier runs:\n", 1)[1].split("\n\n", 1)[0].splitlines()
+        std = prompt.split("Standard questions:\n", 1)[1].split("\n\n", 1)[0].splitlines()
+        n = int(re.search(r"Choose the (\d+) questions", prompt).group(1))
+        return {"questions": ([g for g in gaps if g != "(none)"] + std)[:n]}
     if task == "conflicts":                 # near-identical lines are duplicates; plus two ids that must be dropped
         rows = re.findall(r"^(L\d+) \| \S+ \| (.*)$", prompt, re.M)
         words = {i: set(re.findall(r"\w+", t.lower())) for i, t in rows}

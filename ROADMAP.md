@@ -16,7 +16,7 @@
 - [x] ChatGPT export converter + corrections pass ([docs/chatgpt-import.md](docs/chatgpt-import.md))
 - [ ] classify corrections on real export
 - [ ] per-cluster extraction
-- [ ] interview agent to fill gaps in minime.md (partly: gap questions per run)
+- [x] interview agent: `tools/interview.py` asks your own model's picks from the open gaps; your answers → `data/`, then `extract.py --source self`
 - [ ] publish soul.me tag `v0.1` (the vault repo's Action pins to it)
 - [ ] first real vault: my own, in a separate private repo ([docs/own-vault.md](docs/own-vault.md), D-015)
 
@@ -24,7 +24,7 @@
 - [x] export profiles `work` / `personal` (D-022), `tools/export.py`
 - [x] minime.md → ChatGPT custom-instruction fields, with a per-field budget and a report of what didn't fit
 - [x] bundle for Claude project files (`core.md`, `procedures.md`, `context.md`)
-- [ ] check the real ChatGPT field limit and set the default budget to it
+- [ ] check the real ChatGPT field limit and set the default budget to it. Secondary sources (2026-07 onward) say 5,000 characters on paid plans and 1,500 on Free/Go, but disagree on per field vs. in total; help.openai.com wasn't reachable to confirm. Default stays 1,500 (safe on every plan); use `--budget` on a paid plan
 
 ## v3: Curation (offboarding-ready by default)
 - [x] `tools/curate.py`: read-only weekly report (old inbox files, old sessions, facts past valid_to, near-duplicates, minime budget)
@@ -39,7 +39,8 @@
 - [x] `tools/mcp_server.py`: `get_core`, `search`, `read`, `list`, `get_skill`, `propose` (inbox only), `last_handoff`
 - [ ] `handoff(note)`: needs a decision on how a model-written session note is tagged (D-030)
 - [x] per-client scope: one server per client with `--profile`, `--client`, `--read-only`
-- [ ] runs next to the local LLM setup (try with a real client config)
+- [x] works with the official MCP Python SDK client (2.3.0): initialize, tools/list, calls, errors
+- [ ] runs next to the local LLM setup (try with Claude Desktop / Claude Code config)
 
 ## Later
 - vectors if FTS recall is poor · temporal graph · offboarding kit as a bridge-work.ai offer
