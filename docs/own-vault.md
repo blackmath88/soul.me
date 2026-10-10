@@ -101,6 +101,15 @@ Only `[stated]` lines inside their validity window leave the vault; `inbox/`, `d
 `people/` and anything not marked `profiles: [work, …]`. If a target has a size limit, whole lines are dropped lowest priority
 first (context, procedures, tensions, identity, operating manual last) and listed on stderr: nothing is shortened silently.
 
+## Weekly curation (v3)
+
+Copy [`templates/vault-curate.yml`](../templates/vault-curate.yml) to `.github/workflows/curate.yml` and allow Actions to open
+pull requests (Settings → Actions → General). Every Monday it runs `tools/curate.py --apply` and, if anything changed, opens one PR
+on `curate/weekly`: inbox files past 4 weeks and sessions past 14 days deleted, expired lines moved word for word to `# Archive`.
+The report is the PR body. Merge to accept, close to reject; your validate Action checks the branch first.
+Duplicates and the minime budget need your judgement, so they are listed (in the PR, or in the run summary) but never changed.
+Locally: `python ../soul.me/tools/curate.py vault` shows the same report without changing anything.
+
 ## Where the extraction runs (D-016)
 
 Extraction sends your raw material to whichever model runs it. In order of preference:

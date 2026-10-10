@@ -39,7 +39,8 @@ against your own model.** The person's manual work is requesting exports (monthl
 | vault repo + its CI | `soul-vault` (per person) | documented in [own-vault.md](own-vault.md) | Action checks out soul.me at a pinned tag and validates. **Tag `v0.1` is not published yet**, so that Action can't run until it is. |
 | brand kit | soul.me `brand/` | built | static HTML (D-019) |
 | drop-in export | soul.me `tools/export.py` | built (v2) | `--profile work` or `personal`, `--target system`, `chatgpt` or `claude`; tested in CI |
-| curation, MCP server | – | planned (v3–v4) | see below |
+| curation | soul.me `tools/curate.py` + `templates/vault-curate.yml` | built (v3, partly) | weekly Action in the vault repo opens one PR: expiry, archive, pruning; duplicates and budget report-only |
+| MCP server | – | planned (v4) | see below |
 | interview agent, Observstory workflow | – | not built | the interview is an optional prompt in `how-i-work.md` |
 
 ## Sources have two axes
