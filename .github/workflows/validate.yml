@@ -24,3 +24,4 @@ jobs:
       - run: python tests/test_conflicts.py
       - run: python tests/test_interview.py
       - run: python tests/test_staged_intake.py
+      - run: python tests/test_status.py

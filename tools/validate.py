@@ -173,6 +173,12 @@ def validate(vault):
 
 
 def summary(vault, files, today=None):
+    c = counts(vault, files, today)
+    return (f"stated {c['stated']} · inbox {c['inbox']} · inbox files past 4 weeks {c['old_inbox']} · "
+            f"sessions past 14 days {c['old_sessions']}")
+
+
+def counts(vault, files, today=None):
     """Counts for status displays: stated lines, inbox lines, expired inbox files and sessions."""
     today = today or datetime.date.today()
     stated = inbox = old_inbox = old_sessions = 0
@@ -195,7 +201,7 @@ def summary(vault, files, today=None):
         if rel.startswith("sessions/") and DATE_RE.match(path.stem[:10]):
             if (today - datetime.date.fromisoformat(path.stem[:10])).days > 14:
                 old_sessions += 1
-    return f"stated {stated} · inbox {inbox} · inbox files past 4 weeks {old_inbox} · sessions past 14 days {old_sessions}"
+    return {"stated": stated, "inbox": inbox, "old_inbox": old_inbox, "old_sessions": old_sessions}
 
 
 if __name__ == "__main__":

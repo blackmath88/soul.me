@@ -34,7 +34,9 @@
 - [x] contradictions and duplicates: `tools/conflicts.py`, your own model, run locally, report-only
 - [ ] merge duplicates in the PR itself (after a few weeks of reports show what's safe to automate)
 - [x] proposals expire after 4 weeks, counted from release (D-012, D-027): `release.py` + the weekly PR
-- [ ] continuous sanitising of work-context lines, with a "what was stripped" section (D-014)
+- [x] continuous check: the weekly report flags live lines with IDs, account numbers, emails, phones or denylist terms, masked (D-014)
+- [ ] sanitising work-context lines with a "what was stripped" section: still the in-tenant prompt (D-014)
+- [x] status mark from the vault's numbers: `tools/status.py` (grey / colour / seal, brand kit)
 
 ## v4: MCP server (optional layer, D-013)
 - [x] FTS5 index built from the vault (in memory, rebuilt when files change, D-005)

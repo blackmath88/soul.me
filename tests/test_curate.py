@@ -52,7 +52,7 @@ class Curate(unittest.TestCase):
 
     def test_quiet_when_fresh(self):
         out = self.run_curate("2026-10-01")
-        self.assertEqual(out.count("- none"), 4)
+        self.assertEqual(out.count("- none"), 5)
 
     def test_apply(self):
         out = subprocess.run([sys.executable, str(ROOT / "tools" / "curate.py"), str(self.vault), "--today", "2027-01-20",
@@ -69,10 +69,24 @@ class Curate(unittest.TestCase):
         v = subprocess.run([sys.executable, str(ROOT / "tools" / "validate.py"), str(self.vault)], capture_output=True, text=True)
         self.assertEqual(v.returncode, 0, v.stdout)
         again = self.run_curate("2027-01-20")                                   # nothing left to do
-        self.assertEqual(again.count("- none"), 4)                              # nothing left to do
+        self.assertEqual(again.count("- none"), 5)                              # nothing left to do
         e = subprocess.run([sys.executable, str(ROOT / "tools" / "export.py"), str(self.vault), "--profile", "personal",
                             "--target", "system", "--today", "2026-10-01"], capture_output=True, text=True)
         self.assertNotIn("Contract runs until", e.stdout)                       # archived lines never leave the vault
+
+    def test_flags_ids_and_denylist(self):
+        t = self.vault / "topics" / "tools.md"
+        t.write_text(t.read_text() + "- [stated] Pays the coach from CH93 0076 2011 6238 5295 7\n"
+                     "- [stated] Keeps the Nordhafen Q3 numbers in a separate folder\n")
+        (self.vault / "data" / "denylist.txt").write_text("Nordhafen\n")
+        before = digest(self.vault)
+        out = self.run_curate("2026-10-01")
+        self.assertEqual(before, digest(self.vault))
+        section = out.split("## Possible IDs")[1]
+        self.assertIn("(iban): Pays the coach from <iban>", section)
+        self.assertNotIn("6238", out)                                           # masked, not repeated
+        self.assertIn("(denylist): Keeps the <denylist> Q3 numbers", section)
+        self.assertIn("`people/jonas-brandt.md` (denylist): Sponsor of the <denylist> pilot", section)
 
 
 if __name__ == "__main__":

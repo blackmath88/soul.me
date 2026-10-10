@@ -115,7 +115,8 @@ prunes sessions older than 14 days and checks `minime.md` against its budget.
 ## Status numbers
 
 `validate.py --summary` prints the counts that any status display needs (stated lines, inbox lines, expired inbox
-files, expired sessions). The brand's favicon seal, tails and incense are drawn from these numbers, never decoratively.
+files, expired sessions). The brand's favicon seal, tails and incense are drawn from these numbers, never decoratively:
+`tools/status.py` draws the mask as an SVG (grey until the first sealed line, the shu seal while lines wait), always with the words next to it.
 
 ## Non-goals (v1)
 

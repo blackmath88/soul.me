@@ -9,7 +9,9 @@ Prints a markdown report (meant as the body of the weekly curation PR) with:
   - live [stated] lines past their valid_to, to move to an `# Archive` section (D-017), never to delete
   - near-duplicate [stated] lines across live files
   - minime.md against its word budget
-Contradictions need judgement and are not detected here.
+  - live lines that look like IDs, account numbers, emails or phones, or contain a term from data/denylist.txt
+    (D-014: offboarding-ready by default); the match is masked in the report, the line is never changed
+Contradictions need judgement: tools/conflicts.py, locally.
 
 --apply makes the mechanical changes, for the weekly Action to put in one PR the person merges or closes:
 deletes the old inbox files (D-012) and sessions, and moves expired lines to `# Archive` in the same file (D-017),
@@ -25,6 +27,7 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from extract import REDACT  # noqa: E402
 from validate import ITEM_RE, MINIME_WORD_BUDGET, TAG_RE, VALIDITY_RE, check_body, split_frontmatter  # noqa: E402
 
 STOP = set("the a an and or of to in on for with is are was be it its this that as at by from not no "
@@ -87,7 +90,10 @@ def main():
     vault = Path(a.vault)
     today = datetime.date.fromisoformat(a.today) if a.today else datetime.date.today()
 
-    old_inbox, old_sessions, expired, live = [], [], [], []
+    old_inbox, old_sessions, expired, live, flagged = [], [], [], [], []
+    dl = vault / "data" / "denylist.txt"                     # local only: data/ is never committed
+    deny = [t.strip() for t in dl.read_text(encoding="utf-8").splitlines() if t.strip()] if dl.exists() else []
+    checks = REDACT + [("denylist", re.compile(r"\b" + re.escape(t) + r"\b", re.I)) for t in deny]
     to_archive = {}                                  # path -> body line indexes
     inbox_lines = 0
     for p in sorted(vault.rglob("*.md")):
@@ -121,6 +127,12 @@ def main():
                 continue
             item = m.group(1)
             clean = re.sub(r"\s+", " ", VALIDITY_RE.sub("", TAG_RE.sub("", item, count=1))).strip()
+            masked, kinds = clean, []
+            for kind, rx in checks:
+                masked, n = rx.subn(f"<{kind}>", masked)
+                kinds += [kind] * bool(n)
+            if kinds:
+                flagged.append((rel, ", ".join(kinds), masked))
             if not in_archive:
                 for field, value in VALIDITY_RE.findall(item):
                     end = end_of(value)
@@ -164,6 +176,8 @@ def main():
             [f"- `{r}`: {t} (valid_to {v})" for r, t, v in expired], "none")
     section("Possible duplicates: merge or keep both",
             [f"- `{a[0]}`: {a[1]}\n  `{b[0]}`: {b[1]}" for a, b in dupes], "none")
+    section("Possible IDs, private or employer content (D-014): reword or remove before it travels",
+            [f"- `{r}` ({k}): {t}" for r, k, t in flagged], "none")
     if words > MINIME_WORD_BUDGET:
         section("minime.md over budget", [f"- {words} words; budget {MINIME_WORD_BUDGET}: move detail to areas/ or topics/"], "")
     sys.stdout.write("\n".join(out))
