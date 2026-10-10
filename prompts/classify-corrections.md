@@ -39,7 +39,7 @@ updated: {date}
 labels: {preference: <n>, one-off: <n>, noise: <n>}
 ---
 ## → minime.md: Operating manual
-- [imported:chatgpt] (seen: <distinct conversations>) <the preference as an instruction to an assistant>
+- [imported:chatgpt-home] (seen: <distinct conversations>) <the preference as an instruction to an assistant>
 
 Rules:
 - Each line is an instruction to an assistant, in English, imperative, short: "Lead with one recommendation, not options."

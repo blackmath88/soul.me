@@ -37,6 +37,7 @@ Every file starts with a YAML frontmatter block. **(checked)**
 | `scope` | yes | `always` \| `global` \| `project` \| `session` |
 | `updated` | yes | ISO date `YYYY-MM-DD` |
 | `aliases` | no | list of other names |
+| `profiles` | no | which exports may include the file: `[work, personal]`. Defaults: `minime.md` and `skills/` both, `areas/` and `topics/` personal only; `people/` is never in `work` (D-022). Skills put it under `metadata:` as a string, e.g. `profiles: "work personal"`. |
 
 Other fields are allowed in vault files.
 
@@ -121,7 +122,7 @@ The first two checks come from aaronjmars/soul.md (see [research](research.md#2a
 
 ## Not checked yet
 
-- Sessions older than 14 days (curation pass, v3)
-- Facts past `valid_to` (curation pass, v3)
-- `inbox/` files older than 4 weeks (curation pass, v3, D-012)
+- Sessions older than 14 days (reported by `tools/curate.py`)
+- Facts past `valid_to` (reported by `tools/curate.py`, D-017)
+- `inbox/` files older than 4 weeks (reported by `tools/curate.py`; counted from `released:` if set, D-012/D-027)
 - Duplicates and contradictions across files (v3)

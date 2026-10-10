@@ -18,3 +18,5 @@ jobs:
           sleep 1
           python tools/eval_extract.py --base http://127.0.0.1:8765/v1 --model stub
       - run: python tests/test_chatgpt_import.py
+      - run: python tests/test_export.py
+      - run: python tests/test_curate.py
