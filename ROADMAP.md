@@ -34,10 +34,11 @@
 - [ ] continuous sanitising of work-context lines, with a "what was stripped" section (D-014)
 
 ## v4: MCP server (optional layer, D-013)
-- [ ] FTS5 index built from the vault
-- [ ] tools: `get_core`, `search`, `read`, `list`, `get_skill`, `propose`, `handoff`
-- [ ] per-client scope allowlist
-- [ ] runs next to the local LLM setup
+- [x] FTS5 index built from the vault (in memory, rebuilt when files change, D-005)
+- [x] `tools/mcp_server.py`: `get_core`, `search`, `read`, `list`, `get_skill`, `propose` (inbox only), `last_handoff`
+- [ ] `handoff(note)`: needs a decision on how a model-written session note is tagged (D-030)
+- [x] per-client scope: one server per client with `--profile`, `--client`, `--read-only`
+- [ ] runs next to the local LLM setup (try with a real client config)
 
 ## Later
 - vectors if FTS recall is poor · temporal graph · offboarding kit as a bridge-work.ai offer

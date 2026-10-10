@@ -40,7 +40,7 @@ against your own model.** The person's manual work is requesting exports (monthl
 | brand kit | soul.me `brand/` | built | static HTML (D-019) |
 | drop-in export | soul.me `tools/export.py` | built (v2) | `--profile work` or `personal`, `--target system`, `chatgpt` or `claude`; tested in CI |
 | curation | soul.me `tools/curate.py` + `templates/vault-curate.yml` | built (v3, partly) | weekly Action in the vault repo opens one PR: expiry, archive, pruning; duplicates and budget report-only |
-| MCP server | – | planned (v4) | see below |
+| MCP server | soul.me `tools/mcp_server.py` | built (v4, first cut) | stdio, one process per client and profile; see below |
 | interview agent, Observstory workflow | – | not built | the interview is an optional prompt in `how-i-work.md` |
 
 ## Sources have two axes
@@ -91,7 +91,7 @@ Places are destinations too. Whatever serves the vault takes a **profile** that 
 | curation | vault + `inbox/` | one weekly PR | v3 |
 | MCP server | vault + per-client profile | the tools below | v4, optional |
 
-### MCP server (v4 tool surface)
+### MCP server (v4, `tools/mcp_server.py`)
 
 | Tool | Does |
 |---|---|
@@ -99,8 +99,8 @@ Places are destinations too. Whatever serves the vault takes a **profile** that 
 | `search(query, scope?)` | SQLite FTS5 over the vault; matching lines + file |
 | `read(path)` / `list(prefix?)` | one file / file index with descriptions |
 | `get_skill(name)` | one procedure |
-| `propose(path, lines, source)` | writes to `inbox/` only. **Never to live files.** |
-| `handoff(note)` / `last_handoff()` | session layer |
+| `propose(path, lines, told?)` | writes to `inbox/<date>-mcp-<client>.md` only, `[inferred]` or `[imported:<client>]` (D-030). **Never to live files.** |
+| `last_handoff()` | latest session note, personal profile only. `handoff(note)` is not built (D-030) |
 
 The FTS5 index is rebuilt from the vault and can always be thrown away (D-005). It runs locally first.
 

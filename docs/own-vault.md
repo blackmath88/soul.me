@@ -101,6 +101,19 @@ Only `[stated]` lines inside their validity window leave the vault; `inbox/`, `d
 `people/` and anything not marked `profiles: [work, …]`. If a target has a size limit, whole lines are dropped lowest priority
 first (context, procedures, tensions, identity, operating manual last) and listed on stderr: nothing is shortened silently.
 
+## Use it live (MCP server, optional, v4)
+
+One server process per client, so each client gets exactly one profile. Example for Claude Desktop or Claude Code:
+
+```json
+{"mcpServers": {"soul": {"command": "python",
+  "args": ["/path/to/soul.me/tools/mcp_server.py", "/path/to/soul-vault/vault", "--profile", "personal", "--client", "claude-home"]}}}
+```
+
+It serves the same lines as the export (confirmed, inside their validity window, never inbox or sessions; `work` never sees
+`people/`). The assistant can `propose` new facts: they land in `inbox/<date>-mcp-<client>.md` for your weekly review, never in a
+live file. Add `--read-only` for clients that shouldn't propose at all, e.g. an employer's tenant.
+
 ## Weekly curation (v3)
 
 Copy [`templates/vault-curate.yml`](../templates/vault-curate.yml) to `.github/workflows/curate.yml` and allow Actions to open

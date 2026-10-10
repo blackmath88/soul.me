@@ -52,9 +52,12 @@ alone gets a new account about 70% of the way to "knowing me".
 | [docs/spec.md](docs/spec.md) | vault file format, checked by `tools/validate.py` |
 | [vault/](vault/) | a **fictional** example vault (Mara Keller) |
 | [prompts/](prompts/) | v1 intake prompts, with a fictional worked example |
+| [tools/](tools/) | validate, extract (intake), export (drop-in), curate (weekly), mcp_server (live, optional) |
+| [templates/](templates/) | GitHub Actions to copy into your vault repo |
 | [docs/own-vault.md](docs/own-vault.md) | set up your real vault in its own private repo |
 | [DECISIONS.md](DECISIONS.md) | decision log |
 | [ROADMAP.md](ROADMAP.md) | what gets built, in what order |
 | [AGENTS.md](AGENTS.md) | orientation for agents working in this repo |
 
-Status: **v0**. A spec, a validator and a fictional example vault.
+Status: **v0–v4 first cuts**, tested on the fictional vault only: spec and validator, automated intake, drop-in export,
+weekly curation PR and an optional MCP server. Next: the first real vault, in its own private repo.
