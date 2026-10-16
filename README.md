@@ -1,6 +1,17 @@
+<!-- BEGIN public-repo-header -->
+<div align="center">
+
 # soul.me
 
 **A portable, human-owned "me" for any LLM.**
+
+<a href="https://github.com/blackmath88/soul.me/actions/workflows/validate.yml"><img alt="Validation" src="https://github.com/blackmath88/soul.me/actions/workflows/validate.yml/badge.svg?branch=main"></a>
+<a href="https://github.com/blackmath88/soul.me"><img alt="Primary language: Python" src="https://img.shields.io/badge/language-Python-737373?style=flat"></a>
+<a href="https://github.com/blackmath88/soul.me/tree/main/docs"><img alt="Documentation" src="https://img.shields.io/badge/docs-guide-737373?style=flat"></a>
+<a href="https://github.com/blackmath88/soul.me/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/blackmath88/soul.me?style=flat&amp;color=737373"></a>
+
+</div>
+<!-- END public-repo-header -->
 
 The longer you work with an assistant, the more it knows how you roll: your role, your standards,
 your habits, the projects you carry. That aggregated experience is locked inside one vendor
