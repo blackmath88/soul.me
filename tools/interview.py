@@ -20,6 +20,7 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from ui import cmd, next_step  # noqa: E402
 from chatgpt_export import refuse_repo_output  # noqa: E402
 from extract import LLM, PROMPTS, fill, prompt_text, vault_lines  # noqa: E402
 from validate import split_frontmatter  # noqa: E402
@@ -84,7 +85,8 @@ def main():
         return
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n\n".join(answers) + "\n", encoding="utf-8")
-    print(f"\n{len(answers)} answers written to {out}\nnext: python tools/extract.py {out} --source self", file=sys.stderr)
+    print(f"\n{len(answers)} answers written to {out}", file=sys.stderr)
+    next_step(cmd("extract.py", out, "--source self --vault", a.vault, "--stage"))
 
 
 if __name__ == "__main__":

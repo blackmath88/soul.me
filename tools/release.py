@@ -16,6 +16,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from ui import next_step, paint, seal_hint  # noqa: E402
 from validate import validate  # noqa: E402
 
 
@@ -33,13 +34,17 @@ def main():
     vault = Path(a.vault)
     today = a.today or datetime.date.today().isoformat()
     staged = queue(vault)
+    pending = sorted((vault / "inbox").glob("*.md"))
     if a.list or not staged:
         print("\n".join(f"{i}. {p.name}" for i, p in enumerate(staged, 1)) or "nothing staged")
+        if pending:
+            print(paint(f"{len(pending)} inbox file(s) waiting to seal", "seal", sys.stdout))
+            next_step(seal_hint(pending[0]))
         return
-    pending = sorted((vault / "inbox").glob("*.md"))
     if len(pending) >= a.max_pending:
-        print(f"{len(pending)} inbox file(s) still waiting ({', '.join(p.name for p in pending)}); "
-              f"seal or delete them first. {len(staged)} batch(es) staged.")
+        print(paint(f"{len(pending)} inbox file(s) still waiting to seal", "seal", sys.stdout) +
+              f" ({', '.join(p.name for p in pending)}); seal or delete them first. {len(staged)} batch(es) staged.")
+        next_step(seal_hint(pending[0]))
         return
     src = staged[0]
     dest = vault / "inbox" / src.name
@@ -58,6 +63,7 @@ def main():
         sys.exit("not released, the batch fails the validator:\n" + "\n".join(errors))
     src.unlink()
     print(f"released {dest.relative_to(vault)} (expires 4 weeks after {today}); {len(staged) - 1} batch(es) still staged")
+    next_step(seal_hint(dest))
 
 
 if __name__ == "__main__":

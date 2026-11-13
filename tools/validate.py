@@ -214,5 +214,9 @@ if __name__ == "__main__":
         print(e)
     print(f"{len(files)} files checked, {len(errors)} problems")
     if "--summary" in sys.argv:
-        print(summary(vault, files))
+        from ui import paint
+        c = counts(vault, files)
+        print(paint(f"stated {c['stated']}", "own", sys.stdout) + " · " +
+              (paint(f"inbox {c['inbox']}", "seal", sys.stdout) if c["inbox"] else "inbox 0") +
+              f" · inbox files past 4 weeks {c['old_inbox']} · sessions past 14 days {c['old_sessions']}")
     sys.exit(1 if errors else 0)

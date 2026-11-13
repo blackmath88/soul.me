@@ -29,6 +29,7 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from ui import next_step  # noqa: E402
 from validate import ITEM_RE, TAG_RE, VALIDITY_RE, split_frontmatter  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
@@ -201,6 +202,9 @@ def main():
           f"not in this profile; {len(dropped)} lines dropped for the budget", file=sys.stderr)
     for k, line in dropped:
         print(f"  dropped ({TITLES[k]}): {line.strip()}", file=sys.stderr)
+    next_step({"system": "paste it into your local model's system prompt",
+               "chatgpt": "paste each part into ChatGPT → Settings → Personalization → Custom instructions",
+               "claude": "upload the files to a Claude project's knowledge"}[a.target])
 
 
 if __name__ == "__main__":

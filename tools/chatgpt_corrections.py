@@ -16,6 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from chatgpt_export import read_asset_names, read_conversations, refuse_repo_output, turns  # noqa: E402
+from ui import cmd, next_step, vault_of  # noqa: E402
 
 MAX_USER = 300
 MAX_PREV = 300
@@ -51,6 +52,7 @@ def main():
                 n += 1
                 hinted += hint
     print(f"{n} short follow-up turns written to {out_file} ({hinted} with a correction hint)")
+    next_step(cmd("classify_corrections.py", out_file, "--vault", vault_of(out_file), "--stage"))
 
 
 if __name__ == "__main__":

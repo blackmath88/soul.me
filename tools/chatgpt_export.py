@@ -19,6 +19,9 @@ import sys
 import unicodedata
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from ui import cmd, next_step, vault_of  # noqa: E402
+
 REPO = Path(__file__).resolve().parent.parent
 ASSET_MAPS = ("conversation_asset_file_names.json", "library_files.json")
 PASTE_LIMIT = 2000
@@ -229,8 +232,14 @@ def main():
     (out_dir / "_stats.json").write_text(json.dumps(stats, ensure_ascii=False, indent=1), encoding="utf-8")
     total = stats["chars"]["authored"] + stats["chars"]["pasted"]
     share = f"{100 * stats['chars']['pasted'] / total:.0f}%" if total else "n/a"
-    print(f"{stats['conversations']} conversations, kept {stats['kept']}, skipped {sum(stats['skipped'].values())} "
-          f"{stats['skipped']}; pasted share of user chars: {share}; written to {out_dir}")
+    sk = stats["skipped"]
+    print(f"{stats['conversations']} conversations: kept {stats['kept']}, skipped {sum(sk.values())} "
+          f"({sk['fewer_than_2_user_turns']} with fewer than 2 of your turns, {sk['under_300_authored_chars']} under 300 "
+          f"characters of your own); {share} of your characters were pasted material. Written to {out_dir}")
+    v = vault_of(out_dir)
+    next_step(cmd("chatgpt_corrections.py", export_dir, f"{v}/data/chatgpt/corrections.jsonl"),
+              "sort the files into one folder per theme, then " + cmd("extract.py", "<folder>", "--source chatgpt-home",
+                                                                       "--vault", v, "--stage"))
 
 
 if __name__ == "__main__":

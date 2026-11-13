@@ -20,6 +20,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from ui import cmd, next_step, seal_hint  # noqa: E402
 from extract import LLM, fill, prompt_text, redact  # noqa: E402
 
 SCHEMA = {"type": "object", "additionalProperties": False, "required": ["labels", "candidates"], "properties": {
@@ -110,8 +111,9 @@ def main():
 
     cands, labels, dropped = classify(rows, LLM(a.base, a.model, os.environ.get("SOULME_LLM_KEY")), max(1, a.batch))
     batches = (len(rows) + a.batch - 1) // a.batch
-    print(f"{len(rows)} lines in {batches} batch(es): {labels}; {len(cands)} candidates; {dropped} unknown ids dropped; "
-          f"redacted {counts or 'nothing'}", file=sys.stderr)
+    red = ", ".join(f"{v} {k}" for k, v in counts.items()) or "nothing"
+    print(f"{len(rows)} lines in {batches} batch(es): {labels['preference']} preference, {labels['one-off']} one-off, "
+          f"{labels['noise']} noise → {len(cands)} candidates ({dropped} unknown ids dropped; redacted {red})", file=sys.stderr)
     if not cands:
         print("no preferences found, nothing written")
         return
@@ -123,6 +125,7 @@ def main():
     dest.mkdir(parents=True, exist_ok=True)
     (dest / f"{name}.md").write_text(markdown(name, a.source, cands, labels, batches), encoding="utf-8")
     print(f"{'staged' if a.stage else 'inbox'}: {dest / (name + '.md')}")
+    next_step(cmd("release.py", vault) if a.stage else seal_hint(dest / f"{name}.md"))
 
 
 if __name__ == "__main__":
